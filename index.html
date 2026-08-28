@@ -105,6 +105,12 @@
 
     .rental .calendar{padding:14px}.rental .month{font-size:10px;font-weight:900;color:#1c3354;margin-bottom:9px}.rental .days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.rental .days i{height:16px;border-radius:4px;background:#eef2f7}.rental .days i:nth-child(9),.rental .days i:nth-child(16){background:#dce9ff}.rental .days i:nth-child(12){background:#ffe8e5}.rental .float{position:absolute;right:14px;bottom:12px;width:50px;height:50px;border-radius:16px;background:#17365f;color:#fff;display:grid;place-items:center;font-size:23px;box-shadow:0 10px 25px rgba(17,45,83,.25)}
 
+
+    .press .request{padding:14px 16px}.press .request-title{font-size:10px;font-weight:900;color:#183151;margin-bottom:10px}
+    .press .choice-row{display:flex;gap:6px;margin-bottom:9px}.press .choice{height:20px;flex:1;border:1px solid #dfe6ef;border-radius:6px;background:#fbfcfe;font-size:6px;color:#7c899b;display:grid;place-items:center;font-weight:800}.press .choice.on{background:#eaf2ff;border-color:#cbdcff;color:var(--blue)}
+    .press .field-row{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:7px}.press .field{height:22px;border:1px solid #dfe6ef;border-radius:6px;background:#fbfcfe;position:relative}.press .field:before{content:"";position:absolute;left:7px;top:6px;width:55%;height:4px;background:#e4e9f0;border-radius:4px}.press .field:after{content:"";position:absolute;left:7px;top:13px;width:34%;height:3px;background:#eef2f6;border-radius:4px}
+    .press .request-box{height:35px;border:1px solid #dfe6ef;border-radius:6px;background:#fbfcfe;margin-top:7px}.press .request-submit{height:23px;margin-top:10px;border-radius:7px;background:var(--blue);color:#fff;font-size:7px;font-weight:900;display:grid;place-items:center}
+
     .agora .room{padding:15px}.agora .room-title{font-size:10px;font-weight:900;color:#153154}.agora .slots{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}.agora .slot{height:31px;border:1px solid #dce4ee;border-radius:7px;background:#fbfcfe;position:relative}.agora .slot:after{content:"";position:absolute;left:6px;right:6px;bottom:6px;height:4px;background:#e5ebf2;border-radius:4px}.agora .slot.on{border-color:#bdd0fb;background:#eef4ff}.agora .slot.on:after{background:#7aa2ff}.agora .admin{position:absolute;left:15px;right:15px;bottom:14px;height:25px;border-radius:7px;background:#112c51;color:white;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:900}
 
     .latest{position:absolute;z-index:3;top:14px;right:14px;background:#101d34;color:#fff;font-size:10px;font-weight:900;padding:7px 9px;border-radius:999px;box-shadow:0 7px 16px rgba(16,29,52,.2)}
@@ -148,7 +154,7 @@
     <section class="wrap" aria-labelledby="projects-title">
       <div class="section-head">
         <h2 class="section-title" id="projects-title">PROJECTS</h2>
-        <div class="section-sub">09 CREATIONS</div>
+        <div class="section-sub">10 CREATIONS</div>
       </div>
 
       <div class="grid">
@@ -164,7 +170,7 @@
 
         <a class="card" href="https://hy-erica-archive.web.app/" target="_blank" rel="noopener">
           <div class="preview archive"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="search">HY-ERICA 기사 검색</div><div class="rows"><div class="row"><span></span><b>114호</b></div><div class="row"><span></span><b>113호</b></div><div class="row"><span></span><b>112호</b></div><div class="row"><span></span><b>111호</b></div></div><div class="badge">ARTICLE ARCHIVE</div></div></div>
-          <div class="card-body"><div class="meta"><span class="num">03</span><span class="date">2026.08.25</span></div><h2>HY-ERICA 기사 아카이브</h2><p class="desc">HY-ERICA 교지 기사 DB를 검색하고 원문 PDF의 해당 기사 위치까지 찾아가는 아카이브.</p><div class="tags"><span class="tag">아카이브</span><span class="tag">검색</span><span class="tag">Vercel</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
+          <div class="card-body"><div class="meta"><span class="num">03</span><span class="date">2026.08.25</span></div><h2>HY-ERICA 기사 아카이브</h2><p class="desc">HY-ERICA 교지 기사 DB를 검색하고 원문 PDF의 해당 기사 위치까지 찾아가는 아카이브.</p><div class="tags"><span class="tag">아카이브</span><span class="tag">검색</span><span class="tag">Firebase</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
         </a>
 
         <a class="card" href="https://hyungkeunyoo.github.io/notice-maker/" target="_blank" rel="noopener">
@@ -193,9 +199,14 @@
         </a>
 
         <a class="card" href="https://hyungkeunyoo.github.io/agora-rental/" target="_blank" rel="noopener">
-          <span class="latest">LATEST</span>
           <div class="preview agora"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="room"><div class="room-title">아고라 공간 예약</div><div class="slots"><div class="slot"></div><div class="slot on"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot on"></div></div><div class="admin">예약 신청 · 관리자 승인</div></div></div></div>
           <div class="card-body"><div class="meta"><span class="num">09</span><span class="date">2026.08.28</span></div><h2>아고라 대관 시스템</h2><p class="desc">공간별 예약 신청과 승인·불허 코멘트, 관리자 운영까지 묶은 대관 관리 시스템.</p><div class="tags"><span class="tag">대관</span><span class="tag">예약</span><span class="tag">관리자</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
+        </a>
+
+        <a class="card" href="https://hyungkeunyoo.github.io/erica-press/" target="_blank" rel="noopener">
+          <span class="latest">LATEST</span>
+          <div class="preview press"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="request"><div class="request-title">ERICA 촬영·취재 지원 요청</div><div class="choice-row"><div class="choice on">사진 촬영</div><div class="choice">취재 지원</div><div class="choice">기타</div></div><div class="field-row"><div class="field"></div><div class="field"></div></div><div class="field-row"><div class="field"></div><div class="field"></div></div><div class="request-box"></div><div class="request-submit">지원 요청 제출하기</div></div></div></div>
+          <div class="card-body"><div class="meta"><span class="num">10</span><span class="date">2026.08.28</span></div><h2>ERICA 촬영·취재 지원 요청</h2><p class="desc">교내 촬영과 취재 지원 요청을 필요한 일정·내용과 함께 접수하는 업무 요청 시스템.</p><div class="tags"><span class="tag">촬영</span><span class="tag">취재</span><span class="tag">업무요청</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
         </a>
       </div>
     </section>
