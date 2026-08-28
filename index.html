@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1f3a" />
+  <meta name="description" content="한양대학교 ERICA에서 AI를 활용해 업무 과정에 필요한 기능을 구현한 프로젝트 모음" />
+  <title>한양대학교 ERICA AI 활용 프로젝트</title>
+  <style>
+    :root{
+      --navy:#0b1f3a;
+      --blue:#2563eb;
+      --blue2:#4f8cff;
+      --ink:#172033;
+      --muted:#6b7280;
+      --line:#e8edf4;
+      --paper:#f7f9fc;
+      --white:#ffffff;
+      --shadow:0 18px 50px rgba(11,31,58,.10);
+      --radius:24px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(37,99,235,.08), transparent 26rem),
+        linear-gradient(#fbfcfe,#f5f7fb);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Pretendard","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+      letter-spacing:-.02em;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(1180px,calc(100% - 36px));margin:0 auto}
+
+    header{padding:34px 0 12px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:850;letter-spacing:-.035em}
+    .brand-mark{
+      width:36px;height:36px;border-radius:11px;display:grid;place-items:center;
+      color:#fff;background:linear-gradient(145deg,var(--navy),var(--blue));
+      box-shadow:0 8px 20px rgba(37,99,235,.24);font-size:13px;letter-spacing:-.04em
+    }
+    .top-actions{display:flex;gap:9px;align-items:center}
+    .chip{
+      border:1px solid var(--line);background:rgba(255,255,255,.82);backdrop-filter:blur(10px);
+      border-radius:999px;padding:9px 12px;color:#526076;font-size:13px;font-weight:700
+    }
+    .github-link:hover{border-color:#c9d5e7;color:var(--blue)}
+
+    .hero{padding:76px 0 54px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--blue);font-weight:850;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+    .dot{width:7px;height:7px;border-radius:99px;background:var(--blue);box-shadow:0 0 0 5px rgba(37,99,235,.10)}
+    h1{margin:18px 0 18px;font-size:clamp(44px,7vw,84px);line-height:.98;letter-spacing:-.065em;color:var(--navy)}
+    .hero p{max-width:760px;margin:0;color:#667085;font-size:clamp(17px,2vw,21px);line-height:1.7;font-weight:530}
+    .hero p strong{color:#344054}
+    .rule{height:1px;background:linear-gradient(90deg,var(--line),transparent);margin-top:44px}
+
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:12px 0 22px}
+    .section-title{margin:0;font-size:24px;letter-spacing:-.04em;color:var(--navy)}
+    .section-sub{color:#8590a3;font-size:13px;font-weight:700}
+
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding-bottom:74px}
+    .card{
+      position:relative;overflow:hidden;border:1px solid var(--line);background:rgba(255,255,255,.92);
+      border-radius:var(--radius);box-shadow:0 1px 0 rgba(255,255,255,.8) inset;
+      transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+      min-height:430px;display:flex;flex-direction:column
+    }
+    .card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:#d6dfec}
+    .preview{height:210px;padding:19px;position:relative;overflow:hidden;background:linear-gradient(145deg,#f3f6fb,#eaf0f8)}
+    .preview:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-70px;top:-90px;background:rgba(37,99,235,.08)}
+    .card-body{padding:22px 22px 20px;display:flex;flex-direction:column;flex:1}
+    .meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+    .num{font-size:12px;font-weight:900;color:var(--blue);letter-spacing:.10em}
+    .date{font-size:12px;color:#98a2b3;font-weight:700}
+    .card h2{font-size:22px;margin:0 0 10px;color:var(--navy);letter-spacing:-.045em}
+    .desc{font-size:14px;line-height:1.62;color:#667085;margin:0 0 18px}
+    .tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto}
+    .tag{font-size:11px;font-weight:800;color:#5a6b84;background:#f1f5fa;border:1px solid #e7edf5;border-radius:999px;padding:6px 8px}
+    .open{margin-top:18px;padding-top:15px;border-top:1px solid #eef2f6;display:flex;justify-content:space-between;align-items:center;color:#344054;font-size:13px;font-weight:850}
+    .arrow{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:#f4f7fb;color:var(--blue);transition:.2s}
+    .card:hover .arrow{background:var(--blue);color:white;transform:translate(2px,-2px)}
+
+    /* mini UI previews */
+    .mini-window{height:100%;border-radius:16px;background:#fff;border:1px solid #dde5f0;box-shadow:0 16px 35px rgba(30,55,90,.11);position:relative;z-index:1;overflow:hidden}
+    .bar{height:28px;border-bottom:1px solid #eef2f6;display:flex;align-items:center;gap:5px;padding:0 10px}
+    .bar i{display:block;width:6px;height:6px;border-radius:99px;background:#d7deea}
+
+    .mail .sheet{margin:24px 18px;padding:16px;border:1px solid #e8edf4;border-radius:10px}
+    .mail .name{font-size:16px;font-weight:900;color:#162a49}.mail .role{font-size:8px;color:#77849a;margin-top:3px}
+    .mail .blue-line{height:3px;width:78%;background:var(--blue);margin:12px 0 8px;border-radius:3px}.mail .txt{height:5px;background:#e7ecf3;border-radius:4px;margin:5px 0}.mail .txt.s{width:57%}
+
+    .nameplate .table{position:absolute;inset:48px 25px 23px;background:linear-gradient(145deg,#eef3f8,#fff);border:1px solid #dbe3ed;border-radius:7px;transform:perspective(400px) rotateX(11deg);box-shadow:0 18px 20px rgba(12,40,75,.12);display:grid;place-items:center;text-align:center}.nameplate .person{font-size:22px;font-weight:900;color:#102849}.nameplate .dept{font-size:8px;color:#76849a;margin-top:5px}.nameplate .logo-line{width:42px;height:3px;background:var(--blue);margin:8px auto 0;border-radius:9px}
+
+    .archive .search{margin:16px;height:28px;border:1px solid #dbe4ef;border-radius:8px;background:#f9fbfd;display:flex;align-items:center;padding:0 9px;color:#9aa5b5;font-size:8px}.archive .rows{padding:0 16px}.archive .row{height:24px;border-bottom:1px solid #edf1f5;display:flex;align-items:center;justify-content:space-between}.archive .row span{height:5px;background:#dce3ec;border-radius:4px;width:63%}.archive .row b{font-size:7px;color:#8b98aa}.archive .badge{position:absolute;right:13px;bottom:12px;background:#eaf2ff;color:var(--blue);font-size:7px;font-weight:900;padding:6px 7px;border-radius:7px}
+
+    .notice .poster{width:105px;height:143px;background:#fff;border:1px solid #dbe3ed;border-radius:6px;position:absolute;left:50%;top:50%;transform:translate(-50%,-47%);box-shadow:0 18px 30px rgba(15,39,70,.14);padding:13px}.notice .poster:before{content:"NOTICE";font-size:7px;font-weight:900;color:var(--blue);letter-spacing:.15em}.notice .poster h3{font-size:12px;line-height:1.2;margin:12px 0 8px;color:#183151}.notice .poster .line{height:4px;background:#e6ebf2;border-radius:4px;margin:5px 0}.notice .poster .line:nth-of-type(2){width:75%}.notice .poster .footer{position:absolute;left:13px;right:13px;bottom:13px;height:16px;background:#102a4e;border-radius:4px}
+
+    .welcome .screen{position:absolute;inset:42px 25px 28px;background:linear-gradient(130deg,#171c24,#0b1f3a);border:6px solid #dce3eb;border-radius:9px;box-shadow:0 18px 25px rgba(15,34,58,.20);display:grid;place-items:center;text-align:center;color:#fff}.welcome .screen .small{font-size:7px;letter-spacing:.14em;opacity:.65}.welcome .screen .big{font-size:16px;font-weight:900;line-height:1.15;margin:6px 0}.welcome .screen .info{font-size:7px;opacity:.75}
+
+    .pr .form{padding:15px 16px}.pr .label{font-size:7px;color:#8390a2;font-weight:800;margin:8px 0 4px}.pr .input{height:17px;border:1px solid #dfe6ef;border-radius:5px;background:#fbfcfe}.pr .input.big{height:38px}.pr .submit{height:22px;margin-top:11px;border-radius:6px;background:var(--blue);color:#fff;font-size:7px;font-weight:900;display:grid;place-items:center}
+
+    .character .panel{display:grid;grid-template-columns:1fr 80px;gap:12px;padding:18px}.character .q{height:11px;background:#e5ebf2;border-radius:5px;margin-bottom:9px}.character .q:nth-child(2){width:78%}.character .bubble{width:76px;height:76px;border-radius:25px;background:#e8f0ff;display:grid;place-items:center;font-size:28px}.character .approve{margin-top:14px;height:25px;border-radius:7px;background:#eef8f0;color:#36804a;font-size:7px;font-weight:900;display:grid;place-items:center}
+
+    .rental .calendar{padding:14px}.rental .month{font-size:10px;font-weight:900;color:#1c3354;margin-bottom:9px}.rental .days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.rental .days i{height:16px;border-radius:4px;background:#eef2f7}.rental .days i:nth-child(9),.rental .days i:nth-child(16){background:#dce9ff}.rental .days i:nth-child(12){background:#ffe8e5}.rental .float{position:absolute;right:14px;bottom:12px;width:50px;height:50px;border-radius:16px;background:#17365f;color:#fff;display:grid;place-items:center;font-size:23px;box-shadow:0 10px 25px rgba(17,45,83,.25)}
+
+    .agora .room{padding:15px}.agora .room-title{font-size:10px;font-weight:900;color:#153154}.agora .slots{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:12px}.agora .slot{height:31px;border:1px solid #dce4ee;border-radius:7px;background:#fbfcfe;position:relative}.agora .slot:after{content:"";position:absolute;left:6px;right:6px;bottom:6px;height:4px;background:#e5ebf2;border-radius:4px}.agora .slot.on{border-color:#bdd0fb;background:#eef4ff}.agora .slot.on:after{background:#7aa2ff}.agora .admin{position:absolute;left:15px;right:15px;bottom:14px;height:25px;border-radius:7px;background:#112c51;color:white;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:900}
+
+    .latest{position:absolute;z-index:3;top:14px;right:14px;background:#101d34;color:#fff;font-size:10px;font-weight:900;padding:7px 9px;border-radius:999px;box-shadow:0 7px 16px rgba(16,29,52,.2)}
+
+    footer{padding:0 0 50px}.foot{border-top:1px solid var(--line);padding-top:24px;color:#8a94a5;font-size:12px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}.foot strong{color:#59667a}
+
+    @media (max-width:980px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width:640px){
+      .wrap{width:min(100% - 24px,1180px)}
+      header{padding-top:20px}.brand span:last-child{font-size:14px}.chip.hide-mobile{display:none}
+      .hero{padding:56px 0 40px}h1{font-size:50px}.hero p{font-size:16px}.rule{margin-top:32px}
+      .grid{grid-template-columns:1fr;gap:14px}.card{min-height:404px}.preview{height:195px}
+      .section-head{align-items:center}.section-title{font-size:21px}
+    }
+    @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap topbar">
+      <a class="brand" href="#top" aria-label="맨 위로">
+        <span class="brand-mark">AI</span><span>ERICA AI PROJECTS</span>
+      </a>
+      <div class="top-actions">
+        <span class="chip hide-mobile">제작순서 · OLD → NEW</span>
+        <a class="chip github-link" href="https://github.com/hyungkeunyoo" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <div class="eyebrow"><span class="dot"></span> AI-ASSISTED WORK PROJECTS</div>
+        <h1>한양대학교 ERICA<br>AI 활용 프로젝트</h1>
+        <p>업무 과정에서 필요에 따라 AI를 활용해 제작한 <strong>작은 도구와 시스템</strong>을 제작 순서대로 정리하였습니다.</p>
+        <div class="rule"></div>
+      </div>
+    </section>
+
+    <section class="wrap" aria-labelledby="projects-title">
+      <div class="section-head">
+        <h2 class="section-title" id="projects-title">PROJECTS</h2>
+        <div class="section-sub">09 CREATIONS</div>
+      </div>
+
+      <div class="grid">
+        <a class="card" href="https://hyungkeunyoo.github.io/mail-card-maker/" target="_blank" rel="noopener">
+          <div class="preview mail"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="sheet"><div class="name">홍 길 동</div><div class="role">HANYANG UNIVERSITY ERICA</div><div class="blue-line"></div><div class="txt"></div><div class="txt s"></div><div class="txt"></div></div></div></div>
+          <div class="card-body"><div class="meta"><span class="num">01</span><span class="date">2026.06.02</span></div><h2>메일 명함 생성기</h2><p class="desc">이름·소속·연락처·로고·캐릭터를 골라 메일용 명함 이미지를 바로 만드는 도구.</p><div class="tags"><span class="tag">제작기</span><span class="tag">PNG</span><span class="tag">GitHub Pages</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
+        </a>
+
+        <a class="card" href="https://hyungkeunyoo.github.io/nameplate-maker/" target="_blank" rel="noopener">
+          <div class="preview nameplate"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="table"><div><div class="person">홍 길 동</div><div class="dept">한양대학교 ERICA</div><div class="logo-line"></div></div></div></div></div>
+          <div class="card-body"><div class="meta"><span class="num">02</span><span class="date">2026.07.29</span></div><h2>행사용 명패 생성기</h2><p class="desc">행사 명패를 여러 명 한 번에 만들고 양면·A4 출력까지 정리하는 자동 제작기.</p><div class="tags"><span class="tag">제작기</span><span class="tag">대량생성</span><span class="tag">인쇄</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
+        </a>
+
+        <a class="card" href="https://hy-erica-archive.vercel.app/" target="_blank" rel="noopener">
+          <div class="preview archive"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="search">HY-ERICA 기사 검색</div><div class="rows"><div class="row"><span></span><b>114호</b></div><div class="row"><span></span><b>113호</b></div><div class="row"><span></span><b>112호</b></div><div class="row"><span></span><b>111호</b></div></div><div class="badge">ARTICLE ARCHIVE</div></div></div>
+          <div class="card-body"><div class="meta"><span class="num">03</span><span class="date">2026.08.25</span></div><h2>HY-ERICA 기사 아카이브</h2><p class="desc">HY-ERICA 교지 기사 DB를 검색하고 원문 PDF의 해당 기사 위치까지 찾아가는 아카이브.</p><div class="tags"><span class="tag">아카이브</span><span class="tag">검색</span><span class="tag">Vercel</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
+        </a>
+
+        <a class="card" href="https://hyungkeunyoo.github.io/notice-maker/" target="_blank" rel="noopener">
+          <div class="preview notice"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="poster"><h3>행사 안내문<br>제작 예시</h3><div class="line"></div><div class="line"></div><div class="line"></div><div class="footer"></div></div></div></div>
+          <div class="card-body"><div class="meta"><span class="num">04</span><span class="date">2026.08.25</span></div><h2>안내문 제작기</h2><p class="desc">가로·세로 템플릿에 제목, 로고, 캐릭터를 배치해 행사 안내문을 만드는 도구.</p><div class="tags"><span class="tag">제작기</span><span class="tag">템플릿</span><span class="tag">포스터</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
+        </a>
+
+        <a class="card" href="https://hyungkeunyoo.github.io/welcome-board-maker/" target="_blank" rel="noopener">
+          <div class="preview welcome"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="screen"><div><div class="small">HANYANG UNIVERSITY ERICA</div><div class="big">WELCOME<br>TO ERICA</div><div class="info">2026. 08. 28 · 본관 1층</div></div></div></div></div>
+          <div class="card-body"><div class="meta"><span class="num">05</span><span class="date">2026.08.26</span></div><h2>웰컴보드 제작기</h2><p class="desc">본관 스크린용 환영 이미지를 템플릿·문구·로고 조합으로 고해상도 제작하는 도구.</p><div class="tags"><span class="tag">제작기</span><span class="tag">웰컴보드</span><span class="tag">고해상도</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
+        </a>
+
+        <a class="card" href="https://hyungkeunyoo.github.io/erica-pr-request/" target="_blank" rel="noopener">
+          <div class="preview pr"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="form"><div class="label">보도자료 제목</div><div class="input"></div><div class="label">주요 내용</div><div class="input big"></div><div class="label">이미지 첨부</div><div class="input"></div><div class="submit">보도자료 제출하기</div></div></div></div>
+          <div class="card-body"><div class="meta"><span class="num">06</span><span class="date">2026.08.26</span></div><h2>ERICA 보도자료 제출 시스템</h2><p class="desc">외부 배포·블로그 게재 여부를 골라 자료와 이미지를 담당자에게 전달하는 제출 폼.</p><div class="tags"><span class="tag">업무폼</span><span class="tag">메일연동</span><span class="tag">Apps Script</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
+        </a>
+
+        <a class="card" href="https://hyungkeunyoo.github.io/character-use/" target="_blank" rel="noopener">
+          <div class="preview character"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="panel"><div><div class="q"></div><div class="q"></div><div class="q"></div><div class="approve">활용 신청 · 승인 검토</div></div><div class="bubble">🐾</div></div></div></div>
+          <div class="card-body"><div class="meta"><span class="num">07</span><span class="date">2026.08.27</span></div><h2>캐릭터 활용 신청 시스템</h2><p class="desc">하냥이·하이비비 등 캐릭터 활용 신청을 받고 담당자가 승인·보완·불허 처리하는 시스템.</p><div class="tags"><span class="tag">신청</span><span class="tag">승인</span><span class="tag">관리자</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
+        </a>
+
+        <a class="card" href="https://hyungkeunyoo.github.io/hanyang-costume-rental/" target="_blank" rel="noopener">
+          <div class="preview rental"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="calendar"><div class="month">AUGUST 2026</div><div class="days"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><div class="float">🎭</div></div></div>
+          <div class="card-body"><div class="meta"><span class="num">08</span><span class="date">2026.08.27</span></div><h2>하냥이 인형탈 대여 시스템</h2><p class="desc">대여 가능일 확인부터 신청, 승인·거절, 결과 메일까지 연결한 인형탈 예약 시스템.</p><div class="tags"><span class="tag">대여</span><span class="tag">달력</span><span class="tag">승인</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
+        </a>
+
+        <a class="card" href="https://hyungkeunyoo.github.io/agora-rental/" target="_blank" rel="noopener">
+          <span class="latest">LATEST</span>
+          <div class="preview agora"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="room"><div class="room-title">아고라 공간 예약</div><div class="slots"><div class="slot"></div><div class="slot on"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot on"></div></div><div class="admin">예약 신청 · 관리자 승인</div></div></div></div>
+          <div class="card-body"><div class="meta"><span class="num">09</span><span class="date">2026.08.28</span></div><h2>아고라 대관 시스템</h2><p class="desc">공간별 예약 신청과 승인·불허 코멘트, 관리자 운영까지 묶은 대관 관리 시스템.</p><div class="tags"><span class="tag">대관</span><span class="tag">예약</span><span class="tag">관리자</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <span>© <span id="year">2026</span> <strong>ERICA AI PROJECTS</strong></span>
+      <span>AI를 활용한 업무 개선 프로젝트 모음.</span>
+    </div>
+  </footer>
+
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
