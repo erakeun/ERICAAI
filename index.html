@@ -143,6 +143,19 @@
     .studentwork .student-row i:nth-child(3){width:62%}
     .studentwork .status-pill{position:absolute;right:14px;bottom:12px;background:#edf7ef;color:#3d7a4c;font-size:7px;font-weight:900;padding:6px 8px;border-radius:999px}
 
+
+    .campusmap .map-mini{position:absolute;inset:40px 18px 18px;border-radius:12px;background:linear-gradient(145deg,#dfe8d9,#eef3ea);border:1px solid #d9e2d5;overflow:hidden;box-shadow:0 12px 25px rgba(31,70,45,.10)}
+    .campusmap .road{position:absolute;background:#fff;opacity:.82;border-radius:999px;transform-origin:center}
+    .campusmap .road.r1{width:180px;height:18px;left:30px;top:73px;transform:rotate(-16deg)}
+    .campusmap .road.r2{width:150px;height:15px;left:82px;top:39px;transform:rotate(58deg)}
+    .campusmap .road.r3{width:115px;height:13px;left:28px;top:116px;transform:rotate(18deg)}
+    .campusmap .building{position:absolute;background:#d9c9b7;border:1px solid #c5b29d;border-radius:4px;box-shadow:0 3px 7px rgba(70,55,40,.08)}
+    .campusmap .b1{width:32px;height:25px;left:54px;top:52px}.campusmap .b2{width:38px;height:22px;left:112px;top:75px}.campusmap .b3{width:28px;height:31px;left:160px;top:45px}.campusmap .b4{width:44px;height:24px;left:66px;top:117px}.campusmap .b5{width:30px;height:23px;left:155px;top:116px}.campusmap .b6{width:35px;height:22px;left:205px;top:88px}
+    .campusmap .pin{position:absolute;width:18px;height:18px;border-radius:50%;background:var(--blue);color:#fff;font-size:7px;font-weight:900;display:grid;place-items:center;box-shadow:0 0 0 4px rgba(255,255,255,.9),0 5px 12px rgba(37,99,235,.24)}
+    .campusmap .p1{left:74px;top:65px}.campusmap .p2{left:132px;top:86px}.campusmap .p3{left:176px;top:59px}
+    .campusmap .map-search{position:absolute;left:16px;right:16px;top:12px;height:22px;border-radius:7px;background:#fff;border:1px solid #dbe4df;display:flex;align-items:center;padding:0 8px;color:#94a09a;font-size:7px}
+    .campusmap .map-badge{position:absolute;right:12px;bottom:10px;background:#eaf2ff;color:var(--blue);font-size:7px;font-weight:900;padding:6px 7px;border-radius:7px}
+
     .latest{position:absolute;z-index:3;top:14px;right:14px;background:#101d34;color:#fff;font-size:10px;font-weight:900;padding:7px 9px;border-radius:999px;box-shadow:0 7px 16px rgba(16,29,52,.2)}
 
     footer{padding:0 0 50px}.foot{border-top:1px solid var(--line);padding-top:24px;color:#8a94a5;font-size:12px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}.foot strong{color:#59667a}
@@ -184,7 +197,7 @@
     <section class="wrap" aria-labelledby="projects-title">
       <div class="section-head">
         <h2 class="section-title" id="projects-title">PROJECTS</h2>
-        <div class="section-sub">11 CREATIONS</div>
+        <div class="section-sub">12 CREATIONS</div>
       </div>
 
       <div class="grid">
@@ -239,7 +252,6 @@
         </a>
 
         <a class="card" href="https://hyungkeunyoo.github.io/workstudent-manager/" target="_blank" rel="noopener">
-          <span class="latest">LATEST</span>
           <div class="preview studentwork">
             <div class="mini-window">
               <div class="bar"><i></i><i></i><i></i></div>
@@ -278,6 +290,41 @@
               <span class="tag">근로장학생</span>
               <span class="tag">근무일정</span>
               <span class="tag">예산관리</span>
+            </div>
+            <div class="open">
+              <span>열어보기</span>
+              <span class="arrow">↗</span>
+            </div>
+          </div>
+        </a>
+
+
+        <a class="card" href="https://hyungkeunyoo.github.io/erica-campus-map/" target="_blank" rel="noopener">
+          <span class="latest">LATEST</span>
+          <div class="preview campusmap">
+            <div class="mini-window">
+              <div class="bar"><i></i><i></i><i></i></div>
+              <div class="map-mini">
+                <div class="map-search">건물 번호·건물명 검색</div>
+                <div class="road r1"></div><div class="road r2"></div><div class="road r3"></div>
+                <div class="building b1"></div><div class="building b2"></div><div class="building b3"></div>
+                <div class="building b4"></div><div class="building b5"></div><div class="building b6"></div>
+                <div class="pin p1">101</div><div class="pin p2">206</div><div class="pin p3">301</div>
+                <div class="map-badge">CAMPUS MAP</div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="meta">
+              <span class="num">12</span>
+              <span class="date">2026.08.30</span>
+            </div>
+            <h2>ERICA 캠퍼스맵</h2>
+            <p class="desc">건물 번호·건물명으로 위치를 검색하고, 연결된 건물은 지도에서 바로 내부 구조도까지 확인할 수 있는 인터랙티브 캠퍼스맵.</p>
+            <div class="tags">
+              <span class="tag">캠퍼스맵</span>
+              <span class="tag">건물검색</span>
+              <span class="tag">내부구조도</span>
             </div>
             <div class="open">
               <span>열어보기</span>
