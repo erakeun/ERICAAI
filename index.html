@@ -186,6 +186,68 @@
     .signage .screen .footer-mini{position:absolute;left:10px;right:10px;bottom:10px;height:13px;border-radius:4px;background:rgba(255,255,255,.13)}
     .signage .ratio{position:absolute;right:11px;bottom:10px;background:#fff;color:#2f5f9b;border:1px solid #d9e4f2;font-size:6px;font-weight:900;padding:5px 7px;border-radius:999px}
 
+
+    /* similar system request */
+    .request-section{padding:0 0 54px}
+    .request-details{
+      border:1px solid #dfe7f2;background:rgba(255,255,255,.88);border-radius:22px;
+      box-shadow:0 12px 34px rgba(11,31,58,.06);overflow:hidden
+    }
+    .request-summary{
+      list-style:none;cursor:pointer;padding:22px 24px;display:flex;align-items:center;
+      justify-content:space-between;gap:18px;user-select:none
+    }
+    .request-summary::-webkit-details-marker{display:none}
+    .request-summary-main{display:flex;align-items:center;gap:15px;min-width:0}
+    .request-icon{
+      width:42px;height:42px;border-radius:13px;display:grid;place-items:center;flex:0 0 auto;
+      color:#fff;background:linear-gradient(145deg,var(--navy),var(--blue));
+      box-shadow:0 8px 20px rgba(37,99,235,.20);font-size:18px;font-weight:900
+    }
+    .request-summary strong{display:block;color:var(--navy);font-size:18px;letter-spacing:-.04em}
+    .request-summary span{display:block;color:#778398;font-size:13px;line-height:1.55;margin-top:3px}
+    .request-toggle{
+      width:34px;height:34px;border-radius:10px;background:#f3f6fa;color:var(--blue);
+      display:grid;place-items:center;font-size:18px;font-weight:900;transition:.2s;flex:0 0 auto
+    }
+    .request-details[open] .request-toggle{transform:rotate(45deg);background:#eaf2ff}
+    .request-panel{border-top:1px solid #edf1f6;padding:24px}
+    .request-intro{
+      margin:0 0 22px;color:#667085;font-size:14px;line-height:1.75;max-width:860px
+    }
+    .request-intro strong{color:#344054}
+    .request-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .request-field{display:flex;flex-direction:column;gap:7px}
+    .request-field.full{grid-column:1/-1}
+    .request-field label{font-size:12px;font-weight:850;color:#344054}
+    .request-field label em{font-style:normal;color:var(--blue)}
+    .request-field input,.request-field select,.request-field textarea{
+      width:100%;border:1px solid #dce4ef;background:#fbfcfe;color:#26364d;
+      border-radius:11px;padding:12px 13px;font:inherit;font-size:14px;outline:none;
+      transition:border-color .18s,box-shadow .18s,background .18s
+    }
+    .request-field textarea{min-height:104px;resize:vertical;line-height:1.55}
+    .request-field input:focus,.request-field select:focus,.request-field textarea:focus{
+      border-color:#9ab8f5;background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.08)
+    }
+    .request-help{font-size:11px;color:#98a2b3;line-height:1.45}
+    .request-actions{
+      grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;
+      gap:14px;flex-wrap:wrap;margin-top:4px;padding-top:18px;border-top:1px solid #eef2f6
+    }
+    .request-privacy{font-size:11px;color:#8b96a8;line-height:1.55}
+    .request-buttons{display:flex;gap:8px;flex-wrap:wrap}
+    .request-btn{
+      border:0;border-radius:11px;padding:12px 15px;font:inherit;font-size:13px;
+      font-weight:850;cursor:pointer;transition:.18s
+    }
+    .request-btn.primary{background:var(--blue);color:#fff;box-shadow:0 8px 18px rgba(37,99,235,.18)}
+    .request-btn.primary:hover{transform:translateY(-1px);background:#1f57d3}
+    .request-btn.secondary{background:#f2f5f9;color:#42526a}
+    .request-btn.secondary:hover{background:#e9eef5}
+    .request-status{grid-column:1/-1;display:none;margin-top:-4px;font-size:12px;font-weight:750;color:#3d6f4a}
+    .request-status.show{display:block}
+
     .latest{position:absolute;z-index:3;top:14px;right:14px;background:#101d34;color:#fff;font-size:10px;font-weight:900;padding:7px 9px;border-radius:999px;box-shadow:0 7px 16px rgba(16,29,52,.2)}
 
     footer{padding:0 0 50px}.foot{border-top:1px solid var(--line);padding-top:24px;color:#8a94a5;font-size:12px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}.foot strong{color:#59667a}
@@ -197,6 +259,12 @@
       .hero{padding:56px 0 40px}h1{font-size:50px}.hero p{font-size:16px}.rule{margin-top:32px}
       .grid{grid-template-columns:1fr;gap:14px}.card{min-height:404px}.preview{height:195px}
       .section-head{align-items:center}.section-title{font-size:21px}
+
+      .request-summary{padding:18px}.request-summary strong{font-size:16px}
+      .request-summary span{font-size:12px}.request-panel{padding:18px}
+      .request-form{grid-template-columns:1fr}.request-field.full{grid-column:auto}
+      .request-actions{grid-column:auto;align-items:flex-start}.request-status{grid-column:auto}
+
     }
     @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
   </style>
@@ -221,6 +289,118 @@
         <h1>한양대학교 ERICA 발전협력팀<br>AI 활용 프로젝트</h1>
         <p>AI를 활용해 제작한 <strong>툴과 시스템</strong>을 제작 순서대로 정리했습니다.</p>
         <div class="rule"></div>
+      </div>
+    </section>
+
+
+    <section class="request-section">
+      <div class="wrap">
+        <details class="request-details" id="system-request">
+          <summary class="request-summary">
+            <div class="request-summary-main">
+              <div class="request-icon">↗</div>
+              <div>
+                <strong>비슷한 시스템이 필요하신가요?</strong>
+                <span>업무에서 불편한 점과 만들고 싶은 흐름을 알려주시면, 기존 프로젝트를 바탕으로 적용 가능성을 함께 살펴봅니다.</span>
+              </div>
+            </div>
+            <div class="request-toggle">+</div>
+          </summary>
+
+          <div class="request-panel">
+            <p class="request-intro">
+              이미 만든 시스템을 그대로 복제하기보다, <strong>현재 어떤 문제가 있고 왜 비슷한 시스템이 필요한지</strong>,
+              그리고 실제로 어떤 방식으로 쓰고 싶은지를 알려주세요. 기존 구조를 재활용하거나 업무 상황에 맞게 변형할 수 있는지 검토하기 좋게 메일 내용이 자동으로 정리됩니다.
+            </p>
+
+            <form class="request-form" id="projectRequestForm">
+              <div class="request-field">
+                <label for="rqName">이름 <em>*</em></label>
+                <input id="rqName" name="name" type="text" autocomplete="name" required placeholder="홍길동">
+              </div>
+
+              <div class="request-field">
+                <label for="rqOrg">소속 / 부서 <em>*</em></label>
+                <input id="rqOrg" name="org" type="text" required placeholder="예: ○○대학교 ○○팀">
+              </div>
+
+              <div class="request-field">
+                <label for="rqEmail">신청자 이메일 <em>*</em></label>
+                <input id="rqEmail" name="email" type="email" autocomplete="email" required placeholder="example@hanyang.ac.kr">
+              </div>
+
+              <div class="request-field">
+                <label for="rqPhone">전화번호 <em>*</em></label>
+                <input id="rqPhone" name="phone" type="tel" autocomplete="tel" required placeholder="010-0000-0000">
+              </div>
+
+              <div class="request-field full">
+                <label for="rqReference">참고한 프로젝트</label>
+                <select id="rqReference" name="reference">
+                  <option value="잘 모르겠음 / 상담 필요">잘 모르겠음 / 상담 필요</option>
+                  <option>메일 명함 생성기</option>
+                  <option>행사용 명패 생성기</option>
+                  <option>HY-ERICA 기사 아카이브</option>
+                  <option>안내문 제작기</option>
+                  <option>웰컴보드 제작기</option>
+                  <option>ERICA 보도자료 제출 시스템</option>
+                  <option>캐릭터 활용 신청 시스템</option>
+                  <option>하냥이 인형탈 대여 시스템</option>
+                  <option>아고라 대관 시스템</option>
+                  <option>ERICA 촬영·취재 지원 요청</option>
+                  <option>근로장학생 관리시스템</option>
+                  <option>ERICA 캠퍼스맵</option>
+                  <option>홍보물품 재고관리 시스템</option>
+                  <option>무인기부코너 관리시스템</option>
+                  <option>디지털 사이니지 제작기</option>
+                </select>
+              </div>
+
+              <div class="request-field full">
+                <label for="rqProblem">현재 겪고 있는 문제 <em>*</em></label>
+                <textarea id="rqProblem" name="problem" required placeholder="지금 어떤 방식으로 업무를 처리하고 있고, 무엇이 가장 불편한지 적어주세요."></textarea>
+              </div>
+
+              <div class="request-field full">
+                <label for="rqWhy">왜 비슷한 시스템이 필요한가요? <em>*</em></label>
+                <textarea id="rqWhy" name="why" required placeholder="기존 프로젝트에서 어떤 점을 보고 비슷한 구조가 필요하다고 생각했는지 적어주세요."></textarea>
+              </div>
+
+              <div class="request-field full">
+                <label for="rqWant">만들고 싶은 기능 / 업무 흐름 <em>*</em></label>
+                <textarea id="rqWant" name="want" required placeholder="예: 신청 → 담당자 검토 → 승인/불허 → 자동 메일 → 관리자 DB 저장"></textarea>
+                <span class="request-help">정확한 기술 용어를 몰라도 괜찮습니다. 실제 업무가 어떻게 흘렀으면 하는지를 적는 편이 더 좋습니다.</span>
+              </div>
+
+              <div class="request-field">
+                <label for="rqCurrent">현재 사용 중인 도구</label>
+                <input id="rqCurrent" name="current" type="text" placeholder="예: Excel, Google Sheets, 메일, 종이 신청서">
+              </div>
+
+              <div class="request-field">
+                <label for="rqTiming">희망 시기 / 일정</label>
+                <input id="rqTiming" name="timing" type="text" placeholder="예: 9월 중 테스트 희망">
+              </div>
+
+              <div class="request-field full">
+                <label for="rqNote">추가로 알려주실 내용</label>
+                <textarea id="rqNote" name="note" placeholder="예상 사용자 수, 관리자 수, 기존 자료 유무, 반드시 지켜야 할 운영 조건 등이 있다면 적어주세요."></textarea>
+              </div>
+
+              <div class="request-actions">
+                <div class="request-privacy">
+                  입력 내용은 이 페이지에 저장되지 않습니다.<br>
+                  메일 작성 시 수신자는 <strong>keun0810@hanyang.ac.kr</strong>로 설정됩니다.
+                </div>
+                <div class="request-buttons">
+                  <button class="request-btn secondary" type="button" id="copyRequestBtn">내용 복사</button>
+                  <button class="request-btn primary" type="submit">내용 정리해서 메일 보내기 ↗</button>
+                </div>
+              </div>
+              <div class="request-status" id="requestStatus">메일 내용을 클립보드에 복사했습니다.</div>
+            </form>
+          </div>
+        </details>
       </div>
     </section>
 
@@ -471,10 +651,84 @@
   <footer>
     <div class="wrap foot">
       <span>© <span id="year">2026</span> <strong>ERICA AI PROJECTS</strong></span>
-      <span>AI를 활용한 업무 개선 프로젝트 모음.</span>
+      <span>AI를 활용한 업무 개선 프로젝트 모음. · <strong>v1.1</strong></span>
     </div>
   </footer>
 
-  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent=new Date().getFullYear();
+
+    const requestForm = document.getElementById('projectRequestForm');
+    const requestStatus = document.getElementById('requestStatus');
+
+    function requestMailText(){
+      const v = id => document.getElementById(id).value.trim();
+      return [
+        '[ERICA AI PROJECTS · 시스템 구축 문의]',
+        '',
+        '■ 신청자 정보',
+        `- 이름: ${v('rqName')}`,
+        `- 소속/부서: ${v('rqOrg')}`,
+        `- 이메일: ${v('rqEmail')}`,
+        `- 전화번호: ${v('rqPhone')}`,
+        '',
+        '■ 참고한 프로젝트',
+        `- ${v('rqReference')}`,
+        '',
+        '■ 현재 겪고 있는 문제',
+        v('rqProblem'),
+        '',
+        '■ 비슷한 시스템이 필요한 이유',
+        v('rqWhy'),
+        '',
+        '■ 만들고 싶은 기능 / 업무 흐름',
+        v('rqWant'),
+        '',
+        '■ 현재 사용 중인 도구',
+        v('rqCurrent') || '미작성',
+        '',
+        '■ 희망 시기 / 일정',
+        v('rqTiming') || '미작성',
+        '',
+        '■ 추가 참고사항',
+        v('rqNote') || '없음'
+      ].join('\n');
+    }
+
+    requestForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      if(!requestForm.reportValidity()) return;
+
+      const name = document.getElementById('rqName').value.trim();
+      const org = document.getElementById('rqOrg').value.trim();
+      const subject = `[ERICA AI PROJECTS] 시스템 구축 문의 - ${name} / ${org}`;
+      const body = requestMailText();
+      window.location.href =
+        'mailto:keun0810@hanyang.ac.kr?subject=' + encodeURIComponent(subject) +
+        '&body=' + encodeURIComponent(body);
+    });
+
+    document.getElementById('copyRequestBtn').addEventListener('click', async function(){
+      if(!requestForm.reportValidity()) return;
+      const text = requestMailText();
+
+      try{
+        await navigator.clipboard.writeText(text);
+        requestStatus.textContent = '메일 내용을 클립보드에 복사했습니다.';
+        requestStatus.classList.add('show');
+      }catch(err){
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+        requestStatus.textContent = '메일 내용을 클립보드에 복사했습니다.';
+        requestStatus.classList.add('show');
+      }
+
+      setTimeout(()=>requestStatus.classList.remove('show'), 2800);
+    });
+  </script>
 </body>
 </html>
