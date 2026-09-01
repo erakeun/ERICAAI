@@ -167,6 +167,25 @@
     .inventory .stock-row i{height:5px;background:#dfe6ee;border-radius:4px}.inventory .stock-row i:nth-child(2){background:#d9e9ff}.inventory .stock-row i:nth-child(3){background:#e4f1e7}
     .inventory .low-badge{position:absolute;right:11px;bottom:10px;background:#fff2df;color:#a86613;border:1px solid #f6dfb9;font-size:6px;font-weight:900;padding:5px 7px;border-radius:999px}
 
+
+    .donation .donation-ui{position:absolute;inset:40px 18px 18px;border-radius:12px;background:#fff;border:1px solid #e0e7ef;overflow:hidden;box-shadow:0 12px 25px rgba(31,55,85,.10)}
+    .donation .donation-head{height:34px;background:linear-gradient(90deg,#0c3d73,#165a9f);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 11px}
+    .donation .donation-head b{font-size:8px}.donation .donation-head span{font-size:6px;opacity:.72}
+    .donation .place-row{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:10px}
+    .donation .place{height:35px;border:1px solid #dfe6ef;border-radius:8px;background:#f8fafc;padding:7px}
+    .donation .place.on{background:#edf4ff;border-color:#c9daf6}.donation .place b{display:block;font-size:8px;color:#173e70}.donation .place span{display:block;font-size:5px;color:#8995a7;margin-top:3px}
+    .donation .donation-row{height:22px;margin:0 10px;border-top:1px solid #edf1f5;display:grid;grid-template-columns:1.2fr .65fr .65fr;align-items:center;gap:7px}
+    .donation .donation-row i{height:5px;background:#dfe6ee;border-radius:4px}.donation .donation-row i:nth-child(2){background:#d9e9ff}.donation .donation-row i:nth-child(3){background:#e1f0e6}
+    .donation .internal-badge{position:absolute;right:11px;bottom:10px;background:#eef2f7;color:#5d6d82;font-size:6px;font-weight:900;padding:5px 7px;border-radius:999px}
+
+    .signage .canvas{position:absolute;inset:40px 18px 18px;border-radius:12px;background:#f1f4f8;border:1px solid #dfe6ef;overflow:hidden;box-shadow:0 12px 25px rgba(31,55,85,.10)}
+    .signage .side{position:absolute;left:0;top:0;bottom:0;width:39%;background:#fff;border-right:1px solid #e2e8f0;padding:10px}
+    .signage .side-title{font-size:7px;font-weight:900;color:#183151;margin-bottom:8px}.signage .option{height:16px;border:1px solid #e1e7ee;border-radius:5px;margin-bottom:6px;background:#fbfcfe}.signage .option.on{background:#eef4ff;border-color:#c9dafc}
+    .signage .screen{position:absolute;right:16px;top:12px;width:42%;height:126px;border-radius:7px;background:linear-gradient(155deg,#13294b,#1d5aa6);box-shadow:0 12px 20px rgba(20,48,90,.18);padding:12px;color:#fff;text-align:center}
+    .signage .screen .small{font-size:5px;letter-spacing:.13em;opacity:.72}.signage .screen .big{font-size:12px;font-weight:900;line-height:1.18;margin-top:20px}.signage .screen .line{height:3px;background:rgba(255,255,255,.45);border-radius:3px;margin:10px auto 0;width:68%}
+    .signage .screen .footer-mini{position:absolute;left:10px;right:10px;bottom:10px;height:13px;border-radius:4px;background:rgba(255,255,255,.13)}
+    .signage .ratio{position:absolute;right:11px;bottom:10px;background:#fff;color:#2f5f9b;border:1px solid #d9e4f2;font-size:6px;font-weight:900;padding:5px 7px;border-radius:999px}
+
     .latest{position:absolute;z-index:3;top:14px;right:14px;background:#101d34;color:#fff;font-size:10px;font-weight:900;padding:7px 9px;border-radius:999px;box-shadow:0 7px 16px rgba(16,29,52,.2)}
 
     footer{padding:0 0 50px}.foot{border-top:1px solid var(--line);padding-top:24px;color:#8a94a5;font-size:12px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}.foot strong{color:#59667a}
@@ -208,7 +227,7 @@
     <section class="wrap" aria-labelledby="projects-title">
       <div class="section-head">
         <h2 class="section-title" id="projects-title">PROJECTS</h2>
-        <div class="section-sub">13 CREATIONS</div>
+        <div class="section-sub">15 CREATIONS</div>
       </div>
 
       <div class="grid">
@@ -345,7 +364,6 @@
 
 
         <a class="card" href="https://script.google.com/macros/s/AKfycbxUXKzhNP4Q3oMz07_9jJ5ohQdQ7xXTK88LrJdCxhPzxInXWcUK_ofvhg8ZhSU0UhlV/exec" target="_blank" rel="noopener">
-          <span class="latest">LATEST</span>
           <div class="preview inventory">
             <div class="mini-window">
               <div class="bar"><i></i><i></i><i></i></div>
@@ -383,6 +401,66 @@
               <span>열어보기</span>
               <span class="arrow">↗</span>
             </div>
+          </div>
+        </a>
+
+
+        <div class="card" role="article" aria-label="무인기부코너 관리시스템">
+          <div class="preview donation">
+            <div class="mini-window">
+              <div class="bar"><i></i><i></i><i></i></div>
+              <div class="donation-ui">
+                <div class="donation-head">
+                  <b>무인기부코너 관리</b>
+                  <span>HANYANG VIEW</span>
+                </div>
+                <div class="place-row">
+                  <div class="place on"><b>본관 1층</b><span>상품 · 재고 · 매출</span></div>
+                  <div class="place"><b>셔틀콕</b><span>지점 관리</span></div>
+                </div>
+                <div class="donation-row"><i></i><i></i><i></i></div>
+                <div class="donation-row"><i></i><i></i><i></i></div>
+                <div class="donation-row"><i></i><i></i><i></i></div>
+                <div class="internal-badge">INTERNAL SYSTEM</div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="meta"><span class="num">14</span><span class="date">2026.08.31</span></div>
+            <h2>무인기부코너 관리시스템</h2>
+            <p class="desc">무인기부코너의 지점별 상품·재고·매출과 입고·조정·점검 이력을 한곳에서 관리하도록 만든 내부 운영 시스템.</p>
+            <div class="tags"><span class="tag">재고관리</span><span class="tag">지점관리</span><span class="tag">내부시스템</span></div>
+            <div class="open"><span>내부 운영 시스템</span><span class="arrow">🔒</span></div>
+          </div>
+        </div>
+
+
+
+        <a class="card" href="https://erakeun.github.io/digital-signage-maker/" target="_blank" rel="noopener">
+          <span class="latest">LATEST</span>
+          <div class="preview signage">
+            <div class="mini-window">
+              <div class="bar"><i></i><i></i><i></i></div>
+              <div class="canvas">
+                <div class="side">
+                  <div class="side-title">DIGITAL SIGNAGE MAKER</div>
+                  <div class="option on"></div><div class="option"></div><div class="option"></div><div class="option"></div><div class="option"></div>
+                </div>
+                <div class="screen">
+                  <div class="small">HANYANG UNIVERSITY ERICA</div>
+                  <div class="big">행사 안내<br>디지털 사이니지</div>
+                  <div class="line"></div><div class="footer-mini"></div>
+                </div>
+                <div class="ratio">9 : 16</div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="meta"><span class="num">15</span><span class="date">2026.08.31</span></div>
+            <h2>디지털 사이니지 제작기</h2>
+            <p class="desc">ERICA 내부 세로형 디지털 사이니지에 맞춰 텍스트·로고·색상과 템플릿을 조합해 안내 화면을 만드는 제작 도구.</p>
+            <div class="tags"><span class="tag">사이니지</span><span class="tag">9:16</span><span class="tag">템플릿</span></div>
+            <div class="open"><span>열어보기</span><span class="arrow">↗</span></div>
           </div>
         </a>
 
