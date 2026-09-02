@@ -248,6 +248,32 @@
     .request-status{grid-column:1/-1;display:none;margin-top:-4px;font-size:12px;font-weight:750;color:#3d6f4a}
     .request-status.show{display:block}
 
+
+    .studentpromo .promo-ui{position:absolute;inset:40px 18px 18px;border-radius:12px;background:#fff;border:1px solid #dfe7e2;overflow:hidden;box-shadow:0 12px 25px rgba(28,73,49,.10)}
+    .studentpromo .promo-head{height:34px;background:linear-gradient(90deg,#0b4d34,#17834d);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 11px}
+    .studentpromo .promo-head b{font-size:8px}.studentpromo .promo-head span{font-size:6px;opacity:.75}
+    .studentpromo .promo-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:9px 10px 7px}
+    .studentpromo .promo-stat{height:35px;border:1px solid #e1e9e4;border-radius:7px;background:#f8fbf9;padding:6px}
+    .studentpromo .promo-stat b{display:block;font-size:10px;color:#17613d}.studentpromo .promo-stat span{display:block;margin-top:3px;font-size:5px;color:#87958c}
+    .studentpromo .promo-row{height:22px;margin:0 10px;border-top:1px solid #edf2ef;display:grid;grid-template-columns:.72fr 1.2fr .7fr;align-items:center;gap:7px}
+    .studentpromo .promo-row i{height:5px;background:#dfe7e2;border-radius:4px}.studentpromo .promo-row i:nth-child(2){background:#cfe7d8}.studentpromo .promo-row i:nth-child(3){background:#dce8f6}
+    .studentpromo .promo-badge{position:absolute;right:11px;bottom:10px;background:#eaf5ee;color:#28714a;font-size:6px;font-weight:900;padding:5px 7px;border-radius:999px}
+
+
+    /* project design-guide links */
+    .project-item{min-width:0;display:flex;flex-direction:column;gap:9px}
+    .project-item .card{width:100%;flex:1}
+    .guide-link{
+      min-height:42px;border:1px solid #dfe7f2;background:rgba(255,255,255,.9);border-radius:13px;
+      padding:10px 13px;display:flex;align-items:center;justify-content:space-between;gap:10px;
+      color:#344054;font-size:12px;font-weight:850;box-shadow:0 1px 0 rgba(255,255,255,.8) inset;
+      transition:border-color .18s,box-shadow .18s,transform .18s,color .18s,background .18s
+    }
+    .guide-link.active{cursor:pointer;color:#245fd7;border-color:#cddbf7;background:#f8fbff}
+    .guide-link.active:hover{transform:translateY(-1px);border-color:#a9c1f3;box-shadow:0 8px 18px rgba(37,99,235,.08);background:#fff}
+    .guide-link.disabled{color:#a0a9b7;background:#f7f9fc;border-color:#e7ebf1;cursor:default}
+    .guide-link .guide-state{font-size:10px;font-weight:800;color:inherit;opacity:.75}
+
     .latest{position:absolute;z-index:3;top:14px;right:14px;background:#101d34;color:#fff;font-size:10px;font-weight:900;padding:7px 9px;border-radius:999px;box-shadow:0 7px 16px rgba(16,29,52,.2)}
 
     footer{padding:0 0 50px}.foot{border-top:1px solid var(--line);padding-top:24px;color:#8a94a5;font-size:12px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}.foot strong{color:#59667a}
@@ -353,6 +379,7 @@
                   <option>홍보물품 재고관리 시스템</option>
                   <option>무인기부코너 관리시스템</option>
                   <option>디지털 사이니지 제작기</option>
+                  <option>학생홍보단 관리시스템</option>
                 </select>
               </div>
 
@@ -407,7 +434,7 @@
     <section class="wrap" aria-labelledby="projects-title">
       <div class="section-head">
         <h2 class="section-title" id="projects-title">PROJECTS</h2>
-        <div class="section-sub">15 CREATIONS</div>
+        <div class="section-sub">16 CREATIONS</div>
       </div>
 
       <div class="grid">
@@ -543,7 +570,7 @@
         </a>
 
 
-        <a class="card" href="https://script.google.com/macros/s/AKfycbxUXKzhNP4Q3oMz07_9jJ5ohQdQ7xXTK88LrJdCxhPzxInXWcUK_ofvhg8ZhSU0UhlV/exec" target="_blank" rel="noopener">
+        <div class="card" role="article" aria-label="홍보물품 재고관리 시스템">
           <div class="preview inventory">
             <div class="mini-window">
               <div class="bar"><i></i><i></i><i></i></div>
@@ -578,11 +605,11 @@
               <span class="tag">관리자</span>
             </div>
             <div class="open">
-              <span>열어보기</span>
-              <span class="arrow">↗</span>
+              <span>내부 운영 시스템</span>
+              <span class="arrow">🔒</span>
             </div>
           </div>
-        </a>
+        </div>
 
 
         <div class="card" role="article" aria-label="무인기부코너 관리시스템">
@@ -617,7 +644,6 @@
 
 
         <a class="card" href="https://erakeun.github.io/digital-signage-maker/" target="_blank" rel="noopener">
-          <span class="latest">LATEST</span>
           <div class="preview signage">
             <div class="mini-window">
               <div class="bar"><i></i><i></i><i></i></div>
@@ -644,6 +670,38 @@
           </div>
         </a>
 
+
+        <div class="card" role="article" aria-label="학생홍보단 관리시스템">
+          <span class="latest">LATEST</span>
+          <div class="preview studentpromo">
+            <div class="mini-window">
+              <div class="bar"><i></i><i></i><i></i></div>
+              <div class="promo-ui">
+                <div class="promo-head">
+                  <b>학생홍보단 운영관리</b>
+                  <span>V2.2.0 · TEAM CALENDAR</span>
+                </div>
+                <div class="promo-stats">
+                  <div class="promo-stat"><b>근무</b><span>출퇴근 · 누적</span></div>
+                  <div class="promo-stat"><b>콘텐츠</b><span>진행 · 완료</span></div>
+                  <div class="promo-stat"><b>승인</b><span>추가근무</span></div>
+                </div>
+                <div class="promo-row"><i></i><i></i><i></i></div>
+                <div class="promo-row"><i></i><i></i><i></i></div>
+                <div class="promo-row"><i></i><i></i><i></i></div>
+                <div class="promo-badge">TEAM CALENDAR</div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="meta"><span class="num">16</span><span class="date">2026.09.01</span></div>
+            <h2>학생홍보단 관리시스템</h2>
+            <p class="desc">학생홍보단의 출퇴근·근무 누적과 추가근무 승인, 콘텐츠 진행 현황, 팀 캘린더와 월별 정산을 한곳에서 관리하는 운영 시스템.</p>
+            <div class="tags"><span class="tag">학생홍보단</span><span class="tag">근무관리</span><span class="tag">콘텐츠관리</span></div>
+            <div class="open"><span>내부 운영 시스템</span><span class="arrow">🔒</span></div>
+          </div>
+        </div>
+
       </div>
     </section>
   </main>
@@ -651,12 +709,83 @@
   <footer>
     <div class="wrap foot">
       <span>© <span id="year">2026</span> <strong>ERICA AI PROJECTS</strong></span>
-      <span>AI를 활용한 업무 개선 프로젝트 모음. · <strong>v1.1</strong></span>
+      <span>AI를 활용한 업무 개선 프로젝트 모음. · <strong>v1.2</strong></span>
     </div>
   </footer>
 
   <script>
     document.getElementById('year').textContent=new Date().getFullYear();
+
+
+    /*
+      설계방법 링크 관리
+      ------------------------------------------------------------
+      아래 GUIDE_LINKS에서 원하는 프로젝트 번호에 Google Drive 공유 URL을 넣으면
+      해당 카드 아래의 '설계방법' 버튼이 자동으로 활성화됩니다.
+      빈 문자열("")로 두면 버튼은 보이되 비활성 상태로 유지됩니다.
+
+      예시:
+      "09": "https://drive.google.com/drive/folders/XXXXXXXX"
+    */
+    const GUIDE_LINKS = {
+      "01": "", // 메일 명함 생성기
+      "02": "", // 행사용 명패 생성기
+      "03": "", // HY-ERICA 기사 아카이브
+      "04": "", // 안내문 제작기
+      "05": "", // 웰컴보드 제작기
+      "06": "", // ERICA 보도자료 제출 시스템
+      "07": "", // 캐릭터 활용 신청 시스템
+      "08": "", // 하냥이 인형탈 대여 시스템
+      "09": "", // 아고라 대관 시스템
+      "10": "", // ERICA 촬영·취재 지원 요청
+      "11": "https://drive.google.com/drive/folders/1FmQyEXxmZ-DjyqSx_DiwW8wnIbmr6txy?usp=sharing", // 근로장학생 관리시스템
+      "12": "", // ERICA 캠퍼스맵
+      "13": "https://drive.google.com/drive/folders/1KWpZ4S2w2LFhhQfIRzGBC5t86FC3TTXe?usp=drive_link", // 홍보물품 재고관리 시스템
+      "14": "", // 무인기부코너 관리시스템
+      "15": "", // 디지털 사이니지 제작기
+      "16": ""  // 학생홍보단 관리시스템
+    };
+
+    function buildGuideLinks(){
+      const grid = document.querySelector('.grid');
+      if(!grid) return;
+
+      [...grid.children].forEach(card => {
+        if(!card.classList.contains('card')) return;
+
+        const numEl = card.querySelector('.num');
+        if(!numEl) return;
+        const id = numEl.textContent.trim();
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'project-item';
+        grid.insertBefore(wrapper, card);
+        wrapper.appendChild(card);
+
+        const url = (GUIDE_LINKS[id] || '').trim();
+
+        if(url){
+          const guide = document.createElement('a');
+          guide.className = 'guide-link active';
+          guide.href = url;
+          guide.target = '_blank';
+          guide.rel = 'noopener';
+          guide.setAttribute('aria-label', `${id}번 프로젝트 설계방법 열기`);
+          guide.innerHTML = '<span>설계방법</span><span class="guide-state">↗</span>';
+          wrapper.appendChild(guide);
+        }else{
+          const guide = document.createElement('div');
+          guide.className = 'guide-link disabled';
+          guide.setAttribute('aria-disabled', 'true');
+          guide.title = '설계자료 링크가 등록되면 활성화됩니다.';
+          guide.innerHTML = '<span>설계방법</span><span class="guide-state">준비중</span>';
+          wrapper.appendChild(guide);
+        }
+      });
+    }
+
+    buildGuideLinks();
+
 
     const requestForm = document.getElementById('projectRequestForm');
     const requestStatus = document.getElementById('requestStatus');
