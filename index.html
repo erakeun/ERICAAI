@@ -48,39 +48,42 @@
     }
     .github-link:hover{border-color:#c9d5e7;color:var(--blue)}
 
-    .hero{padding:76px 0 54px}
+    .hero{padding:52px 0 36px}
     .eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--blue);font-weight:850;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
     .dot{width:7px;height:7px;border-radius:99px;background:var(--blue);box-shadow:0 0 0 5px rgba(37,99,235,.10)}
-    h1{margin:18px 0 18px;font-size:clamp(44px,7vw,84px);line-height:.98;letter-spacing:-.065em;color:var(--navy)}
-    .hero p{max-width:760px;margin:0;color:#667085;font-size:clamp(17px,2vw,21px);line-height:1.7;font-weight:530}
+    h1{margin:14px 0;font-size:clamp(44px,7vw,84px);line-height:.98;letter-spacing:-.065em;color:var(--navy);word-break:keep-all;overflow-wrap:break-word}
+    .hero p{max-width:760px;margin:0;color:#667085;font-size:clamp(17px,2vw,21px);line-height:1.7;font-weight:530;word-break:keep-all;overflow-wrap:break-word}
     .hero p strong{color:#344054}
-    .rule{height:1px;background:linear-gradient(90deg,var(--line),transparent);margin-top:44px}
+    .rule{height:1px;background:linear-gradient(90deg,var(--line),transparent);margin-top:30px}
 
-    .section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:12px 0 22px}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:10px 0 20px}
     .section-title{margin:0;font-size:24px;letter-spacing:-.04em;color:var(--navy)}
     .section-sub{color:#8590a3;font-size:13px;font-weight:700}
 
-    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding-bottom:74px}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 22px;padding-bottom:74px}
     .card{
       position:relative;overflow:hidden;border:1px solid var(--line);background:rgba(255,255,255,.92);
       border-radius:var(--radius);box-shadow:0 1px 0 rgba(255,255,255,.8) inset;
-      transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
-      min-height:430px;display:flex;flex-direction:column
+      transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+      min-height:424px;display:flex;flex-direction:column
     }
-    .card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:#d6dfec}
-    .preview{height:210px;padding:19px;position:relative;overflow:hidden;background:linear-gradient(145deg,#f3f6fb,#eaf0f8)}
+    a.card{cursor:pointer}
+    a.card:hover{transform:translateY(-4px);box-shadow:0 20px 48px rgba(11,31,58,.14);border-color:#b9c9e2}
+    a.card:focus-visible{outline:3px solid rgba(37,99,235,.52);outline-offset:3px;box-shadow:0 16px 42px rgba(37,99,235,.16);border-color:#8eacf0}
+    .preview{height:200px;padding:19px;position:relative;overflow:hidden;background:linear-gradient(145deg,#f3f6fb,#eaf0f8)}
     .preview:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-70px;top:-90px;background:rgba(37,99,235,.08)}
     .card-body{padding:22px 22px 20px;display:flex;flex-direction:column;flex:1}
-    .meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
-    .num{font-size:12px;font-weight:900;color:var(--blue);letter-spacing:.10em}
-    .date{font-size:12px;color:#98a2b3;font-weight:700}
-    .card h2{font-size:22px;margin:0 0 10px;color:var(--navy);letter-spacing:-.045em}
-    .desc{font-size:14px;line-height:1.62;color:#667085;margin:0 0 18px}
-    .tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto}
-    .tag{font-size:11px;font-weight:800;color:#5a6b84;background:#f1f5fa;border:1px solid #e7edf5;border-radius:999px;padding:6px 8px}
-    .open{margin-top:18px;padding-top:15px;border-top:1px solid #eef2f6;display:flex;justify-content:space-between;align-items:center;color:#344054;font-size:13px;font-weight:850}
-    .arrow{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:#f4f7fb;color:var(--blue);transition:.2s}
-    .card:hover .arrow{background:var(--blue);color:white;transform:translate(2px,-2px)}
+    .meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+    .num{font-size:11px;font-weight:900;color:var(--blue);letter-spacing:.10em;background:#eef4ff;border:1px solid #dce8ff;border-radius:999px;padding:4px 7px}
+    .date{font-size:11px;color:#8995a7;font-weight:750;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+    .card h2{font-size:21px;line-height:1.28;font-weight:850;margin:0 0 9px;color:var(--navy);letter-spacing:-.045em;word-break:keep-all;overflow-wrap:break-word}
+    .desc{font-size:14px;line-height:1.58;color:#667085;margin:0 0 16px;word-break:keep-all;overflow-wrap:break-word}
+    .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
+    .tag{font-size:11px;font-weight:800;color:#5a6b84;background:#f1f5fa;border:1px solid #e7edf5;border-radius:999px;padding:5px 8px}
+    .open{margin-top:16px;padding-top:14px;border-top:1px solid #eef2f6;display:flex;justify-content:space-between;align-items:center;color:#344054;font-size:13px;font-weight:850}
+    a.card .open{color:#245fd7}
+    .arrow{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:#eef4ff;color:var(--blue);transition:background-color .18s,color .18s,transform .18s}
+    a.card:hover .arrow,a.card:focus-visible .arrow{background:var(--blue);color:white;transform:translate(2px,-2px)}
 
     /* mini UI previews */
     .mini-window{height:100%;border-radius:16px;background:#fff;border:1px solid #dde5f0;box-shadow:0 16px 35px rgba(30,55,90,.11);position:relative;z-index:1;overflow:hidden}
@@ -252,7 +255,7 @@
 
 
     /* project design-guide links */
-    .project-item{min-width:0;display:flex;flex-direction:column;gap:9px}
+    .project-item{min-width:0;display:flex;flex-direction:column;gap:10px}
     .project-item .card{width:100%;flex:1}
     .guide-link{
       min-height:42px;border:1px solid #dfe7f2;background:rgba(255,255,255,.9);border-radius:13px;
@@ -303,6 +306,10 @@
       background:linear-gradient(135deg,#2c6df4 0%,#153fa1 100%) !important;
       box-shadow:0 14px 30px rgba(37,99,235,.30) !important;
     }
+    .brand:focus-visible,.github-link:focus-visible,.guide-link.active:focus-visible,.request-btn:focus-visible{
+      outline:3px solid rgba(37,99,235,.52);outline-offset:3px
+    }
+    .request-summary:focus-visible{outline:3px solid rgba(37,99,235,.52);outline-offset:-3px}
     .guide-main{display:flex;align-items:center;gap:10px;min-width:0}
     .guide-icon{
       width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.16);
@@ -324,8 +331,11 @@
     @media (max-width:640px){
       .wrap{width:min(100% - 24px,1180px)}
       header{padding-top:20px}.brand span:last-child{font-size:14px}.chip.hide-mobile{display:none}
-      .hero{padding:56px 0 40px}h1{font-size:50px}.hero p{font-size:16px}.rule{margin-top:32px}
-      .grid{grid-template-columns:1fr;gap:14px}.card{min-height:404px}.preview{height:195px}
+      .hero{padding:34px 0 26px}h1{font-size:clamp(40px,11.5vw,46px);line-height:1.02}.hero p{font-size:16px;line-height:1.6}.rule{margin-top:24px}
+      .grid{grid-template-columns:1fr;gap:18px}.card{min-height:380px}.preview{height:176px;padding:16px}
+      .card-body{padding:18px 17px 17px}.meta{margin-bottom:11px}
+      .card h2{font-size:20px;line-height:1.3;margin-bottom:8px}.desc{font-size:13.5px;line-height:1.58;margin-bottom:15px}
+      .open{margin-top:15px;padding-top:13px}
       .section-head{align-items:center}.section-title{font-size:21px}
 
       .request-summary{padding:18px}.request-summary strong{font-size:16px}
@@ -406,23 +416,6 @@
                 <label for="rqReference">참고한 프로젝트</label>
                 <select id="rqReference" name="reference">
                   <option value="잘 모르겠음 / 상담 필요">잘 모르겠음 / 상담 필요</option>
-                  <option>메일 명함 생성기</option>
-                  <option>행사용 명패 생성기</option>
-                  <option>HY-ERICA 기사 아카이브</option>
-                  <option>안내문 제작기</option>
-                  <option>웰컴보드 제작기</option>
-                  <option>ERICA 보도자료 제출 시스템</option>
-                  <option>캐릭터 활용 신청 시스템</option>
-                  <option>하냥이 인형탈 대여 시스템</option>
-                  <option>아고라 대관 시스템</option>
-                  <option>ERICA 촬영·취재 지원 요청</option>
-                  <option>근로장학생 관리시스템</option>
-                  <option>ERICA 캠퍼스맵</option>
-                  <option>홍보물품 재고관리 시스템</option>
-                  <option>무인기부코너 관리시스템</option>
-                  <option>디지털 사이니지 제작기</option>
-                  <option>카니발 운행일지 시스템</option>
-                  <option>카카오 데이터센터 방문 신청 시스템</option>
                 </select>
               </div>
 
@@ -477,298 +470,10 @@
     <section class="wrap" aria-labelledby="projects-title">
       <div class="section-head">
         <h2 class="section-title" id="projects-title">PROJECTS</h2>
-        <div class="section-sub">17 CREATIONS</div>
+        <div class="section-sub" id="projectCount"></div>
       </div>
 
-      <div class="grid">
-        <a class="card" href="https://erakeun.github.io/mail-card-maker/" target="_blank" rel="noopener">
-          <div class="preview mail"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="sheet"><div class="name">홍 길 동</div><div class="role">HANYANG UNIVERSITY ERICA</div><div class="blue-line"></div><div class="txt"></div><div class="txt s"></div><div class="txt"></div></div></div></div>
-          <div class="card-body"><div class="meta"><span class="num">01</span><span class="date">2026.06.02</span></div><h2>메일 명함 생성기</h2><p class="desc">이름·소속·연락처·로고·캐릭터를 골라 메일용 명함 이미지를 바로 만드는 도구.</p><div class="tags"><span class="tag">제작기</span><span class="tag">PNG</span><span class="tag">GitHub Pages</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
-        </a>
-
-        <a class="card" href="https://erakeun.github.io/nameplate-maker/" target="_blank" rel="noopener">
-          <div class="preview nameplate"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="table"><div><div class="person">홍 길 동</div><div class="dept">한양대학교 ERICA</div><div class="logo-line"></div></div></div></div></div>
-          <div class="card-body"><div class="meta"><span class="num">02</span><span class="date">2026.07.29</span></div><h2>행사용 명패 생성기</h2><p class="desc">행사 명패를 여러 명 한 번에 만들고 양면·A4 출력까지 정리하는 자동 제작기.</p><div class="tags"><span class="tag">제작기</span><span class="tag">대량생성</span><span class="tag">인쇄</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
-        </a>
-
-        <a class="card" href="https://hy-erica-archive.web.app/" target="_blank" rel="noopener">
-          <div class="preview archive"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="search">HY-ERICA 기사 검색</div><div class="rows"><div class="row"><span></span><b>114호</b></div><div class="row"><span></span><b>113호</b></div><div class="row"><span></span><b>112호</b></div><div class="row"><span></span><b>111호</b></div></div><div class="badge">ARTICLE ARCHIVE</div></div></div>
-          <div class="card-body"><div class="meta"><span class="num">03</span><span class="date">2026.08.25</span></div><h2>HY-ERICA 기사 아카이브</h2><p class="desc">HY-ERICA 교지 기사 DB를 검색하고 원문 PDF의 해당 기사 위치까지 찾아가는 아카이브.</p><div class="tags"><span class="tag">아카이브</span><span class="tag">검색</span><span class="tag">Firebase</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
-        </a>
-
-        <a class="card" href="https://erakeun.github.io/notice-maker/" target="_blank" rel="noopener">
-          <div class="preview notice"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="poster"><h3>행사 안내문<br>제작 예시</h3><div class="line"></div><div class="line"></div><div class="line"></div><div class="footer"></div></div></div></div>
-          <div class="card-body"><div class="meta"><span class="num">04</span><span class="date">2026.08.25</span></div><h2>안내문 제작기</h2><p class="desc">가로·세로 템플릿에 제목, 로고, 캐릭터를 배치해 행사 안내문을 만드는 도구.</p><div class="tags"><span class="tag">제작기</span><span class="tag">템플릿</span><span class="tag">포스터</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
-        </a>
-
-        <a class="card" href="https://erakeun.github.io/welcome-board-maker/" target="_blank" rel="noopener">
-          <div class="preview welcome"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="screen"><div><div class="small">HANYANG UNIVERSITY ERICA</div><div class="big">WELCOME<br>TO ERICA</div><div class="info">2026. 08. 28 · 본관 1층</div></div></div></div></div>
-          <div class="card-body"><div class="meta"><span class="num">05</span><span class="date">2026.08.26</span></div><h2>웰컴보드 제작기</h2><p class="desc">본관 스크린용 환영 이미지를 템플릿·문구·로고 조합으로 고해상도 제작하는 도구.</p><div class="tags"><span class="tag">제작기</span><span class="tag">웰컴보드</span><span class="tag">고해상도</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
-        </a>
-
-        <a class="card" href="https://erakeun.github.io/erica-pr-request/" target="_blank" rel="noopener">
-          <div class="preview pr"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="form"><div class="label">보도자료 제목</div><div class="input"></div><div class="label">주요 내용</div><div class="input big"></div><div class="label">이미지 첨부</div><div class="input"></div><div class="submit">보도자료 제출하기</div></div></div></div>
-          <div class="card-body"><div class="meta"><span class="num">06</span><span class="date">2026.08.26</span></div><h2>ERICA 보도자료 제출 시스템</h2><p class="desc">외부 배포·블로그 게재 여부를 골라 자료와 이미지를 담당자에게 전달하는 제출 폼.</p><div class="tags"><span class="tag">업무폼</span><span class="tag">메일연동</span><span class="tag">Apps Script</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
-        </a>
-
-        <a class="card" href="https://erakeun.github.io/character-use/" target="_blank" rel="noopener">
-          <div class="preview character"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="panel"><div><div class="q"></div><div class="q"></div><div class="q"></div><div class="approve">활용 신청 · 승인 검토</div></div><div class="bubble">🐾</div></div></div></div>
-          <div class="card-body"><div class="meta"><span class="num">07</span><span class="date">2026.08.27</span></div><h2>캐릭터 활용 신청 시스템</h2><p class="desc">하냥이·하이비비 등 캐릭터 활용 신청을 받고 담당자가 승인·보완·불허 처리하는 시스템.</p><div class="tags"><span class="tag">신청</span><span class="tag">승인</span><span class="tag">관리자</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
-        </a>
-
-        <a class="card" href="https://erakeun.github.io/hanyang-costume-rental/" target="_blank" rel="noopener">
-          <div class="preview rental"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="calendar"><div class="month">AUGUST 2026</div><div class="days"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><div class="float">🎭</div></div></div>
-          <div class="card-body"><div class="meta"><span class="num">08</span><span class="date">2026.08.27</span></div><h2>하냥이 인형탈 대여 시스템</h2><p class="desc">대여 가능일 확인부터 신청, 승인·거절, 결과 메일까지 연결한 인형탈 예약 시스템.</p><div class="tags"><span class="tag">대여</span><span class="tag">달력</span><span class="tag">승인</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
-        </a>
-
-        <a class="card" href="https://erakeun.github.io/agora-rental/" target="_blank" rel="noopener">
-          <div class="preview agora"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="room"><div class="room-title">아고라 공간 예약</div><div class="slots"><div class="slot"></div><div class="slot on"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot on"></div></div><div class="admin">예약 신청 · 관리자 승인</div></div></div></div>
-          <div class="card-body"><div class="meta"><span class="num">09</span><span class="date">2026.08.28</span></div><h2>아고라 대관 시스템</h2><p class="desc">공간별 예약 신청과 승인·불허 코멘트, 관리자 운영까지 묶은 대관 관리 시스템.</p><div class="tags"><span class="tag">대관</span><span class="tag">예약</span><span class="tag">관리자</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
-        </a>
-
-        <a class="card" href="https://erakeun.github.io/erica-press/" target="_blank" rel="noopener">
-          <div class="preview press"><div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="request"><div class="request-title">ERICA 촬영·취재 지원 요청</div><div class="choice-row"><div class="choice on">사진 촬영</div><div class="choice">취재 지원</div><div class="choice">기타</div></div><div class="field-row"><div class="field"></div><div class="field"></div></div><div class="field-row"><div class="field"></div><div class="field"></div></div><div class="request-box"></div><div class="request-submit">지원 요청 제출하기</div></div></div></div>
-          <div class="card-body"><div class="meta"><span class="num">10</span><span class="date">2026.08.28</span></div><h2>ERICA 촬영·취재 지원 요청</h2><p class="desc">교내 촬영과 취재 지원 요청을 필요한 일정·내용과 함께 접수하는 업무 요청 시스템.</p><div class="tags"><span class="tag">촬영</span><span class="tag">취재</span><span class="tag">업무요청</span></div><div class="open"><span>열어보기</span><span class="arrow">↗</span></div></div>
-        </a>
-
-        <a class="card" href="https://erakeun.github.io/workstudent-manager/" target="_blank" rel="noopener">
-          <div class="preview studentwork">
-            <div class="mini-window">
-              <div class="bar"><i></i><i></i><i></i></div>
-              <div class="work-left">
-                <div class="work-mark">W</div>
-                <div class="work-kicker">WORK STUDENT MANAGER</div>
-                <div class="work-title">한양대학교 ERICA<br>발전협력팀</div>
-                <div class="work-sub">근로장학생 관리 시스템</div>
-                <div class="work-chips">
-                  <span class="work-chip">개인 달력</span>
-                  <span class="work-chip">주·월 근무표</span>
-                  <span class="work-chip">공휴일 자동 반영</span>
-                  <span class="work-chip">결근·대타</span>
-                  <span class="work-chip">예산 예측</span>
-                </div>
-              </div>
-              <div class="login-card">
-                <div class="login-kicker">SIGN IN</div>
-                <div class="login-title">근로장학생 근무관리</div>
-                <div class="login-term">2026-2학기</div>
-                <div class="login-toggle"><i></i><i></i></div>
-                <div class="login-field"></div>
-                <div class="login-field"></div>
-                <div class="login-button"></div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="meta">
-              <span class="num">11</span>
-              <span class="date">2026.08.29</span>
-            </div>
-            <h2>근로장학생 관리시스템</h2>
-            <p class="desc">근로장학생 정보와 개인별 근무일정, 주·월 근무표, 결근·대타 및 예산 현황을 한곳에서 관리하는 업무 시스템.</p>
-            <div class="tags">
-              <span class="tag">근로장학생</span>
-              <span class="tag">근무일정</span>
-              <span class="tag">예산관리</span>
-            </div>
-            <div class="open">
-              <span>열어보기</span>
-              <span class="arrow">↗</span>
-            </div>
-          </div>
-        </a>
-
-
-        <a class="card" href="https://erakeun.github.io/erica-campus-map/" target="_blank" rel="noopener">
-          <div class="preview campusmap">
-            <div class="mini-window">
-              <div class="bar"><i></i><i></i><i></i></div>
-              <div class="map-mini">
-                <div class="map-search">건물 번호·건물명 검색</div>
-                <div class="road r1"></div><div class="road r2"></div><div class="road r3"></div>
-                <div class="building b1"></div><div class="building b2"></div><div class="building b3"></div>
-                <div class="building b4"></div><div class="building b5"></div><div class="building b6"></div>
-                <div class="pin p1">101</div><div class="pin p2">206</div><div class="pin p3">301</div>
-                <div class="map-badge">CAMPUS MAP</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="meta">
-              <span class="num">12</span>
-              <span class="date">2026.08.30</span>
-            </div>
-            <h2>ERICA 캠퍼스맵</h2>
-            <p class="desc">건물 번호·건물명으로 위치를 검색하고, 연결된 건물은 지도에서 바로 내부 구조도까지 확인할 수 있는 인터랙티브 캠퍼스맵.</p>
-            <div class="tags">
-              <span class="tag">캠퍼스맵</span>
-              <span class="tag">건물검색</span>
-              <span class="tag">내부구조도</span>
-            </div>
-            <div class="open">
-              <span>열어보기</span>
-              <span class="arrow">↗</span>
-            </div>
-          </div>
-        </a>
-
-
-        <div class="card" role="article" aria-label="홍보물품 재고관리 시스템">
-          <div class="preview inventory">
-            <div class="mini-window">
-              <div class="bar"><i></i><i></i><i></i></div>
-              <div class="stock-ui">
-                <div class="stock-head">
-                  <b>홍보물품 재고관리</b>
-                  <span>INVENTORY V2</span>
-                </div>
-                <div class="stock-stats">
-                  <div class="stock-stat"><b>24</b><span>관리 품목</span></div>
-                  <div class="stock-stat"><b>318</b><span>현재 재고</span></div>
-                  <div class="stock-stat"><b>03</b><span>확인 필요</span></div>
-                </div>
-                <div class="stock-row"><i></i><i></i><i></i></div>
-                <div class="stock-row"><i></i><i></i><i></i></div>
-                <div class="stock-row"><i></i><i></i><i></i></div>
-                <div class="stock-row"><i></i><i></i><i></i></div>
-                <div class="low-badge">LOW STOCK</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="meta">
-              <span class="num">13</span>
-              <span class="date">2026.08.31</span>
-            </div>
-            <h2>홍보물품 재고관리 시스템</h2>
-            <p class="desc">홍보물품의 입고·출고·반납부터 폐기·분실·실사까지 기록하고, 현재 재고와 부족 품목을 빠르게 확인할 수 있도록 만든 재고관리 시스템.</p>
-            <div class="tags">
-              <span class="tag">재고관리</span>
-              <span class="tag">입출고</span>
-              <span class="tag">관리자</span>
-            </div>
-            <div class="open">
-              <span>내부 운영 시스템</span>
-              <span class="arrow">🔒</span>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="card" role="article" aria-label="무인기부코너 관리시스템">
-          <div class="preview donation">
-            <div class="mini-window">
-              <div class="bar"><i></i><i></i><i></i></div>
-              <div class="donation-ui">
-                <div class="donation-head">
-                  <b>무인기부코너 관리</b>
-                  <span>HANYANG VIEW</span>
-                </div>
-                <div class="place-row">
-                  <div class="place on"><b>본관 1층</b><span>상품 · 재고 · 매출</span></div>
-                  <div class="place"><b>셔틀콕</b><span>지점 관리</span></div>
-                </div>
-                <div class="donation-row"><i></i><i></i><i></i></div>
-                <div class="donation-row"><i></i><i></i><i></i></div>
-                <div class="donation-row"><i></i><i></i><i></i></div>
-                <div class="internal-badge">INTERNAL SYSTEM</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="meta"><span class="num">14</span><span class="date">2026.08.31</span></div>
-            <h2>무인기부코너 관리시스템</h2>
-            <p class="desc">무인기부코너의 지점별 상품·재고·매출과 입고·조정·점검 이력을 한곳에서 관리하도록 만든 내부 운영 시스템.</p>
-            <div class="tags"><span class="tag">재고관리</span><span class="tag">지점관리</span><span class="tag">내부시스템</span></div>
-            <div class="open"><span>내부 운영 시스템</span><span class="arrow">🔒</span></div>
-          </div>
-        </div>
-
-
-
-        <a class="card" href="https://erakeun.github.io/digital-signage-maker/" target="_blank" rel="noopener">
-          <div class="preview signage">
-            <div class="mini-window">
-              <div class="bar"><i></i><i></i><i></i></div>
-              <div class="canvas">
-                <div class="side">
-                  <div class="side-title">DIGITAL SIGNAGE MAKER</div>
-                  <div class="option on"></div><div class="option"></div><div class="option"></div><div class="option"></div><div class="option"></div>
-                </div>
-                <div class="screen">
-                  <div class="small">HANYANG UNIVERSITY ERICA</div>
-                  <div class="big">행사 안내<br>디지털 사이니지</div>
-                  <div class="line"></div><div class="footer-mini"></div>
-                </div>
-                <div class="ratio">9 : 16</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="meta"><span class="num">15</span><span class="date">2026.08.31</span></div>
-            <h2>디지털 사이니지 제작기</h2>
-            <p class="desc">ERICA 내부 세로형 디지털 사이니지에 맞춰 텍스트·로고·색상과 템플릿을 조합해 안내 화면을 만드는 제작 도구.</p>
-            <div class="tags"><span class="tag">사이니지</span><span class="tag">9:16</span><span class="tag">템플릿</span></div>
-            <div class="open"><span>열어보기</span><span class="arrow">↗</span></div>
-          </div>
-        </a>
-
-
-        
-
-        <div class="card" role="article" aria-label="카니발 운행일지 시스템">
-          <div class="preview carnival">
-            <div class="mini-window">
-              <div class="bar"><i></i><i></i><i></i></div>
-              <div class="drive-ui">
-                <div class="drive-head"><b>카니발 운행일지</b><span>DRIVING LOG</span></div>
-                <div class="drive-form">
-                  <div class="drive-row"><div class="drive-field"></div><div class="drive-field"></div></div>
-                  <div class="drive-row"><div class="drive-field"></div><div class="drive-field"></div></div>
-                  <div class="drive-row"><div class="drive-field"></div><div class="drive-field"></div></div>
-                  <div class="drive-submit">운행 기록 저장</div>
-                </div>
-                <div class="drive-badge">INTERNAL ONLY</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="meta"><span class="num">16</span><span class="date">2026.08.31</span></div>
-            <h2>카니발 운행일지 시스템</h2>
-            <p class="desc">부서 차량 운행 시 운행일·목적지·사유·시간·거리 등을 모바일에서 기록하고 Google Sheets에 자동 누적하도록 만든 내부 업무 시스템.</p>
-            <div class="tags"><span class="tag">차량관리</span><span class="tag">운행일지</span><span class="tag">내부시스템</span></div>
-            <div class="open"><span>내부 운영 시스템</span><span class="arrow">🔒</span></div>
-          </div>
-        </div>
-
-
-
-        <a class="card" href="https://script.google.com/a/macros/hanyang.ac.kr/s/AKfycbx311E1JstDf2CLKFo1J0IOeli7X_0-teIHaxHyd-U820WSLmUwqzjQUYQ14Ot3sb4_/exec" target="_blank" rel="noopener">
-          <span class="latest">LATEST</span>
-          <div class="preview kakao">
-            <div class="mini-window">
-              <div class="bar"><i></i><i></i><i></i></div>
-              <div class="kakao-ui">
-                <div class="kakao-head"><b>카카오 데이터센터 안산</b><span>VISIT REQUEST</span></div>
-                <div class="kakao-body">
-                  <div class="kakao-title">방문 신청</div>
-                  <div class="kakao-grid"><div class="kakao-field"></div><div class="kakao-field"></div><div class="kakao-field"></div><div class="kakao-field"></div></div>
-                  <div class="kakao-flow"><span class="kakao-step on">신청</span><span>→</span><span class="kakao-step">담당부서 검토</span><span>→</span><span class="kakao-step">최종 승인</span></div>
-                </div>
-                <div class="kakao-badge">APPLICATION</div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="meta"><span class="num">17</span><span class="date">2026.09.02</span></div>
-            <h2>카카오 데이터센터 방문 신청 시스템</h2>
-            <p class="desc">카카오 데이터센터 안산 방문 신청에 필요한 소속·연락처·방문 일정·인원·차량 정보를 접수하고, 담당부서 검토 흐름까지 정리한 신청 시스템.</p>
-            <div class="tags"><span class="tag">방문신청</span><span class="tag">검토절차</span><span class="tag">업무폼</span></div>
-            <div class="open"><span>열어보기</span><span class="arrow">↗</span></div>
-          </div>
-        </a>
-
-      </div>
+      <div class="grid" id="projectsGrid"></div>
     </section>
   </main>
 
@@ -784,74 +489,283 @@
 
 
     /*
-      설계방법 링크 관리
+      프로젝트 데이터 관리
       ------------------------------------------------------------
-      아래 GUIDE_LINKS에서 원하는 프로젝트 번호에 Google Drive 공유 URL을 넣으면
-      해당 카드 아래의 '설계방법' 버튼이 자동으로 활성화됩니다.
-      빈 문자열("")로 두면 버튼은 보이되 비활성 상태로 유지됩니다.
-
-      예시:
-      "09": "https://drive.google.com/drive/folders/XXXXXXXX"
+      새 프로젝트는 아래 PROJECTS 배열에 객체 하나를 추가하면 카드, 요청 폼,
+      설계자료 버튼, 프로젝트 개수가 함께 갱신됩니다.
+      previewHtml은 카드별 미리보기 전용 정적 마크업입니다.
     */
-    const GUIDE_LINKS = {
-      "01": "https://drive.google.com/drive/folders/1W7KVJj9QsAgtvrMVm1shcBtO0EuMFYbg?usp=drive_link", // 메일 명함 생성기
-      "02": "https://drive.google.com/drive/folders/1PAlU32av2R772kF-FpZHUMxsRUE-7B2Y?usp=drive_link", // 행사용 명패 생성기
-      "03": "", // HY-ERICA 기사 아카이브
-      "04": "https://drive.google.com/drive/folders/1z2wTuXZKaiA6gN-SEdIlV8BPCjnwpXyf?usp=drive_link", // 안내문 제작기
-      "05": "", // 웰컴보드 제작기
-      "06": "", // ERICA 보도자료 제출 시스템
-      "07": "", // 캐릭터 활용 신청 시스템
-      "08": "", // 하냥이 인형탈 대여 시스템
-      "09": "", // 아고라 대관 시스템
-      "10": "", // ERICA 촬영·취재 지원 요청
-      "11": "https://drive.google.com/drive/folders/1FmQyEXxmZ-DjyqSx_DiwW8wnIbmr6txy?usp=drive_link", // 근로장학생 관리시스템
-      "12": "", // ERICA 캠퍼스맵
-      "13": "https://drive.google.com/drive/folders/1KWpZ4S2w2LFhhQfIRzGBC5t86FC3TTXe?usp=drive_link", // 홍보물품 재고관리 시스템
-      "14": "", // 무인기부코너 관리시스템
-      "15": "", // 디지털 사이니지 제작기
-      "16": "https://drive.google.com/drive/folders/1vB-6NBjl1E__dRO3uoFifAtkMhrOXOQu?usp=sharing", // 카니발 운행일지 시스템
-      "17": ""  // 카카오 데이터센터 방문 신청 시스템
-    };
+    const PROJECTS = [
+      {
+        id:'01',
+        name:'메일 명함 생성기',
+        description:'이름·소속·연락처·로고·캐릭터를 골라 메일용 명함 이미지를 바로 만드는 도구.',
+        date:'2026.06.02',
+        url:'https://erakeun.github.io/mail-card-maker/',
+        guideUrl:'https://drive.google.com/drive/folders/1W7KVJj9QsAgtvrMVm1shcBtO0EuMFYbg?usp=drive_link',
+        internal:false,
+        tags:['제작기','PNG','GitHub Pages'],
+        previewClass:'mail',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="sheet"><div class="name">홍 길 동</div><div class="role">HANYANG UNIVERSITY ERICA</div><div class="blue-line"></div><div class="txt"></div><div class="txt s"></div><div class="txt"></div></div></div>'
+      },
+      {
+        id:'02',
+        name:'행사용 명패 생성기',
+        description:'행사 명패를 여러 명 한 번에 만들고 양면·A4 출력까지 정리하는 자동 제작기.',
+        date:'2026.07.29',
+        url:'https://erakeun.github.io/nameplate-maker/',
+        guideUrl:'https://drive.google.com/drive/folders/1PAlU32av2R772kF-FpZHUMxsRUE-7B2Y?usp=drive_link',
+        internal:false,
+        tags:['제작기','대량생성','인쇄'],
+        previewClass:'nameplate',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="table"><div><div class="person">홍 길 동</div><div class="dept">한양대학교 ERICA</div><div class="logo-line"></div></div></div></div>'
+      },
+      {
+        id:'03',
+        name:'HY-ERICA 기사 아카이브',
+        description:'HY-ERICA 교지 기사 DB를 검색하고 원문 PDF의 해당 기사 위치까지 찾아가는 아카이브.',
+        date:'2026.08.25',
+        url:'https://hy-erica-archive.web.app/',
+        guideUrl:'',
+        internal:false,
+        tags:['아카이브','검색','Firebase'],
+        previewClass:'archive',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="search">HY-ERICA 기사 검색</div><div class="rows"><div class="row"><span></span><b>114호</b></div><div class="row"><span></span><b>113호</b></div><div class="row"><span></span><b>112호</b></div><div class="row"><span></span><b>111호</b></div></div><div class="badge">ARTICLE ARCHIVE</div></div>'
+      },
+      {
+        id:'04',
+        name:'안내문 제작기',
+        description:'가로·세로 템플릿에 제목, 로고, 캐릭터를 배치해 행사 안내문을 만드는 도구.',
+        date:'2026.08.25',
+        url:'https://erakeun.github.io/notice-maker/',
+        guideUrl:'https://drive.google.com/drive/folders/1z2wTuXZKaiA6gN-SEdIlV8BPCjnwpXyf?usp=drive_link',
+        internal:false,
+        tags:['제작기','템플릿','포스터'],
+        previewClass:'notice',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="poster"><h3>행사 안내문<br>제작 예시</h3><div class="line"></div><div class="line"></div><div class="line"></div><div class="footer"></div></div></div>'
+      },
+      {
+        id:'05',
+        name:'웰컴보드 제작기',
+        description:'본관 스크린용 환영 이미지를 템플릿·문구·로고 조합으로 고해상도 제작하는 도구.',
+        date:'2026.08.26',
+        url:'https://erakeun.github.io/welcome-board-maker/',
+        guideUrl:'',
+        internal:false,
+        tags:['제작기','웰컴보드','고해상도'],
+        previewClass:'welcome',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="screen"><div><div class="small">HANYANG UNIVERSITY ERICA</div><div class="big">WELCOME<br>TO ERICA</div><div class="info">2026. 08. 28 · 본관 1층</div></div></div></div>'
+      },
+      {
+        id:'06',
+        name:'ERICA 보도자료 제출 시스템',
+        description:'외부 배포·블로그 게재 여부를 골라 자료와 이미지를 담당자에게 전달하는 제출 폼.',
+        date:'2026.08.26',
+        url:'https://erakeun.github.io/erica-pr-request/',
+        guideUrl:'',
+        internal:false,
+        tags:['업무폼','메일연동','Apps Script'],
+        previewClass:'pr',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="form"><div class="label">보도자료 제목</div><div class="input"></div><div class="label">주요 내용</div><div class="input big"></div><div class="label">이미지 첨부</div><div class="input"></div><div class="submit">보도자료 제출하기</div></div></div>'
+      },
+      {
+        id:'07',
+        name:'캐릭터 활용 신청 시스템',
+        description:'하냥이·하이비비 등 캐릭터 활용 신청을 받고 담당자가 승인·보완·불허 처리하는 시스템.',
+        date:'2026.08.27',
+        url:'https://erakeun.github.io/character-use/',
+        guideUrl:'',
+        internal:false,
+        tags:['신청','승인','관리자'],
+        previewClass:'character',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="panel"><div><div class="q"></div><div class="q"></div><div class="q"></div><div class="approve">활용 신청 · 승인 검토</div></div><div class="bubble">🐾</div></div></div>'
+      },
+      {
+        id:'08',
+        name:'하냥이 인형탈 대여 시스템',
+        description:'대여 가능일 확인부터 신청, 승인·거절, 결과 메일까지 연결한 인형탈 예약 시스템.',
+        date:'2026.08.27',
+        url:'https://erakeun.github.io/hanyang-costume-rental/',
+        guideUrl:'',
+        internal:false,
+        tags:['대여','달력','승인'],
+        previewClass:'rental',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="calendar"><div class="month">AUGUST 2026</div><div class="days"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><div class="float">🎭</div></div>'
+      },
+      {
+        id:'09',
+        name:'아고라 대관 시스템',
+        description:'공간별 예약 신청과 승인·불허 코멘트, 관리자 운영까지 묶은 대관 관리 시스템.',
+        date:'2026.08.28',
+        url:'https://erakeun.github.io/agora-rental/',
+        guideUrl:'',
+        internal:false,
+        tags:['대관','예약','관리자'],
+        previewClass:'agora',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="room"><div class="room-title">아고라 공간 예약</div><div class="slots"><div class="slot"></div><div class="slot on"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot on"></div></div><div class="admin">예약 신청 · 관리자 승인</div></div></div>'
+      },
+      {
+        id:'10',
+        name:'ERICA 촬영·취재 지원 요청',
+        description:'교내 촬영과 취재 지원 요청을 필요한 일정·내용과 함께 접수하는 업무 요청 시스템.',
+        date:'2026.08.28',
+        url:'https://erakeun.github.io/erica-press/',
+        guideUrl:'',
+        internal:false,
+        tags:['촬영','취재','업무요청'],
+        previewClass:'press',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="request"><div class="request-title">ERICA 촬영·취재 지원 요청</div><div class="choice-row"><div class="choice on">사진 촬영</div><div class="choice">취재 지원</div><div class="choice">기타</div></div><div class="field-row"><div class="field"></div><div class="field"></div></div><div class="field-row"><div class="field"></div><div class="field"></div></div><div class="request-box"></div><div class="request-submit">지원 요청 제출하기</div></div></div>'
+      },
+      {
+        id:'11',
+        name:'근로장학생 관리시스템',
+        description:'근로장학생 정보와 개인별 근무일정, 주·월 근무표, 결근·대타 및 예산 현황을 한곳에서 관리하는 업무 시스템.',
+        date:'2026.08.29',
+        url:'https://erakeun.github.io/workstudent-manager/',
+        guideUrl:'https://drive.google.com/drive/folders/1FmQyEXxmZ-DjyqSx_DiwW8wnIbmr6txy?usp=drive_link',
+        internal:false,
+        tags:['근로장학생','근무일정','예산관리'],
+        previewClass:'studentwork',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="work-left"><div class="work-mark">W</div><div class="work-kicker">WORK STUDENT MANAGER</div><div class="work-title">한양대학교 ERICA<br>발전협력팀</div><div class="work-sub">근로장학생 관리 시스템</div><div class="work-chips"><span class="work-chip">개인 달력</span><span class="work-chip">주·월 근무표</span><span class="work-chip">공휴일 자동 반영</span><span class="work-chip">결근·대타</span><span class="work-chip">예산 예측</span></div></div><div class="login-card"><div class="login-kicker">SIGN IN</div><div class="login-title">근로장학생 근무관리</div><div class="login-term">2026-2학기</div><div class="login-toggle"><i></i><i></i></div><div class="login-field"></div><div class="login-field"></div><div class="login-button"></div></div></div>'
+      },
+      {
+        id:'12',
+        name:'ERICA 캠퍼스맵',
+        description:'건물 번호·건물명으로 위치를 검색하고, 연결된 건물은 지도에서 바로 내부 구조도까지 확인할 수 있는 인터랙티브 캠퍼스맵.',
+        date:'2026.08.30',
+        url:'https://erakeun.github.io/erica-campus-map/',
+        guideUrl:'',
+        internal:false,
+        tags:['캠퍼스맵','건물검색','내부구조도'],
+        previewClass:'campusmap',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="map-mini"><div class="map-search">건물 번호·건물명 검색</div><div class="road r1"></div><div class="road r2"></div><div class="road r3"></div><div class="building b1"></div><div class="building b2"></div><div class="building b3"></div><div class="building b4"></div><div class="building b5"></div><div class="building b6"></div><div class="pin p1">101</div><div class="pin p2">206</div><div class="pin p3">301</div><div class="map-badge">CAMPUS MAP</div></div></div>'
+      },
+      {
+        id:'13',
+        name:'홍보물품 재고관리 시스템',
+        description:'홍보물품의 입고·출고·반납부터 폐기·분실·실사까지 기록하고, 현재 재고와 부족 품목을 빠르게 확인할 수 있도록 만든 재고관리 시스템.',
+        date:'2026.08.31',
+        url:'',
+        guideUrl:'https://drive.google.com/drive/folders/1KWpZ4S2w2LFhhQfIRzGBC5t86FC3TTXe?usp=drive_link',
+        internal:true,
+        tags:['재고관리','입출고','관리자'],
+        previewClass:'inventory',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="stock-ui"><div class="stock-head"><b>홍보물품 재고관리</b><span>INVENTORY V2</span></div><div class="stock-stats"><div class="stock-stat"><b>24</b><span>관리 품목</span></div><div class="stock-stat"><b>318</b><span>현재 재고</span></div><div class="stock-stat"><b>03</b><span>확인 필요</span></div></div><div class="stock-row"><i></i><i></i><i></i></div><div class="stock-row"><i></i><i></i><i></i></div><div class="stock-row"><i></i><i></i><i></i></div><div class="stock-row"><i></i><i></i><i></i></div><div class="low-badge">LOW STOCK</div></div></div>'
+      },
+      {
+        id:'14',
+        name:'무인기부코너 관리시스템',
+        description:'무인기부코너의 지점별 상품·재고·매출과 입고·조정·점검 이력을 한곳에서 관리하도록 만든 내부 운영 시스템.',
+        date:'2026.08.31',
+        url:'',
+        guideUrl:'',
+        internal:true,
+        tags:['재고관리','지점관리','내부시스템'],
+        previewClass:'donation',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="donation-ui"><div class="donation-head"><b>무인기부코너 관리</b><span>HANYANG VIEW</span></div><div class="place-row"><div class="place on"><b>본관 1층</b><span>상품 · 재고 · 매출</span></div><div class="place"><b>셔틀콕</b><span>지점 관리</span></div></div><div class="donation-row"><i></i><i></i><i></i></div><div class="donation-row"><i></i><i></i><i></i></div><div class="donation-row"><i></i><i></i><i></i></div><div class="internal-badge">INTERNAL SYSTEM</div></div></div>'
+      },
+      {
+        id:'15',
+        name:'디지털 사이니지 제작기',
+        description:'ERICA 내부 세로형 디지털 사이니지에 맞춰 텍스트·로고·색상과 템플릿을 조합해 안내 화면을 만드는 제작 도구.',
+        date:'2026.08.31',
+        url:'https://erakeun.github.io/digital-signage-maker/',
+        guideUrl:'',
+        internal:false,
+        tags:['사이니지','9:16','템플릿'],
+        previewClass:'signage',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="canvas"><div class="side"><div class="side-title">DIGITAL SIGNAGE MAKER</div><div class="option on"></div><div class="option"></div><div class="option"></div><div class="option"></div><div class="option"></div></div><div class="screen"><div class="small">HANYANG UNIVERSITY ERICA</div><div class="big">행사 안내<br>디지털 사이니지</div><div class="line"></div><div class="footer-mini"></div></div><div class="ratio">9 : 16</div></div></div>'
+      },
+      {
+        id:'16',
+        name:'카니발 운행일지 시스템',
+        description:'부서 차량 운행 시 운행일·목적지·사유·시간·거리 등을 모바일에서 기록하고 Google Sheets에 자동 누적하도록 만든 내부 업무 시스템.',
+        date:'2026.08.31',
+        url:'',
+        guideUrl:'https://drive.google.com/drive/folders/1vB-6NBjl1E__dRO3uoFifAtkMhrOXOQu?usp=sharing',
+        internal:true,
+        tags:['차량관리','운행일지','내부시스템'],
+        previewClass:'carnival',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="drive-ui"><div class="drive-head"><b>카니발 운행일지</b><span>DRIVING LOG</span></div><div class="drive-form"><div class="drive-row"><div class="drive-field"></div><div class="drive-field"></div></div><div class="drive-row"><div class="drive-field"></div><div class="drive-field"></div></div><div class="drive-row"><div class="drive-field"></div><div class="drive-field"></div></div><div class="drive-submit">운행 기록 저장</div></div><div class="drive-badge">INTERNAL ONLY</div></div></div>'
+      },
+      {
+        id:'17',
+        name:'카카오 데이터센터 방문 신청 시스템',
+        description:'카카오 데이터센터 안산 방문 신청에 필요한 소속·연락처·방문 일정·인원·차량 정보를 접수하고, 담당부서 검토 흐름까지 정리한 신청 시스템.',
+        date:'2026.09.02',
+        url:'https://script.google.com/a/macros/hanyang.ac.kr/s/AKfycbx311E1JstDf2CLKFo1J0IOeli7X_0-teIHaxHyd-U820WSLmUwqzjQUYQ14Ot3sb4_/exec',
+        guideUrl:'',
+        internal:false,
+        tags:['방문신청','검토절차','업무폼'],
+        previewClass:'kakao',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="kakao-ui"><div class="kakao-head"><b>카카오 데이터센터 안산</b><span>VISIT REQUEST</span></div><div class="kakao-body"><div class="kakao-title">방문 신청</div><div class="kakao-grid"><div class="kakao-field"></div><div class="kakao-field"></div><div class="kakao-field"></div><div class="kakao-field"></div></div><div class="kakao-flow"><span class="kakao-step on">신청</span><span>→</span><span class="kakao-step">담당부서 검토</span><span>→</span><span class="kakao-step">최종 승인</span></div></div><div class="kakao-badge">APPLICATION</div></div></div>'
+      }
+    ];
 
-    function buildGuideLinks(){
-      const grid = document.querySelector('.grid');
-      if(!grid) return;
+    function escapeHtml(value){
+      return String(value).replace(/[&<>"]/g, character => ({
+        '&':'&amp;',
+        '<':'&lt;',
+        '>':'&gt;',
+        '"':'&quot;'
+      })[character]);
+    }
 
-      [...grid.children].forEach(card => {
-        if(!card.classList.contains('card')) return;
+    function projectCardHtml(project){
+      const tag = project.internal ? 'div' : 'a';
+      const attributes = project.internal
+        ? ' role="article" aria-label="' + escapeHtml(project.name) + '"'
+        : ' href="' + escapeHtml(project.url) + '" target="_blank" rel="noopener"';
+      const latest = project === PROJECTS[PROJECTS.length - 1] ? '<span class="latest">LATEST</span>' : '';
+      const tags = project.tags
+        .map(tagName => '<span class="tag">' + escapeHtml(tagName) + '</span>')
+        .join('');
+      const actionText = project.internal ? '내부 운영 시스템' : '열어보기';
+      const actionIcon = project.internal ? '🔒' : '↗';
 
-        const numEl = card.querySelector('.num');
-        if(!numEl) return;
-        const id = numEl.textContent.trim();
+      return '<' + tag + ' class="card"' + attributes + '>' +
+        latest +
+        '<div class="preview ' + escapeHtml(project.previewClass) + '">' + project.previewHtml + '</div>' +
+        '<div class="card-body">' +
+          '<div class="meta"><span class="num">' + escapeHtml(project.id) + '</span><span class="date">' + escapeHtml(project.date) + '</span></div>' +
+          '<h2>' + escapeHtml(project.name) + '</h2>' +
+          '<p class="desc">' + escapeHtml(project.description) + '</p>' +
+          '<div class="tags">' + tags + '</div>' +
+          '<div class="open"><span>' + actionText + '</span><span class="arrow">' + actionIcon + '</span></div>' +
+        '</div>' +
+      '</' + tag + '>';
+    }
 
-        const wrapper = document.createElement('div');
-        wrapper.className = 'project-item';
-        grid.insertBefore(wrapper, card);
-        wrapper.appendChild(card);
+    function projectGuideHtml(project){
+      if(project.guideUrl){
+        return '<a class="guide-link active" href="' + escapeHtml(project.guideUrl) + '" target="_blank" rel="noopener" aria-label="' +
+          escapeHtml(project.id) + '번 프로젝트 설계방법 열기">' +
+          '<span class="guide-main"><span class="guide-icon">↓</span><span class="guide-copy"><b>설계방법</b><small>설치자료 · 배포파일</small></span></span>' +
+          '<span class="guide-state">열어보기 ↗</span></a>';
+      }
 
-        const url = (GUIDE_LINKS[id] || '').trim();
+      return '<div class="guide-link disabled" aria-disabled="true" title="설계자료 링크가 등록되면 활성화됩니다.">' +
+        '<span>설계방법</span><span class="guide-state">준비중</span></div>';
+    }
 
-        if(url){
-          const guide = document.createElement('a');
-          guide.className = 'guide-link active';
-          guide.href = url;
-          guide.target = '_blank';
-          guide.rel = 'noopener';
-          guide.setAttribute('aria-label', `${id}번 프로젝트 설계방법 열기`);
-          guide.innerHTML = '<span class="guide-main"><span class="guide-icon">↓</span><span class="guide-copy"><b>설계방법</b><small>설치자료 · 배포파일</small></span></span><span class="guide-state">열어보기 ↗</span>';
-          wrapper.appendChild(guide);
-        }else{
-          const guide = document.createElement('div');
-          guide.className = 'guide-link disabled';
-          guide.setAttribute('aria-disabled', 'true');
-          guide.title = '설계자료 링크가 등록되면 활성화됩니다.';
-          guide.innerHTML = '<span>설계방법</span><span class="guide-state">준비중</span>';
-          wrapper.appendChild(guide);
-        }
+    function renderProjects(){
+      const grid = document.getElementById('projectsGrid');
+      grid.innerHTML = PROJECTS
+        .map(project => '<div class="project-item">' + projectCardHtml(project) + projectGuideHtml(project) + '</div>')
+        .join('');
+
+      document.getElementById('projectCount').textContent = PROJECTS.length + ' CREATIONS';
+
+      const referenceSelect = document.getElementById('rqReference');
+      while(referenceSelect.options.length > 1) referenceSelect.remove(1);
+      PROJECTS.forEach(project => {
+        const option = document.createElement('option');
+        option.textContent = project.name;
+        referenceSelect.appendChild(option);
       });
     }
 
-    buildGuideLinks();
+    renderProjects();
 
 
     const requestForm = document.getElementById('projectRequestForm');
