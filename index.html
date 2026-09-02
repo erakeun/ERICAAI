@@ -287,6 +287,35 @@
     .kakao .kakao-step{padding:4px 6px;border-radius:999px;background:#f3f4f6}.kakao .kakao-step.on{background:#fff6a8;color:#4c4300}
     .kakao .kakao-badge{position:absolute;right:11px;bottom:10px;background:#fff7b8;color:#5b5000;font-size:6px;font-weight:900;padding:5px 7px;border-radius:999px}
 
+
+    /* v1.4 · active guide visibility boost */
+    .guide-link.active{
+      min-height:58px !important;
+      padding:11px 14px !important;
+      color:#fff !important;
+      border-color:#2563eb !important;
+      background:linear-gradient(135deg,#2563eb 0%,#1749b8 100%) !important;
+      box-shadow:0 10px 24px rgba(37,99,235,.24),0 1px 0 rgba(255,255,255,.18) inset !important;
+    }
+    .guide-link.active:hover{
+      transform:translateY(-2px) !important;
+      border-color:#1749b8 !important;
+      background:linear-gradient(135deg,#2c6df4 0%,#153fa1 100%) !important;
+      box-shadow:0 14px 30px rgba(37,99,235,.30) !important;
+    }
+    .guide-main{display:flex;align-items:center;gap:10px;min-width:0}
+    .guide-icon{
+      width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.16);
+      display:grid;place-items:center;font-size:15px;flex:0 0 auto
+    }
+    .guide-copy{display:flex;flex-direction:column;gap:2px;line-height:1.15;text-align:left}
+    .guide-copy b{font-size:13px;letter-spacing:-.025em}
+    .guide-copy small{font-size:10px;font-weight:700;opacity:.74;letter-spacing:-.01em}
+    .guide-link.active .guide-state{
+      padding:6px 8px;border-radius:999px;background:rgba(255,255,255,.15);
+      font-size:10px;font-weight:900;color:#fff;opacity:1;white-space:nowrap
+    }
+
     .latest{position:absolute;z-index:3;top:14px;right:14px;background:#101d34;color:#fff;font-size:10px;font-weight:900;padding:7px 9px;border-radius:999px;box-shadow:0 7px 16px rgba(16,29,52,.2)}
 
     footer{padding:0 0 50px}.foot{border-top:1px solid var(--line);padding-top:24px;color:#8a94a5;font-size:12px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}.foot strong{color:#59667a}
@@ -746,7 +775,7 @@
   <footer>
     <div class="wrap foot">
       <span>© <span id="year">2026</span> <strong>ERICA AI PROJECTS</strong></span>
-      <span>AI를 활용한 업무 개선 프로젝트 모음. · <strong>v1.3</strong></span>
+      <span>AI를 활용한 업무 개선 프로젝트 모음. · <strong>v1.4</strong></span>
     </div>
   </footer>
 
@@ -775,12 +804,12 @@
       "08": "", // 하냥이 인형탈 대여 시스템
       "09": "", // 아고라 대관 시스템
       "10": "", // ERICA 촬영·취재 지원 요청
-      "11": "", // 근로장학생 관리시스템
+      "11": "https://drive.google.com/drive/folders/1FmQyEXxmZ-DjyqSx_DiwW8wnIbmr6txy?usp=drive_link", // 근로장학생 관리시스템
       "12": "", // ERICA 캠퍼스맵
-      "13": "", // 홍보물품 재고관리 시스템
+      "13": "https://drive.google.com/drive/folders/1KWpZ4S2w2LFhhQfIRzGBC5t86FC3TTXe?usp=drive_link", // 홍보물품 재고관리 시스템
       "14": "", // 무인기부코너 관리시스템
       "15": "", // 디지털 사이니지 제작기
-      "16": "", // 카니발 운행일지 시스템
+      "16": "https://drive.google.com/drive/folders/1vB-6NBjl1E__dRO3uoFifAtkMhrOXOQu?usp=sharing", // 카니발 운행일지 시스템
       "17": ""  // 카카오 데이터센터 방문 신청 시스템
     };
 
@@ -809,7 +838,7 @@
           guide.target = '_blank';
           guide.rel = 'noopener';
           guide.setAttribute('aria-label', `${id}번 프로젝트 설계방법 열기`);
-          guide.innerHTML = '<span>설계방법</span><span class="guide-state">↗</span>';
+          guide.innerHTML = '<span class="guide-main"><span class="guide-icon">↓</span><span class="guide-copy"><b>설계방법</b><small>설치자료 · 배포파일</small></span></span><span class="guide-state">열어보기 ↗</span>';
           wrapper.appendChild(guide);
         }else{
           const guide = document.createElement('div');
