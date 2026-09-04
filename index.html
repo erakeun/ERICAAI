@@ -181,6 +181,27 @@
     .donation .donation-row i{height:5px;background:#dfe6ee;border-radius:4px}.donation .donation-row i:nth-child(2){background:#d9e9ff}.donation .donation-row i:nth-child(3){background:#e1f0e6}
     .donation .internal-badge{position:absolute;right:11px;bottom:10px;background:#eef2f7;color:#5d6d82;font-size:6px;font-weight:900;padding:5px 7px;border-radius:999px}
 
+    .nanum .nanum-ui{position:absolute;inset:40px 18px 18px;border-radius:12px;background:#fff;border:1px solid #dfe8e4;overflow:hidden;box-shadow:0 12px 25px rgba(27,78,58,.10)}
+    .nanum .nanum-head{height:34px;background:linear-gradient(90deg,#0d5138,#19865b);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 11px}
+    .nanum .nanum-head b{font-size:8px}.nanum .nanum-head span{font-size:6px;opacity:.76}
+    .nanum .nanum-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;padding:10px}
+    .nanum .nanum-stat{height:36px;border:1px solid #dfe9e4;border-radius:8px;background:#f7faf8;padding:7px}
+    .nanum .nanum-stat b{display:block;font-size:10px;color:#155f43}.nanum .nanum-stat span{display:block;font-size:5px;color:#86958e;margin-top:3px}
+    .nanum .nanum-row{height:22px;margin:0 10px;border-top:1px solid #edf2ef;display:grid;grid-template-columns:1.2fr .7fr .7fr;align-items:center;gap:7px}
+    .nanum .nanum-row i{height:5px;background:#dfe8e3;border-radius:4px}.nanum .nanum-row i:nth-child(2){background:#d8eee4}.nanum .nanum-row i:nth-child(3){background:#e8efe9}
+    .nanum .nanum-badge{position:absolute;right:11px;bottom:10px;background:#eaf6ef;color:#287452;font-size:6px;font-weight:900;padding:5px 7px;border-radius:999px}
+
+    .todaymenu .menu-ui{position:absolute;inset:40px 18px 18px;border-radius:12px;background:#f6f9fc;border:1px solid #dfe7ef;overflow:hidden;box-shadow:0 12px 25px rgba(31,55,85,.10)}
+    .todaymenu .menu-head{height:39px;background:linear-gradient(100deg,#0d3f73,#1769aa);color:#fff;padding:8px 11px}
+    .todaymenu .menu-head b{display:block;font-size:8px}.todaymenu .menu-head span{display:block;font-size:5px;opacity:.72;margin-top:2px}
+    .todaymenu .menu-tabs{display:flex;gap:4px;padding:8px 9px 6px}
+    .todaymenu .menu-tab{height:15px;padding:0 7px;border-radius:999px;background:#fff;border:1px solid #dfe6ee;color:#8290a0;font-size:5px;font-weight:800;display:grid;place-items:center}
+    .todaymenu .menu-tab.on{background:#0d3f73;border-color:#0d3f73;color:#fff}
+    .todaymenu .meal-cards{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 9px}
+    .todaymenu .meal-card{height:54px;border-radius:8px;background:#fff;border:1px solid #e1e7ee;padding:7px}
+    .todaymenu .meal-card b{display:block;font-size:7px;color:#173e70;margin-bottom:7px}.todaymenu .meal-line{height:4px;background:#e3e9f0;border-radius:4px;margin:4px 0}.todaymenu .meal-line.short{width:65%}
+    .todaymenu .menu-badge{position:absolute;right:10px;bottom:9px;background:#eaf3fb;color:#1769aa;font-size:6px;font-weight:900;padding:5px 7px;border-radius:999px}
+
     .signage .canvas{position:absolute;inset:40px 18px 18px;border-radius:12px;background:#f1f4f8;border:1px solid #dfe6ef;overflow:hidden;box-shadow:0 12px 25px rgba(31,55,85,.10)}
     .signage .side{position:absolute;left:0;top:0;bottom:0;width:39%;background:#fff;border-right:1px solid #e2e8f0;padding:10px}
     .signage .side-title{font-size:7px;font-weight:900;color:#183151;margin-bottom:8px}.signage .option{height:16px;border:1px solid #e1e7ee;border-radius:5px;margin-bottom:6px;background:#fbfcfe}.signage .option.on{background:#eef4ff;border-color:#c9dafc}
@@ -699,6 +720,30 @@
         tags:['방문신청','검토절차','업무폼'],
         previewClass:'kakao',
         previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="kakao-ui"><div class="kakao-head"><b>카카오 데이터센터 안산</b><span>VISIT REQUEST</span></div><div class="kakao-body"><div class="kakao-title">방문 신청</div><div class="kakao-grid"><div class="kakao-field"></div><div class="kakao-field"></div><div class="kakao-field"></div><div class="kakao-field"></div></div><div class="kakao-flow"><span class="kakao-step on">신청</span><span>→</span><span class="kakao-step">담당부서 검토</span><span>→</span><span class="kakao-step">최종 승인</span></div></div><div class="kakao-badge">APPLICATION</div></div></div>'
+      },
+      {
+        id:'18',
+        name:'나눔 서포터즈 기부금 수불대장',
+        description:'나눔 서포터즈의 기부금 수입·지출 내역과 운영 일정을 한곳에서 확인하고 관리하는 업무 시스템.',
+        date:'2026.09.04',
+        url:'https://erica-nanum-dev.web.app/schedule.html',
+        guideUrl:'',
+        internal:false,
+        tags:['나눔서포터즈','기부금','수불대장'],
+        previewClass:'nanum',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="nanum-ui"><div class="nanum-head"><b>ERICA NANUM</b><span>DONATION LEDGER</span></div><div class="nanum-stats"><div class="nanum-stat"><b>수입</b><span>기부금 내역</span></div><div class="nanum-stat"><b>지출</b><span>사용 내역</span></div></div><div class="nanum-row"><i></i><i></i><i></i></div><div class="nanum-row"><i></i><i></i><i></i></div><div class="nanum-row"><i></i><i></i><i></i></div><div class="nanum-badge">NANUM SUPPORTERS</div></div></div>'
+      },
+      {
+        id:'19',
+        name:'ERICA 오늘밥',
+        description:'ERICA 교내 식당의 오늘 메뉴와 운영 정보를 식당별로 빠르게 확인할 수 있는 초경량 메뉴 사이트.',
+        date:'2026.09.04',
+        url:'https://erakeun.github.io/erica-today-menu/',
+        guideUrl:'',
+        internal:false,
+        tags:['오늘의메뉴','교내식당','자동갱신'],
+        previewClass:'todaymenu',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="menu-ui"><div class="menu-head"><b>ERICA 오늘의 메뉴</b><span>오늘 뭐 먹지?</span></div><div class="menu-tabs"><div class="menu-tab on">전체</div><div class="menu-tab">학생식당</div><div class="menu-tab">기숙사</div></div><div class="meal-cards"><div class="meal-card"><b>학생식당</b><div class="meal-line"></div><div class="meal-line short"></div></div><div class="meal-card"><b>창의인재원</b><div class="meal-line"></div><div class="meal-line short"></div></div></div><div class="menu-badge">TODAY MENU</div></div></div>'
       }
     ];
 
