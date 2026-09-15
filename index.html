@@ -233,6 +233,23 @@
     .conferenceled .led-stage{position:absolute;left:44%;right:8px;top:11px;bottom:10px}.conferenceled .led-stage-title{font-size:6px;font-weight:900;color:#6b7b8e;letter-spacing:.12em}.conferenceled .led-screen{height:45px;margin-top:10px;border-radius:5px;background:linear-gradient(110deg,#12233d,#1b2940);border:2px solid #d2d9e2;color:#fff;display:grid;place-items:center;text-align:center;box-shadow:0 8px 16px rgba(15,31,53,.18)}
     .conferenceled .led-screen b{font-size:8px;line-height:1.15}.conferenceled .led-screen span{display:block;margin-top:3px;font-size:4px;opacity:.72}.conferenceled .led-status{height:25px;margin-top:10px;border:1px solid #dce4ed;border-radius:7px;background:#fff;color:#496077;font-size:6px;font-weight:900;display:flex;align-items:center;padding:0 8px}.conferenceled .led-actions{position:absolute;left:0;right:0;bottom:0;display:flex;gap:5px}.conferenceled .led-action{height:19px;flex:1;border-radius:5px;background:#fff;border:1px solid #dce4ed;color:#52657a;font-size:5px;font-weight:900;display:grid;place-items:center}.conferenceled .led-action.primary{background:#244d7d;border-color:#244d7d;color:#fff}
 
+    .seatplan .planner-ui{position:absolute;inset:40px 14px 14px;border-radius:12px;background:#f1f4f7;border:1px solid #d8e1eb;overflow:hidden;box-shadow:0 12px 25px rgba(31,55,85,.12)}
+    .seatplan .planner-head{height:27px;background:#0b274b;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 9px}
+    .seatplan .planner-head b{font-size:6px;letter-spacing:.04em}.seatplan .planner-head span{font-size:5px;opacity:.68}
+    .seatplan .planner-side{position:absolute;left:0;top:27px;bottom:0;width:29%;background:#fff;border-right:1px solid #dce4ed;padding:9px}
+    .seatplan .planner-kicker{font-size:5px;font-weight:900;color:#77869a;letter-spacing:.12em}.seatplan .planner-count{margin-top:6px;height:27px;border:1px solid #e0e6ed;border-radius:6px;background:#f8fafc;padding:5px}
+    .seatplan .planner-count b{display:block;font-size:9px;color:#15385f}.seatplan .planner-count span{display:block;font-size:4px;color:#8490a1;margin-top:1px}.seatplan .planner-search{height:14px;margin-top:6px;border:1px solid #dfe6ee;border-radius:5px;background:#fbfcfe}
+    .seatplan .planner-person{height:8px;margin-top:6px;border-radius:4px;background:#e7edf4}.seatplan .planner-person.short{width:72%}
+    .seatplan .planner-stage{position:absolute;left:32%;right:7px;top:35px;bottom:7px;border-radius:7px;background:#f4f0e8;border:4px solid #29323d;overflow:hidden}
+    .seatplan .room-label{position:absolute;right:5px;bottom:1px;font-size:3.5px;font-weight:900;color:#7b746b;letter-spacing:.08em}
+    .seatplan .extra-row{position:absolute;top:4px;left:50%;transform:translateX(-50%);display:flex;gap:4px}.seatplan .extra-row i{display:block;width:9px;height:6px;border-radius:2px;background:#243242;border:1px solid #435365}
+    .seatplan .hall-table{position:absolute;left:50%;transform:translateX(-50%);height:9px;background:linear-gradient(#9c4d2b,#7e351e);border:1px solid #6b2d1d;box-shadow:0 2px 4px rgba(57,31,19,.18)}
+    .seatplan .hall-table:before,.seatplan .hall-table:after{content:"";position:absolute;left:3px;right:3px;height:3px;background:repeating-linear-gradient(90deg,#243242 0 3px,transparent 3px 6px)}
+    .seatplan .hall-table:before{top:-5px}.seatplan .hall-table:after{bottom:-5px}
+    .ericaseat .planner-head{background:linear-gradient(90deg,#0b274b,#124d80)}.ericaseat .hall-table{width:84%;border-radius:45% 45% 18% 18%}.ericaseat .hall-table.first{top:16px}.ericaseat .hall-table.second{top:34px;transform:translateX(-50%) rotate(180deg)}
+    .ericaseat .planner-stage:after{content:"";position:absolute;left:46%;top:27px;width:8px;height:5px;border-radius:50%;background:#5e7b43;box-shadow:15px 0 #5e7b43}
+    .seoulseat .planner-head{background:linear-gradient(90deg,#102a4d,#173b68)}.seoulseat .extra-row{top:4px;gap:9px}.seoulseat .hall-table{width:86%;border-radius:3px}.seoulseat .hall-table.first{top:16px}.seoulseat .hall-table.second{top:34px}
+
     .signage .canvas{position:absolute;inset:40px 18px 18px;border-radius:12px;background:#f1f4f8;border:1px solid #dfe6ef;overflow:hidden;box-shadow:0 12px 25px rgba(31,55,85,.10)}
     .signage .side{position:absolute;left:0;top:0;bottom:0;width:39%;background:#fff;border-right:1px solid #e2e8f0;padding:10px}
     .signage .side-title{font-size:7px;font-weight:900;color:#183151;margin-bottom:8px}.signage .option{height:16px;border:1px solid #e1e7ee;border-radius:5px;margin-bottom:6px;background:#fbfcfe}.signage .option.on{background:#eef4ff;border-color:#c9dafc}
@@ -542,7 +559,7 @@
   <footer>
     <div class="wrap foot">
       <span>© <span id="year">2026</span> <strong>ERICA AI PROJECTS</strong></span>
-      <span>AI를 활용한 업무 개선 프로젝트 모음. · <strong>v1.4.3</strong></span>
+      <span>AI를 활용한 업무 개선 프로젝트 모음. · <strong>v1.5.0</strong></span>
     </div>
   </footer>
 
@@ -817,6 +834,32 @@
         tags:['제작기','LED','행사디자인'],
         previewClass:'conferenceled',
         previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="led-ui"><div class="led-side"><div class="led-kicker">QUICK START</div><div class="led-field large"></div><div class="led-field"></div><div class="led-presets"><div class="led-preset on"></div><div class="led-preset"></div><div class="led-preset"></div><div class="led-preset"></div></div></div><div class="led-stage"><div class="led-stage-title">LIVE PREVIEW</div><div class="led-screen"><b>ERICA 산학협력 업무협약식<span>2026. 11. 05 · 컨퍼런스홀 중강당</span></b></div><div class="led-status">✓ 출력 준비 완료</div><div class="led-actions"><div class="led-action">PPTX</div><div class="led-action primary">PNG</div></div></div></div></div>'
+      },
+      {
+        id:'21',
+        name:'ERICA 컨퍼런스홀 좌석배치 시스템',
+        description:'PRIME 컨퍼런스홀의 메인 49석·수행원 14석에 참석자를 배정하고 행사 좌석배치안을 시각적으로 설계·출력하는 운영 도구.',
+        date:'2026.09.15',
+        url:'https://erakeun.github.io/erica-seat-planner/',
+        guideUrl:'',
+        internal:false,
+        category:'manage',
+        tags:['좌석배치','행사운영','컨퍼런스홀'],
+        previewClass:'seatplan ericaseat',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="planner-ui"><div class="planner-head"><b>ERICA · PRIME HALL</b><span>63 SEATS</span></div><div class="planner-side"><div class="planner-kicker">ATTENDEES</div><div class="planner-count"><b>63</b><span>전체 좌석</span></div><div class="planner-search"></div><div class="planner-person"></div><div class="planner-person short"></div><div class="planner-person"></div></div><div class="planner-stage"><div class="extra-row"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="hall-table first"></div><div class="hall-table second"></div><div class="room-label">PRIME CONFERENCE HALL</div></div></div></div>'
+      },
+      {
+        id:'22',
+        name:'서울캠퍼스 좌석배치 시스템',
+        description:'서울캠퍼스 신본관 회의실1의 메인 49석·배석 4석에 참석자를 배정하고 행사 좌석배치안을 시각적으로 설계·출력하는 운영 도구.',
+        date:'2026.09.15',
+        url:'https://erakeun.github.io/seoul-seat-planner/',
+        guideUrl:'',
+        internal:false,
+        category:'manage',
+        tags:['좌석배치','행사운영','서울캠퍼스'],
+        previewClass:'seatplan seoulseat',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="planner-ui"><div class="planner-head"><b>SEOUL · MEETING ROOM 1</b><span>53 SEATS</span></div><div class="planner-side"><div class="planner-kicker">ATTENDEES</div><div class="planner-count"><b>53</b><span>전체 좌석</span></div><div class="planner-search"></div><div class="planner-person"></div><div class="planner-person short"></div><div class="planner-person"></div></div><div class="planner-stage"><div class="extra-row"><i></i><i></i><i></i><i></i></div><div class="hall-table first"></div><div class="hall-table second"></div><div class="room-label">NEW BUILDING · ROOM 1</div></div></div></div>'
       }
     ];
 
