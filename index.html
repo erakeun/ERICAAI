@@ -13,7 +13,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#0b1f3a" />
-  <meta name="description" content="한양대학교 ERICA에서 AI를 활용해 업무 과정에 필요한 기능을 구현한 프로젝트 모음" />
+  <meta name="description" content="반복되는 대학 행정 업무를 AI와 코드로 시스템화한 ERICA 실무 프로젝트. 제작 도구, 신청·접수, 행사 운영, 정보 검색 사례와 설계자료를 살펴보세요." />
   <title>한양대학교 ERICA AI 활용 프로젝트</title>
   <style>
     :root{
@@ -63,19 +63,37 @@
     h1{margin:14px 0;font-size:clamp(44px,7vw,84px);line-height:.98;letter-spacing:-.065em;color:var(--navy);word-break:keep-all;overflow-wrap:break-word}
     .hero p{max-width:760px;margin:0;color:#667085;font-size:clamp(17px,2vw,21px);line-height:1.7;font-weight:530;word-break:keep-all;overflow-wrap:break-word}
     .hero p strong{color:#344054}
+    .portfolio-summary{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:20px;color:#526076;font-size:13px}
+    .portfolio-summary strong{color:var(--navy);font-size:18px;margin-right:5px}
     .rule{height:1px;background:linear-gradient(90deg,var(--line),transparent);margin-top:30px}
 
     .section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:10px 0 20px}
     .section-title{margin:0;font-size:24px;letter-spacing:-.04em;color:var(--navy)}
-    .section-sub{color:#8590a3;font-size:13px;font-weight:700}
+    .section-sub{color:#58677c;font-size:13px;font-weight:700}
+    .project-search{display:flex;align-items:end;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+    .search-field{flex:1 1 260px;display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:800;color:#344054}
+    .search-field input{width:100%;min-height:44px;border:1px solid #c7d2e1;border-radius:12px;padding:11px 13px;background:#fff;color:var(--ink);font:inherit}
+    .search-field input::placeholder{color:#65748a}
+    .discovery-btn{min-height:44px;border:1px solid #c7d2e1;border-radius:12px;padding:10px 13px;background:#fff;color:#344054;font:inherit;font-size:13px;font-weight:750;cursor:pointer}
+    .guide-only{display:flex;align-items:center;gap:8px;min-height:44px;font-size:13px;font-weight:750;color:#344054;cursor:pointer}
+    .guide-only input{width:18px;height:18px;accent-color:var(--blue)}
+    .discovery-btn:focus-visible,.search-field input:focus-visible,.guide-only input:focus-visible,.card:focus-visible{outline:3px solid #2563eb;outline-offset:3px}
+    .project-help{margin:0 0 14px;color:#58677c;font-size:13px;line-height:1.6}
+    .results-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+    .results-row p{margin:0;color:#526076;font-size:13px;font-weight:700}
+    .filter-count{font-size:11px;font-variant-numeric:tabular-nums;margin-left:5px}
+    .empty-results{padding:24px;border:1px solid var(--line);border-radius:16px;background:#fff;line-height:1.7;color:#526076}
+    .empty-results[hidden]{display:none}
+    .availability{font-size:12px;color:#526076;font-weight:750;margin:0 0 10px}
+    .availability.internal{color:#714a18}
 
     .project-filters{
-      display:flex;gap:8px;margin:0 0 20px;overflow-x:auto;padding:2px 1px 6px;
+      display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;padding:2px 1px 6px;
       scrollbar-width:thin;scrollbar-color:#cbd5e1 transparent
     }
     .filter-btn{
       flex:0 0 auto;border:1px solid #dce4ef;background:rgba(255,255,255,.88);color:#526076;
-      border-radius:999px;padding:9px 14px;font:inherit;font-size:13px;font-weight:800;
+      border-radius:999px;min-height:44px;padding:9px 14px;font:inherit;font-size:13px;font-weight:800;
       cursor:pointer;transition:background-color .18s,color .18s,border-color .18s,box-shadow .18s
     }
     .filter-btn:hover{border-color:#adc2e5;color:#245fd7;background:#fff}
@@ -99,7 +117,7 @@
     .card-body{padding:22px 22px 20px;display:flex;flex-direction:column;flex:1}
     .meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
     .num{font-size:11px;font-weight:900;color:var(--blue);letter-spacing:.10em;background:#eef4ff;border:1px solid #dce8ff;border-radius:999px;padding:4px 7px}
-    .date{font-size:11px;color:#8995a7;font-weight:750;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+    .date{font-size:11px;color:#5b6b80;font-weight:750;letter-spacing:.02em;font-variant-numeric:tabular-nums}
     .card h2{font-size:21px;line-height:1.28;font-weight:850;margin:0 0 9px;color:var(--navy);letter-spacing:-.045em;word-break:keep-all;overflow-wrap:break-word}
     .desc{font-size:14px;line-height:1.58;color:#667085;margin:0 0 16px;word-break:keep-all;overflow-wrap:break-word}
     .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
@@ -436,7 +454,8 @@
       <div class="wrap">
         <div class="eyebrow"><span class="dot"></span> AI-ASSISTED WORK PROJECTS made by Hyung Keun Yoo</div>
         <h1>한양대학교 ERICA 발전협력팀<br>AI 활용 프로젝트</h1>
-        <p>AI를 활용해 제작한 <strong>툴과 시스템</strong>을 제작 순서대로 정리했습니다.</p>
+        <p>반복되는 대학 행정 업무를 <strong>AI와 코드로 직접 시스템화</strong>했습니다.<br>홍보물 제작부터 신청·접수, 행사 운영, 정보 검색까지 실무에서 출발한 프로젝트를 살펴보세요.</p>
+        <div class="portfolio-summary" id="portfolioSummary" aria-label="프로젝트 현황"></div>
         <div class="rule"></div>
       </div>
     </section>
@@ -538,12 +557,21 @@
       </div>
     </section>
 
-    <section class="wrap" aria-labelledby="projects-title">
+    <section class="wrap" id="projects" aria-labelledby="projects-title">
       <div class="section-head">
         <h2 class="section-title" id="projects-title">PROJECTS</h2>
         <div class="section-sub" id="projectCount"></div>
       </div>
 
+      <p class="project-help">사이트 연결은 운영 페이지로 이동하며, 일부 서비스는 로그인이 필요합니다. 설계자료가 있는 프로젝트는 설치·적용 방법도 살펴볼 수 있습니다.</p>
+      <div class="project-search" role="search" aria-label="프로젝트 찾기">
+        <label class="search-field" for="projectSearch">프로젝트명·기능 검색
+          <input id="projectSearch" type="search" placeholder="예: 좌석, 명패, 신청, 재고" aria-controls="projectsGrid" aria-describedby="searchHelp" autocomplete="off">
+        </label>
+        <label class="guide-only"><input id="guideOnly" type="checkbox" aria-controls="projectsGrid">설계자료 있는 프로젝트만</label>
+        <button class="discovery-btn" id="latestProject" type="button" title="검색·필터를 초기화하고 가장 최근 프로젝트로 이동합니다">최신 프로젝트로 이동 ↓</button>
+      </div>
+      <p class="project-help" id="searchHelp">이름·설명·태그에서 검색합니다. 여러 단어를 띄어 쓰면 모두 포함된 프로젝트를 찾습니다.</p>
       <div class="project-filters" id="projectFilters" aria-label="프로젝트 카테고리 필터">
         <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">전체</button>
         <button class="filter-btn" type="button" data-filter="maker" aria-pressed="false">제작</button>
@@ -552,6 +580,11 @@
         <button class="filter-btn" type="button" data-filter="info" aria-pressed="false">정보·검색</button>
       </div>
 
+      <div class="results-row">
+        <p id="projectResults" role="status" aria-live="polite" aria-atomic="true"></p>
+        <button class="discovery-btn" id="resetDiscovery" type="button">검색·필터 초기화</button>
+      </div>
+      <p class="empty-results" id="emptyResults" hidden>조건에 맞는 프로젝트가 없습니다. 검색어를 바꾸거나 위의 검색·필터 초기화 버튼을 눌러 전체 목록을 확인하세요.</p>
       <div class="grid" id="projectsGrid"></div>
     </section>
   </main>
@@ -559,7 +592,7 @@
   <footer>
     <div class="wrap foot">
       <span>© <span id="year">2026</span> <strong>ERICA AI PROJECTS</strong></span>
-      <span>AI를 활용한 업무 개선 프로젝트 모음. · <strong>v1.5.0</strong></span>
+      <span>AI를 활용한 업무 개선 프로젝트 모음. · <strong>v1.6.0</strong></span>
     </div>
   </footer>
 
@@ -643,7 +676,7 @@
       {
         id:'06',
         name:'ERICA 보도자료 제출 시스템',
-        description:'외부 배포·블로그 게재 여부를 골라 자료와 이미지를 담당자에게 전달하는 제출 폼.',
+        description:'기사 작성에 필요한 기본 사실과 자료를 항목별로 접수하고, 언론 배포·블로그 활용 범위를 함께 전달하는 보도자료 기초자료 제출 폼.',
         date:'2026.08.26',
         url:'https://erakeun.github.io/erica-pr-request/',
         guideUrl:'',
@@ -799,7 +832,7 @@
       {
         id:'18',
         name:'나눔 서포터즈 기부금 수불대장',
-        description:'나눔 서포터즈의 기부금 수입·지출 내역과 운영 일정을 한곳에서 확인하고 관리하는 업무 시스템.',
+        description:'공개된 근무표 페이지에서 근무 가능시간을 등록하고 확정 근무표를 확인하며, 나눔 서포터즈의 운영 일정을 함께 조율하는 시스템.',
         date:'2026.09.04',
         url:'https://erica-nanum-dev.web.app/schedule.html',
         guideUrl:'',
@@ -883,12 +916,14 @@
         .join('');
       const actionText = project.internal ? '내부 운영 시스템' : '열어보기';
       const actionIcon = project.internal ? '🔒' : '↗';
+      const availability = project.internal ? '내부 운영 · 화면 비공개' : '사이트 연결';
 
-      return '<' + tag + ' class="card"' + attributes + '>' +
+      return '<' + tag + ' class="card"' + (project.internal ? ' tabindex="-1"' : '') + attributes + '>' +
         latest +
-        '<div class="preview ' + escapeHtml(project.previewClass) + '">' + project.previewHtml + '</div>' +
+        '<div class="preview ' + escapeHtml(project.previewClass) + '" aria-hidden="true">' + project.previewHtml + '</div>' +
         '<div class="card-body">' +
           '<div class="meta"><span class="num">' + escapeHtml(project.id) + '</span><span class="date">' + escapeHtml(project.date) + '</span></div>' +
+          '<p class="availability' + (project.internal ? ' internal' : '') + '">' + availability + '</p>' +
           '<h2>' + escapeHtml(project.name) + '</h2>' +
           '<p class="desc">' + escapeHtml(project.description) + '</p>' +
           '<div class="tags">' + tags + '</div>' +
@@ -901,7 +936,7 @@
       if(project.guideUrl){
         return '<a class="guide-link active" href="' + escapeHtml(project.guideUrl) + '" target="_blank" rel="noopener" aria-label="' +
           escapeHtml(project.id) + '번 프로젝트 설계방법 열기">' +
-          '<span class="guide-main"><span class="guide-icon">↓</span><span class="guide-copy"><b>설계방법</b><small>설치자료 · 배포파일</small></span></span>' +
+          '<span class="guide-main"><span class="guide-icon">↓</span><span class="guide-copy"><b>설계방법 · 자료 제공</b><small>설치자료 · 배포파일</small></span></span>' +
           '<span class="guide-state">열어보기 ↗</span></a>';
       }
 
@@ -912,7 +947,7 @@
     function renderProjects(){
       const grid = document.getElementById('projectsGrid');
       grid.innerHTML = PROJECTS
-        .map(project => '<div class="project-item" data-category="' + escapeHtml(project.category) + '">' + projectCardHtml(project) + projectGuideHtml(project) + '</div>')
+        .map(project => '<div class="project-item" id="project-' + escapeHtml(project.id) + '" data-category="' + escapeHtml(project.category) + '">' + projectCardHtml(project) + projectGuideHtml(project) + '</div>')
         .join('');
 
       document.getElementById('projectCount').textContent = PROJECTS.length + ' CREATIONS';
@@ -928,18 +963,83 @@
 
     renderProjects();
 
+    // Index the rendered wrappers once; filtering never moves or rebuilds cards.
+    const projectItems = Array.from(document.querySelectorAll('#projectsGrid > .project-item'));
+    const filterButtons = Array.from(document.querySelectorAll('#projectFilters .filter-btn'));
+    const searchInput = document.getElementById('projectSearch');
+    const guideOnly = document.getElementById('guideOnly');
+    const normalizeSearch = value => value.normalize('NFKC').toLocaleLowerCase('ko').replace(/\s+/g, ' ').trim();
+    const searchableProjects = projectItems.map(item => ({
+      item,
+      text: normalizeSearch(Array.from(item.querySelectorAll('h2, .desc, .tag')).map(node => node.textContent).join(' ')),
+      hasGuide: Boolean(item.querySelector('a.guide-link[href]'))
+    }));
+    let selectedCategory = 'all';
+
+    filterButtons.forEach(button => {
+      const count = projectItems.filter(item => button.dataset.filter === 'all' || item.dataset.category === button.dataset.filter).length;
+      const badge = document.createElement('span');
+      badge.className = 'filter-count';
+      badge.textContent = count;
+      badge.setAttribute('aria-hidden', 'true');
+      button.setAttribute('aria-label', button.textContent + ' ' + count + '개');
+      button.appendChild(badge);
+      button.setAttribute('aria-controls', 'projectsGrid');
+    });
+    const summary = document.getElementById('portfolioSummary');
+    [
+      [projectItems.length, '프로젝트'],
+      [projectItems.filter(item => item.querySelector('a.card[href]')).length, '사이트 연결'],
+      [searchableProjects.filter(project => project.hasGuide).length, '설계자료 제공']
+    ].forEach(([count, label]) => {
+      const entry = document.createElement('span');
+      const value = document.createElement('strong');
+      value.textContent = count;
+      entry.append(value, label);
+      summary.appendChild(entry);
+    });
+
+    function filterProjects(){
+      const terms = normalizeSearch(searchInput.value).split(' ').filter(Boolean);
+      let visibleCount = 0;
+      searchableProjects.forEach(({item, text, hasGuide}) => {
+        const match = (selectedCategory === 'all' || item.dataset.category === selectedCategory)
+          && (!guideOnly.checked || hasGuide)
+          && terms.every(term => text.includes(term));
+        item.hidden = !match;
+        if(match) visibleCount++;
+      });
+      filterButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === selectedCategory)));
+      document.getElementById('projectResults').textContent = '전체 ' + projectItems.length + '개 중 ' + visibleCount + '개 표시 · 제작순서 OLD → NEW';
+      document.getElementById('emptyResults').hidden = visibleCount !== 0;
+    }
+
     document.getElementById('projectFilters').addEventListener('click', function(event){
       const button = event.target.closest('.filter-btn');
       if(!button) return;
-
-      const selectedCategory = button.dataset.filter;
-      document.querySelectorAll('.filter-btn').forEach(filterButton => {
-        filterButton.setAttribute('aria-pressed', String(filterButton === button));
-      });
-      document.querySelectorAll('.project-item').forEach(item => {
-        item.hidden = selectedCategory !== 'all' && item.dataset.category !== selectedCategory;
-      });
+      selectedCategory = button.dataset.filter;
+      filterProjects();
     });
+    searchInput.addEventListener('input', filterProjects);
+    guideOnly.addEventListener('change', filterProjects);
+    function resetDiscovery(){
+      searchInput.value = '';
+      guideOnly.checked = false;
+      selectedCategory = 'all';
+      filterProjects();
+    }
+    document.getElementById('resetDiscovery').addEventListener('click', function(){
+      resetDiscovery();
+      searchInput.focus();
+    });
+    document.getElementById('latestProject').addEventListener('click', function(){
+      resetDiscovery();
+      const card = document.querySelector('#projectsGrid .latest')?.closest('.card');
+      if(!card) return;
+      card.focus({preventScroll:true});
+      card.scrollIntoView({block:'center', behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+    });
+    filterProjects();
 
 
     const requestForm = document.getElementById('projectRequestForm');
