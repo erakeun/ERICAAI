@@ -60,9 +60,11 @@
     .hero{padding:52px 0 36px}
     .eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--blue);font-weight:850;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
     .dot{width:7px;height:7px;border-radius:99px;background:var(--blue);box-shadow:0 0 0 5px rgba(37,99,235,.10)}
-    h1{margin:14px 0;font-size:clamp(44px,7vw,84px);line-height:.98;letter-spacing:-.065em;color:var(--navy);word-break:keep-all;overflow-wrap:break-word}
-    .hero p{max-width:760px;margin:0;color:#667085;font-size:clamp(17px,2vw,21px);line-height:1.7;font-weight:530;word-break:keep-all;overflow-wrap:break-word}
-    .hero p strong{color:#344054}
+    .hero-title{margin:14px 0 0;font-size:clamp(52px,8vw,92px);line-height:.96;letter-spacing:-.065em;color:var(--navy);word-break:keep-all;overflow-wrap:break-word}
+    .hero-subtitle{max-width:820px;margin:14px 0 0;color:#233b63;font-size:clamp(22px,3vw,31px);line-height:1.25;font-weight:780;letter-spacing:-.035em;word-break:keep-all;overflow-wrap:break-word}
+    .hero-affiliation{margin:10px 0 0;color:#667085;font-size:clamp(14px,1.5vw,16px);line-height:1.5;font-weight:750;word-break:keep-all}
+    .hero-description{max-width:760px;margin:18px 0 0;color:#667085;font-size:clamp(17px,2vw,21px);line-height:1.7;font-weight:530;word-break:keep-all;overflow-wrap:break-word}
+    .hero-description strong{color:#344054}
     .portfolio-summary{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:20px;color:#526076;font-size:13px}
     .portfolio-summary strong{color:var(--navy);font-size:18px;margin-right:5px}
     .rule{height:1px;background:linear-gradient(90deg,var(--line),transparent);margin-top:30px}
@@ -419,7 +421,7 @@
     @media (max-width:640px){
       .wrap{width:min(100% - 24px,1180px)}
       header{padding-top:20px}.brand span:last-child{font-size:14px}.chip.hide-mobile{display:none}
-      .hero{padding:34px 0 26px}h1{font-size:clamp(40px,11.5vw,46px);line-height:1.02}.hero p{font-size:16px;line-height:1.6}.rule{margin-top:24px}
+      .hero{padding:34px 0 26px}.hero-title{font-size:clamp(40px,12vw,54px);line-height:.98}.hero-subtitle{margin-top:12px;font-size:clamp(20px,6vw,25px);line-height:1.25}.hero-affiliation{margin-top:9px;font-size:14px}.hero-description{margin-top:16px;font-size:16px;line-height:1.6}.rule{margin-top:24px}
       .grid{grid-template-columns:1fr;gap:18px}.card{min-height:380px}.preview{height:176px;padding:16px}
       .card-body{padding:18px 17px 17px}.meta{margin-bottom:11px}
       .card h2{font-size:20px;line-height:1.3;margin-bottom:8px}.desc{font-size:13.5px;line-height:1.58;margin-bottom:15px}
@@ -453,8 +455,10 @@
     <section class="hero">
       <div class="wrap">
         <div class="eyebrow"><span class="dot"></span> AI-ASSISTED WORK PROJECTS made by Hyung Keun Yoo</div>
-        <h1>한양대학교 ERICA 발전협력팀<br>AI 활용 프로젝트</h1>
-        <p>반복되는 대학 행정 업무를 <strong>AI와 코드로 직접 시스템화</strong>했습니다.<br>홍보물 제작부터 신청·접수, 행사 운영, 정보 검색까지 실무에서 출발한 프로젝트를 살펴보세요.</p>
+        <h1 class="hero-title">PROJECT MACH</h1>
+        <p class="hero-subtitle">Making Administration Change at Hanyang</p>
+        <p class="hero-affiliation">한양대학교 ERICA 발전협력팀</p>
+        <p class="hero-description">AI를 활용해 제작한 <strong>툴과 시스템</strong>을 제작 순서대로 정리했습니다.</p>
         <div class="portfolio-summary" id="portfolioSummary" aria-label="프로젝트 현황"></div>
         <div class="rule"></div>
       </div>
@@ -592,7 +596,7 @@
   <footer>
     <div class="wrap foot">
       <span>© <span id="year">2026</span> <strong>ERICA AI PROJECTS</strong></span>
-      <span>AI를 활용한 업무 개선 프로젝트 모음. · <strong>v1.6.0</strong></span>
+      <span>AI를 활용한 업무 개선 프로젝트 모음. · <strong>v1.6.1</strong></span>
     </div>
   </footer>
 
