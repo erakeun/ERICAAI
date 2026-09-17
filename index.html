@@ -279,6 +279,16 @@
     .auditorium .auditorium-zone:first-child{transform:skewY(7deg);transform-origin:right top}.auditorium .auditorium-zone:last-child{transform:skewY(-7deg);transform-origin:left top}
     .auditorium .auditorium-zone b{position:absolute;left:3px;right:3px;bottom:3px;border-radius:4px;background:rgba(255,255,255,.91);color:#35536a;font-size:4.5px;text-align:center;padding:2px 0}
 
+    .designrequest .design-ui{position:absolute;inset:40px 16px 16px;border:1px solid #dbe4ef;border-radius:12px;background:#f7f9fc;overflow:hidden;box-shadow:0 12px 25px rgba(31,55,85,.11)}
+    .designrequest .design-head{height:30px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;color:#fff;background:linear-gradient(90deg,#0b294f,#2468e8)}
+    .designrequest .design-head b{font-size:7px}.designrequest .design-head span{font-size:5px;opacity:.72;letter-spacing:.08em}
+    .designrequest .design-body{padding:10px}.designrequest .design-title{color:#183151;font-size:8px;font-weight:900}
+    .designrequest .design-options{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
+    .designrequest .design-option{height:45px;padding:8px;border:1px solid #dce5ef;border-radius:8px;background:#fff;color:#64748b;font-size:5px;font-weight:800}
+    .designrequest .design-option b{display:block;margin-bottom:4px;color:#1d3d66;font-size:7px}.designrequest .design-option.on{border-color:#8eb4fb;background:#eef5ff}
+    .designrequest .design-flow{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:10px;color:#6b7b8f;font-size:5px;font-weight:900}
+    .designrequest .design-step{padding:4px 6px;border-radius:99px;background:#e8edf3}.designrequest .design-step.on{color:#fff;background:#2468e8}
+
     .signage .canvas{position:absolute;inset:40px 18px 18px;border-radius:12px;background:#f1f4f8;border:1px solid #dfe6ef;overflow:hidden;box-shadow:0 12px 25px rgba(31,55,85,.10)}
     .signage .side{position:absolute;left:0;top:0;bottom:0;width:39%;background:#fff;border-right:1px solid #e2e8f0;padding:10px}
     .signage .side-title{font-size:7px;font-weight:900;color:#183151;margin-bottom:8px}.signage .option{height:16px;border:1px solid #e1e7ee;border-radius:5px;margin-bottom:6px;background:#fbfcfe}.signage .option.on{background:#eef4ff;border-color:#c9dafc}
@@ -605,7 +615,7 @@
   <footer>
     <div class="wrap foot">
       <span>© <span id="year">2026</span> <strong>ERICA AI PROJECTS</strong></span>
-      <span>AI를 활용한 업무 개선 프로젝트 모음. · <strong>v1.6.3</strong></span>
+      <span>AI를 활용한 업무 개선 프로젝트 모음. · <strong>v1.6.4</strong></span>
     </div>
   </footer>
 
@@ -919,6 +929,19 @@
         tags:['좌석배치','중강당','인쇄·PDF'],
         previewClass:'auditorium',
         previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="auditorium-ui"><div class="auditorium-head"><b>ERICA · AUDITORIUM 3F</b><span>406 SEATS · 5 ZONES</span></div><div class="auditorium-stage">SCREEN · STAGE</div><div class="auditorium-sections"><div class="auditorium-zone"><b>L1</b></div><div class="auditorium-zone"><b>L2</b></div><div class="auditorium-zone"><b>C</b></div><div class="auditorium-zone"><b>R2</b></div><div class="auditorium-zone"><b>R1</b></div></div></div></div>'
+      },
+      {
+        id:'24',
+        name:'ERICA 디자인 요청 시스템',
+        description:'캐릭터의 새 표정·동작이나 현수막·포스터·카드뉴스 제작 요청을 선택형 문항으로 정리해 담당자 이메일 협의로 연결하는 교내 디자인 요청 시스템.',
+        date:'2026.09.17',
+        url:'https://erakeun.github.io/erica-design-request/',
+        guideUrl:'',
+        internal:false,
+        category:'request',
+        tags:['디자인요청','신청·접수','업무표준화'],
+        previewClass:'designrequest',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="design-ui"><div class="design-head"><b>ERICA DESIGN REQUEST</b><span>STEP 1 / 3</span></div><div class="design-body"><div class="design-title">어떤 작업이 필요한가요?</div><div class="design-options"><div class="design-option on"><b>캐릭터 그림</b>새 표정·동작 요청</div><div class="design-option"><b>홍보물</b>현수막·포스터·카드뉴스</div></div><div class="design-flow"><span class="design-step on">작업 선택</span><span>→</span><span class="design-step">정보 입력</span><span>→</span><span class="design-step">신청</span></div></div></div></div>'
       }
     ];
 
