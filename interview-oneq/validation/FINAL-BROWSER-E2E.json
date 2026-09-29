@@ -1,0 +1,105 @@
+{
+  "baseURL": "http://127.0.0.1:4183/outputs/interview-oneq/",
+  "executedAt": "2026-09-29T02:21:49.417Z",
+  "browser": "Headless Chrome via Playwright, isolated synthetic contexts",
+  "total": 19,
+  "passed": 19,
+  "failed": 0,
+  "results": [
+    {
+      "name": "UI creation, typed applicant, and reload preserve independent internal data",
+      "status": "passed",
+      "milliseconds": 1712
+    },
+    {
+      "name": "unseeded panel and session forms create group slots with break, venue, participant and confirmed assignment",
+      "status": "passed",
+      "milliseconds": 2215
+    },
+    {
+      "name": "actual backup download contains a valid complete project and restores through the file UI",
+      "status": "passed",
+      "milliseconds": 2202
+    },
+    {
+      "name": "clone UI copies settings, protocol and optional pool/venue but no applicant or contact data",
+      "status": "passed",
+      "milliseconds": 927
+    },
+    {
+      "name": "manual move across dates and locked applicant survive automatic reassignment",
+      "status": "passed",
+      "milliseconds": 995
+    },
+    {
+      "name": "confirmed send, released confirmation, changes, reannouncement, and printed-version refresh",
+      "status": "passed",
+      "milliseconds": 1390
+    },
+    {
+      "name": "empty evaluation differs from explicit zero and row Save survives reload",
+      "status": "passed",
+      "milliseconds": 1396
+    },
+    {
+      "name": "final results require explicit results, reserve rank and two human review checks",
+      "status": "passed",
+      "milliseconds": 1137
+    },
+    {
+      "name": "actual downloaded public print and waiting screen omit names, contacts, notes and evaluation",
+      "status": "passed",
+      "milliseconds": 976
+    },
+    {
+      "name": "CSV and real XLSX imports pass through actual file controls with same-name identities",
+      "status": "passed",
+      "milliseconds": 1089
+    },
+    {
+      "name": "deleting a scored criterion archives old score and remains reloadable",
+      "status": "passed",
+      "milliseconds": 1562
+    },
+    {
+      "name": "corrupted saved JSON is preserved as download and recoverable using a validated backup",
+      "status": "passed",
+      "milliseconds": 915
+    },
+    {
+      "name": "confirmed-project privacy purge leaves no applicants, score archives, audit snapshots or output records",
+      "status": "passed",
+      "milliseconds": 1415
+    },
+    {
+      "name": "actual tool handoff downloads respect original schemas and exclude applicant/contact data",
+      "status": "passed",
+      "milliseconds": 1061
+    },
+    {
+      "name": "cancelled applicants disappear from interview notices without losing assignment or other applicants",
+      "status": "passed",
+      "milliseconds": 1024
+    },
+    {
+      "name": "editing a confirmed session into invalid slots reopens confirmation and preserves sent locked assignments",
+      "status": "passed",
+      "milliseconds": 1807
+    },
+    {
+      "name": "nameplate UI defaults to a native new project with names, organization, position and role",
+      "status": "passed",
+      "milliseconds": 904
+    },
+    {
+      "name": "nameplate UI roster option produces a valid same-event incremental update",
+      "status": "passed",
+      "milliseconds": 961
+    },
+    {
+      "name": "mobile operations expose full-width touch controls without overflow and preserve changed status on reload",
+      "status": "passed",
+      "milliseconds": 2061
+    }
+  ]
+}

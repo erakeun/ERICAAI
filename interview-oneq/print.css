@@ -1,0 +1,105 @@
+@charset "UTF-8";
+@page { size: A4 portrait; margin: 13mm 12mm; }
+@page landscape { size: A4 landscape; margin: 12mm; }
+:root { color-scheme: light; font-family: Arial, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; color: #172c46; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #e8edf3; font-size: 10pt; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.print-document { max-width: 210mm; margin: 16px auto; }
+.print-document.landscape { max-width: 297mm; }
+.print-page { background: #fff; padding: 12mm; margin: 0 0 16px; min-height: 270mm; break-after: page; page-break-after: always; }
+.print-page:last-child { break-after: auto; page-break-after: auto; }
+.landscape .print-page { page: landscape; min-height: 185mm; }
+.print-header { border-bottom: 2px solid #153356; padding-bottom: 12px; margin-bottom: 18px; }
+.print-brand { color: #245fbc; font-weight: 700; letter-spacing: .08em; font-size: 9pt; }
+h1 { font-size: 21pt; line-height: 1.3; margin: 5px 0 7px; overflow-wrap: anywhere; }
+h2 { font-size: 14pt; margin: 20px 0 9px; break-after: avoid; page-break-after: avoid; }
+h3 { font-size: 11pt; margin: 14px 0 5px; break-after: avoid; page-break-after: avoid; }
+p { margin: 5px 0; }
+.print-meta { font-size: 8pt; color: #53677d; overflow-wrap: anywhere; }
+.print-privacy { display: inline-block; font-size: 8pt; padding: 2px 6px; border: 1px solid #9aacc0; margin-right: 6px; border-radius: 3px; }
+.print-notice { padding: 9px 11px; border-left: 3px solid #245fbc; background: #f0f5fb; margin: 10px 0; font-size: 9pt; }
+.print-warning { background: #fff5df; border-left-color: #a9720f; }
+.print-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px 18px; margin: 12px 0; }
+.print-grid > div { border-bottom: 1px solid #d9e1ea; padding-bottom: 4px; overflow-wrap: anywhere; }
+.print-label { color: #586b80; font-size: 8pt; display: block; }
+table { width: 100%; border-collapse: collapse; margin: 9px 0 16px; table-layout: fixed; }
+thead { display: table-header-group; }
+tfoot { display: table-footer-group; }
+th, td { border: 1px solid #b9c6d5; padding: 7px 8px; vertical-align: top; overflow-wrap: anywhere; word-break: normal; }
+th { background: #edf2f8; text-align: left; font-size: 9pt; color: #153356; }
+td { font-size: 9pt; }
+tr { break-inside: avoid; page-break-inside: avoid; }
+.print-small th, .print-small td { padding: 5px; font-size: 8pt; }
+.checklist-table th, .checklist-table td { padding: 2px 5px; }
+.checklist-table th:nth-child(1) { width: 8%; }
+.checklist-table th:nth-child(2) { width: 40%; }
+.checklist-table th:nth-child(3) { width: 20%; }
+.checklist-table th:nth-child(4) { width: 32%; }
+.result-table th:nth-child(1) { width: 10%; }
+.result-table th:nth-child(2) { width: 9%; }
+.result-table th:nth-child(3) { width: 9%; }
+.result-table th:nth-child(4), .result-table th:nth-child(5) { width: 8%; }
+.result-table th:nth-child(6) { width: 27%; }
+.result-table th:nth-child(7) { width: 10%; }
+.result-table th:nth-child(8) { width: 8%; }
+.result-table th:nth-child(9) { width: 11%; }
+.criteria-table th:first-child { width: 27%; }
+.print-no-wrap { white-space: nowrap; }
+.print-muted { color: #66768a; }
+.print-empty { border: 1px dashed #a8b7c8; padding: 15px; color: #66768a; }
+.print-question { break-inside: avoid; page-break-inside: avoid; margin: 0 0 13px; }
+.print-question p { white-space: pre-line; overflow-wrap: anywhere; }
+.print-question-meta { color: #66768a; font-size: 8pt; }
+.print-rubric { white-space: pre-line; }
+.print-check { font-family: Arial, sans-serif; font-size: 12pt; }
+.print-comment { border: 1px solid #b9c6d5; min-height: 34mm; padding: 8px; margin-top: 10px; background: repeating-linear-gradient(#fff, #fff 8mm, #e7ecf2 8mm, #e7ecf2 8.2mm); }
+.print-signature { display: flex; justify-content: space-between; gap: 16px; margin-top: 16px; padding: 10px 0; border-bottom: 1px solid #b9c6d5; }
+.evaluation-page { break-inside: avoid; page-break-inside: avoid; }
+.evaluation-page .score-table th:nth-child(1) { width: 9%; }
+.evaluation-page .score-table th:nth-child(2) { width: 51%; }
+.evaluation-page .score-table th:nth-child(3), .evaluation-page .score-table th:nth-child(4) { width: 20%; }
+.evaluation-page .score-table td { height: 13mm; vertical-align: middle; }
+.evaluation-page.dense h1 { font-size: 17pt; }
+.evaluation-page.dense th, .evaluation-page.dense td { padding: 4px 6px; font-size: 8pt; }
+.evaluation-page.dense .score-table td { height: 8mm; }
+.evaluation-page.dense .print-comment { min-height: 22mm; }
+.print-footer { margin-top: 15px; font-size: 8pt; color: #63758a; border-top: 1px solid #d8e0e9; padding-top: 6px; }
+.public-page h1 { font-size: 28pt; }
+.public-page td { font-size: 16pt; padding: 12px; }
+.public-page td:nth-child(4) { font-size: 12pt; }
+.public-page th { font-size: 12pt; }
+.public-page .public-number { font-size: 21pt; font-weight: 700; }
+@media print {
+  body { background: #fff; }
+  .print-document, .print-document.landscape { max-width: none; margin: 0; }
+  .print-page { padding: 0; margin: 0; min-height: 0; }
+  .print-footer { display: none; }
+  .print-comment, .print-signature { break-inside: avoid; page-break-inside: avoid; }
+  .landscape .print-comment { min-height: 15mm; }
+  .landscape .criteria-table th, .landscape .criteria-table td { padding: 5px 7px; font-size: 8pt; line-height: 1.35; }
+  .evaluation-page { height: 269mm; max-height: 269mm; }
+  .landscape .evaluation-page { height: 184mm; max-height: 184mm; min-height: 0; font-size: 9pt; }
+  .landscape .evaluation-page table { margin: 7px 0 10px; }
+  .landscape .evaluation-page th, .landscape .evaluation-page td { padding: 4px 7px; }
+  .landscape .evaluation-page .score-table td { height: 7mm; }
+  .landscape .evaluation-page .print-grid { margin: 8px 0; gap: 5px 18px; }
+  .landscape .evaluation-page .print-comment { min-height: 15mm; }
+  .landscape .evaluation-page .print-signature { margin-top: 7px; padding: 6px 0; }
+  .landscape .evaluation-page .print-footer { margin-top: 8px; }
+  .landscape .evaluation-page h3 { margin-top: 8px; }
+  .landscape .evaluation-page .print-header { padding-bottom: 7px; margin-bottom: 9px; }
+  .landscape .evaluation-page h1 { font-size: 17pt; }
+  .landscape .evaluation-page.dense { font-size: 8pt; line-height: 1.3; }
+  .landscape .evaluation-page.dense h1 { font-size: 14pt; margin: 3px 0; }
+  .landscape .evaluation-page.dense .print-header { padding-bottom: 5px; margin-bottom: 5px; }
+  .landscape .evaluation-page.dense .print-grid { margin: 5px 0; gap: 3px 14px; }
+  .landscape .evaluation-page.dense table { margin: 5px 0 7px; }
+  .landscape .evaluation-page.dense th, .landscape .evaluation-page.dense td { font-size: 7pt; padding: 2px 5px; line-height: 1.25; }
+  .landscape .evaluation-page.dense .score-table td { height: 5mm; }
+  .landscape .evaluation-page.dense h3 { margin: 5px 0 3px; font-size: 9pt; }
+  .landscape .evaluation-page.dense .print-comment { min-height: 12mm; margin-top: 5px; }
+  .landscape .evaluation-page.dense .print-signature { margin-top: 4px; padding: 4px 0; }
+  .landscape .evaluation-page.dense .print-footer { margin-top: 5px; padding-top: 4px; font-size: 7pt; }
+  .print-notice { break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+}
