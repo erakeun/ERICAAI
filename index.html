@@ -77,6 +77,7 @@
     .search-field input{width:100%;min-height:44px;border:1px solid #c7d2e1;border-radius:12px;padding:11px 13px;background:#fff;color:var(--ink);font:inherit}
     .search-field input::placeholder{color:#65748a}
     .discovery-btn{min-height:44px;border:1px solid #c7d2e1;border-radius:12px;padding:10px 13px;background:#fff;color:#344054;font:inherit;font-size:13px;font-weight:750;cursor:pointer}
+    .sort-field{display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:800;color:#344054}
     .guide-only{display:flex;align-items:center;gap:8px;min-height:44px;font-size:13px;font-weight:750;color:#344054;cursor:pointer}
     .guide-only input{width:18px;height:18px;accent-color:var(--blue)}
     .discovery-btn:focus-visible,.search-field input:focus-visible,.guide-only input:focus-visible,.card:focus-visible{outline:3px solid #2563eb;outline-offset:3px}
@@ -473,7 +474,7 @@
         <span class="brand-mark">AI</span><span>ERICA AI PROJECTS</span>
       </a>
       <div class="top-actions">
-        <span class="chip hide-mobile">제작순서 · OLD → NEW</span>
+        <span class="chip hide-mobile" id="sortSummary">제작순서 · OLD → NEW</span>
         <a class="chip github-link" href="https://blog.naver.com/hyerica4473" target="_blank" rel="noopener">ERICA 공식 블로그 ↗</a>
       </div>
     </div>
@@ -600,6 +601,12 @@
         <label class="search-field" for="projectSearch">프로젝트명·기능 검색
           <input id="projectSearch" type="search" placeholder="예: 좌석, 명패, 신청, 재고" aria-controls="projectsGrid" aria-describedby="searchHelp" autocomplete="off">
         </label>
+        <label class="sort-field" for="projectSort">정렬
+          <select class="discovery-btn" id="projectSort" aria-controls="projectsGrid">
+            <option value="oldest">오래된순</option>
+            <option value="newest">최신순</option>
+          </select>
+        </label>
         <label class="guide-only"><input id="guideOnly" type="checkbox" aria-controls="projectsGrid">설계자료 있는 프로젝트만</label>
         <button class="discovery-btn" id="latestProject" type="button" title="검색·필터를 초기화하고 가장 최근 프로젝트로 이동합니다">최신 프로젝트로 이동 ↓</button>
       </div>
@@ -624,7 +631,7 @@
   <footer>
     <div class="wrap foot">
       <span>© <span id="year">2026</span> <strong>ERICA AI PROJECTS</strong></span>
-      <span>AI를 활용한 업무 개선 프로젝트 모음. · <strong>v1.6.5</strong></span>
+      <span>AI를 활용한 업무 개선 프로젝트 모음. · <strong>v1.6.6</strong></span>
     </div>
   </footer>
 
@@ -977,6 +984,19 @@
         tags:['면접운영','시간배정','평가·인쇄'],
         previewClass:'eventoneq',
         previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="oneq-ui"><div class="oneq-head"><b>INTERVIEW ONEQ</b><span>면접 준비 원큐</span></div><div class="oneq-body"><div class="oneq-label">INTERVIEW WORKSPACE</div><div class="oneq-flow"><div class="oneq-step on"><i>1</i>일정</div><div class="oneq-step"><i>2</i>지원자</div><div class="oneq-step"><i>3</i>시간배정</div><div class="oneq-step"><i>4</i>평가표</div><div class="oneq-step"><i>5</i>현장운영</div></div><div class="oneq-check"><b>준비부터 결과 정리까지</b><span>면접 준비하기 →</span></div></div></div></div>'
+      },
+      {
+        id:'27',
+        name:'행사 시간표 제작기',
+        description:'운영 인력의 근무 가능시간과 역할 조건에 맞춰 행사 시간표·배치표를 만들고, 개인별 일정 확인과 출력까지 이어주는 행사 운영 도구.',
+        date:'2026.09.29',
+        url:'https://erakeun.github.io/event-timetable-maker/',
+        guideUrl:'',
+        internal:false,
+        category:'manage',
+        tags:['행사운영','근무시간','인력배치'],
+        previewClass:'eventoneq',
+        previewHtml:'<div class="mini-window"><div class="bar"><i></i><i></i><i></i></div><div class="oneq-ui"><div class="oneq-head"><b>EVENT TIMETABLE</b><span>행사 시간표 제작기</span></div><div class="oneq-body"><div class="oneq-label">EVENT STAFF SCHEDULER</div><div class="oneq-flow"><div class="oneq-step on"><i>1</i>행사</div><div class="oneq-step"><i>2</i>인원</div><div class="oneq-step"><i>3</i>가능시간</div><div class="oneq-step"><i>4</i>배치</div><div class="oneq-step"><i>5</i>출력</div></div><div class="oneq-check"><b>시간표 · 인력 배치표</b><span>시간표 만들기 →</span></div></div></div></div>'
       }
     ];
 
@@ -1047,11 +1067,12 @@
 
     renderProjects();
 
-    // Index the rendered wrappers once; filtering never moves or rebuilds cards.
+    // Keep original card nodes and creation order when filtering or sorting.
     const projectItems = Array.from(document.querySelectorAll('#projectsGrid > .project-item'));
     const filterButtons = Array.from(document.querySelectorAll('#projectFilters .filter-btn'));
     const searchInput = document.getElementById('projectSearch');
     const guideOnly = document.getElementById('guideOnly');
+    const projectSort = document.getElementById('projectSort');
     const normalizeSearch = value => value.normalize('NFKC').toLocaleLowerCase('ko').replace(/\s+/g, ' ').trim();
     const searchableProjects = projectItems.map(item => ({
       item,
@@ -1094,7 +1115,7 @@
         if(match) visibleCount++;
       });
       filterButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === selectedCategory)));
-      document.getElementById('projectResults').textContent = '전체 ' + projectItems.length + '개 중 ' + visibleCount + '개 표시 · 제작순서 OLD → NEW';
+      document.getElementById('projectResults').textContent = '전체 ' + projectItems.length + '개 중 ' + visibleCount + '개 표시 · ' + (projectSort.value === 'newest' ? '최신순 NEW → OLD' : '제작순서 OLD → NEW');
       document.getElementById('emptyResults').hidden = visibleCount !== 0;
     }
 
@@ -1102,6 +1123,13 @@
       const button = event.target.closest('.filter-btn');
       if(!button) return;
       selectedCategory = button.dataset.filter;
+      filterProjects();
+    });
+    projectSort.addEventListener('change', function(){
+      const items = projectSort.value === 'newest' ? [...projectItems].reverse() : projectItems;
+      document.getElementById('projectsGrid').append(...items);
+      document.getElementById('sortSummary').textContent = projectSort.value === 'newest'
+        ? '최신순 · NEW → OLD' : '제작순서 · OLD → NEW';
       filterProjects();
     });
     searchInput.addEventListener('input', filterProjects);
