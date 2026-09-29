@@ -1,0 +1,6 @@
+const linkedBuilding = BUILDINGS.find(building => building.id === params.get("building"));
+if(linkedBuilding){
+  searchInput.value = linkedBuilding.id;
+  clearBtn.style.display = "block";
+  searchBuildings(true);
+}
