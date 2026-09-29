@@ -3,7 +3,7 @@
 대학 면접의 일정·장소·면접위원·지원자 배정부터 질문·평가·안내·당일 운영·결과 확인·출력까지 관리하는 정적 웹앱입니다. 지원자를 평가하거나 합격자를 추천하는 AI 기능은 없으며, 결과는 담당자가 직접 입력하고 확정합니다.
 
 **운영 주소:** [면접 준비 원큐](https://erakeun.github.io/ERICAAI/interview-oneq/)
-**배포 상태:** 기존 PROJECT MACH GitHub Pages 배포 준비 및 검증 진행 중. 배포·운영 URL 재검증 완료 여부는 [최종 검증 기록](validation/FINAL-VALIDATION.md)을 기준으로 확인합니다.
+**배포 상태:** 기존 PROJECT MACH GitHub Pages 배포 및 운영 URL 재검증 완료. 세부 결과는 [최종 검증 기록](validation/FINAL-VALIDATION.md)에 있습니다.
 
 ## 사용 순서
 

@@ -1,0 +1,139 @@
+{
+  "baseURL": "https://erakeun.github.io/ERICAAI/interview-oneq/",
+  "executedAt": "2026-09-29T02:28:11.037840+00:00",
+  "releaseCommit": "a24f251e7927682854825d4577520eac4d371ed0",
+  "total": 13,
+  "matched": 13,
+  "assets": [
+    {
+      "file": "index.html",
+      "url": "https://erakeun.github.io/ERICAAI/interview-oneq/",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 1102,
+      "sha256": "b62d88790975cc18393f70be4887cf58a65c3e37359b22d934376726b9cc1928",
+      "releaseSha256": "b62d88790975cc18393f70be4887cf58a65c3e37359b22d934376726b9cc1928",
+      "matchesRelease": true
+    },
+    {
+      "file": "app.js",
+      "url": "https://erakeun.github.io/ERICAAI/interview-oneq/app.js?v=0.1.0-final",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 90837,
+      "sha256": "07a6636b80bd14db01ac0b7f0f9ad03875ae9a457618b4fe13d8b9c71aeda658",
+      "releaseSha256": "07a6636b80bd14db01ac0b7f0f9ad03875ae9a457618b4fe13d8b9c71aeda658",
+      "matchesRelease": true
+    },
+    {
+      "file": "styles.css",
+      "url": "https://erakeun.github.io/ERICAAI/interview-oneq/styles.css?v=0.1.0-final",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "bytes": 15443,
+      "sha256": "88c13c93ecfd3c9f4701d68946188f20615594d0f0dcd650b6de01c5918a6399",
+      "releaseSha256": "88c13c93ecfd3c9f4701d68946188f20615594d0f0dcd650b6de01c5918a6399",
+      "matchesRelease": true
+    },
+    {
+      "file": "core.js",
+      "url": "https://erakeun.github.io/ERICAAI/interview-oneq/core.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 38288,
+      "sha256": "3fb1f5ef51d03cd8e111b2c6685f8de3e200198275b64e52522a70cea721980e",
+      "releaseSha256": "3fb1f5ef51d03cd8e111b2c6685f8de3e200198275b64e52522a70cea721980e",
+      "matchesRelease": true
+    },
+    {
+      "file": "data.js",
+      "url": "https://erakeun.github.io/ERICAAI/interview-oneq/data.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 18644,
+      "sha256": "0c610f8cb9e7431da5e2aea5442733dd6c856d86a78ecbd580c6ec0f8b844492",
+      "releaseSha256": "0c610f8cb9e7431da5e2aea5442733dd6c856d86a78ecbd580c6ec0f8b844492",
+      "matchesRelease": true
+    },
+    {
+      "file": "import.js",
+      "url": "https://erakeun.github.io/ERICAAI/interview-oneq/import.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 10798,
+      "sha256": "5b1ac3f6098857967c673643474f2fd7bf9287f5694e6ee639ccd30716a1de4a",
+      "releaseSha256": "5b1ac3f6098857967c673643474f2fd7bf9287f5694e6ee639ccd30716a1de4a",
+      "matchesRelease": true
+    },
+    {
+      "file": "storage.js",
+      "url": "https://erakeun.github.io/ERICAAI/interview-oneq/storage.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 863,
+      "sha256": "281c1cd6d927c5e18deb8c982b9ae90a261f1fab47d695353ee509a0aad57a23",
+      "releaseSha256": "281c1cd6d927c5e18deb8c982b9ae90a261f1fab47d695353ee509a0aad57a23",
+      "matchesRelease": true
+    },
+    {
+      "file": "integrations.js",
+      "url": "https://erakeun.github.io/ERICAAI/interview-oneq/integrations.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 10356,
+      "sha256": "b7ad7991ec6c0e8124a7cf3f654bd42c541306b964d0586df5df033a24edd894",
+      "releaseSha256": "b7ad7991ec6c0e8124a7cf3f654bd42c541306b964d0586df5df033a24edd894",
+      "matchesRelease": true
+    },
+    {
+      "file": "print.js",
+      "url": "https://erakeun.github.io/ERICAAI/interview-oneq/print.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 20909,
+      "sha256": "dcdfebbc817e5939d0770a176f933b4260d8731d16b3a208cd386c81a586f11a",
+      "releaseSha256": "dcdfebbc817e5939d0770a176f933b4260d8731d16b3a208cd386c81a586f11a",
+      "matchesRelease": true
+    },
+    {
+      "file": "print.css",
+      "url": "https://erakeun.github.io/ERICAAI/interview-oneq/print.css",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "bytes": 7279,
+      "sha256": "6009b6fdeac09e4d7640d933dc8a3f1e2fadef0e18b9f2f229603a2ccf266a22",
+      "releaseSha256": "6009b6fdeac09e4d7640d933dc8a3f1e2fadef0e18b9f2f229603a2ccf266a22",
+      "matchesRelease": true
+    },
+    {
+      "file": "data/buildings.js",
+      "url": "https://erakeun.github.io/ERICAAI/interview-oneq/data/buildings.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 11434,
+      "sha256": "6614c41d4c658ca23120bc6e2e7adb24e0b7a0470896cc2eb9b1e3d1db0a8ab0",
+      "releaseSha256": "6614c41d4c658ca23120bc6e2e7adb24e0b7a0470896cc2eb9b1e3d1db0a8ab0",
+      "matchesRelease": true
+    },
+    {
+      "file": "vendor/qrcode.js",
+      "url": "https://erakeun.github.io/ERICAAI/interview-oneq/vendor/qrcode.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 56694,
+      "sha256": "18ae399f81182bc9de916e9c77b195df20cc58d6f2d55a62b085a299f1bf1780",
+      "releaseSha256": "18ae399f81182bc9de916e9c77b195df20cc58d6f2d55a62b085a299f1bf1780",
+      "matchesRelease": true
+    },
+    {
+      "file": "vendor/xlsx.full.min.js",
+      "url": "https://erakeun.github.io/ERICAAI/interview-oneq/vendor/xlsx.full.min.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "bytes": 951904,
+      "sha256": "cc015130aa8521e7f088f88898eba949ccdcbfb38df0bd129b44b7273c3a6f41",
+      "releaseSha256": "cc015130aa8521e7f088f88898eba949ccdcbfb38df0bd129b44b7273c3a6f41",
+      "matchesRelease": true
+    }
+  ]
+}
