@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 254 58" fill="#145CBD">
+  <title>MACH — Making Administration Change at Hanyang</title>
+  <desc>전진하는 기울기, M의 두 짧은 절개, H의 상승하는 연결 획을 조합한 독자적인 블루 프로젝트 로고.</desc>
+  <g transform="translate(14 5) skewX(-10)">
+    <path d="M0 48V37h5v-3H0v-8h5v-3H0V0h10l14 28L38 0h10v48H38V18L26 41h-4L10 18v30Z"/>
+    <path fill-rule="evenodd" d="M60 48 79 0h10l19 48H97l-4-11H75l-4 11Zm19-21h10l-5-14Z"/>
+    <path d="M155 4v11c-4-4-8-6-14-6-11 0-17 6-17 15s6 15 17 15c6 0 11-2 15-6v11c-4 3-10 5-16 5-16 0-27-10-27-25S124-1 140-1c6 0 12 2 15 5Z"/>
+    <path d="M168 0h11v21l22-3V0h11v48h-11V28l-22 3v17h-11Z"/>
+  </g>
+  <path d="m231 35 14-14h-10v-4h17v17h-4V24l-14 14Z"/>
+</svg>

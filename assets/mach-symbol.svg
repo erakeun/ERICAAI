@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>MACH</title>
+  <rect width="64" height="64" rx="13" fill="#F6F8FB"/>
+  <path transform="translate(14.5 10.5) skewX(-10) scale(.9)" fill="#145CBD" d="M0 48V37h5v-3H0v-8h5v-3H0V0h10l14 28L38 0h10v48H38V18L26 41h-4L10 18v30Z"/>
+</svg>
