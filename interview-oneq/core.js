@@ -42,7 +42,7 @@ export function nextApplicantNumber(project) {
   return `${prefix}-${String(n).padStart(3, '0')}`;
 }
 export function newApplicant(project, data = {}) {
-  return {...{id:uid(), number:nextApplicantNumber(project), name:'', contact:'', field:project.field || '', note:'', available:[], unavailable:[], assignment:null, locked:false, fixed:false, status:'예정', message:{generated:false,sent:false,replied:false,needsUpdate:false}, result:'미정', resultConfirmed:false, reserveRank:null, evaluations:{}, changeRequest:'', resultMessage:{generated:false,sent:false,replied:false}}, ...data, message:{generated:false,sent:false,replied:false,needsUpdate:false,...data.message}, evaluations:data.evaluations || {}};
+  return {...{id:uid(), number:Object.prototype.propertyIsEnumerable.call(data, 'number') ? undefined : nextApplicantNumber(project), name:'', contact:'', field:project.field || '', note:'', available:[], unavailable:[], assignment:null, locked:false, fixed:false, status:'예정', message:{generated:false,sent:false,replied:false,needsUpdate:false}, result:'미정', resultConfirmed:false, reserveRank:null, evaluations:{}, changeRequest:'', resultMessage:{generated:false,sent:false,replied:false}}, ...data, message:{generated:false,sent:false,replied:false,needsUpdate:false,...data.message}, evaluations:data.evaluations || {}};
 }
 export function sessionErrors(session) {
   const errors = [];
