@@ -16,3 +16,17 @@ main:focus{outline:none}
 .operations-list td select{max-width:none;width:100%;min-height:44px;font-size:16px}
 .operations-list .small-btn{min-height:44px}
 }
+
+
+/* Screen navigation only. Keep outside all generated artwork. */
+.mach-home-nav{display:block;max-width:100%;margin:0 0 12px;box-sizing:border-box}
+.mach-home-link{display:inline-flex;align-items:center;justify-content:center;min-height:44px;max-width:100%;padding:4px 8px;box-sizing:border-box;border-radius:6px;background:#fff;text-decoration:none}
+.mach-home-link img{display:block;width:168px;max-width:100%;height:auto;object-fit:contain}
+.mach-home-link:focus-visible{outline:3px solid #165dcb;outline-offset:3px}
+@media print{.mach-home-nav,.mach-home-link{display:none!important}}
+
+.mach-screen-bar{padding:8px 24px;margin:0;background:#fff}
+
+.topbar .mach-home-link img{width:110px}.topbar .mach-home-link{padding:2px 4px}
+.top-actions .mach-home-link{display:inline-flex}
+@media(max-width:720px){.topbar{height:auto;min-height:65px;padding-top:8px;padding-bottom:8px;flex-wrap:wrap;gap:8px}.top-actions{flex-wrap:wrap}}

@@ -21,3 +21,16 @@
 @media(max-width:720px){.canvas-options{gap:6px}.canvas-options .btn{font-size:10px;padding:8px}.unit-filterbar{padding:10px 12px;flex-wrap:wrap}.unit-filterbar .actions>span{display:none}.unit-view{padding:10px}.unit-columns .unit-members{grid-template-columns:1fr}.unit-subgroups{padding:0 8px 8px}.unit-members .person-role{font-size:11px}.reference-strip{padding:10px 12px}.unit-heading h3{font-size:14px}}
 
 .print-live-preview{padding:15px;background:#eef1e8;border:1px solid #dce4d0;border-radius:8px;margin-top:15px;max-height:55vh;overflow:auto}.print-live-preview[hidden]{display:none}.print-live-preview .print-doc{padding:0;background:#fff;box-shadow:0 2px 12px #2e442026}.employment-tag{display:inline-block;font-size:8px;font-weight:400;color:#9aab88;border:1px solid #e2e9d9;border-radius:3px;padding:0 3px;margin-left:6px;vertical-align:middle}.unit-manager{display:block;font-size:10px;color:#8a9b76;margin-top:5px}
+
+
+/* Screen navigation only. Keep outside all generated artwork. */
+.mach-home-nav{display:block;max-width:100%;margin:0 0 12px;box-sizing:border-box}
+.mach-home-link{display:inline-flex;align-items:center;justify-content:center;min-height:44px;max-width:100%;padding:4px 8px;box-sizing:border-box;border-radius:6px;background:#fff;text-decoration:none}
+.mach-home-link img{display:block;width:168px;max-width:100%;height:auto;object-fit:contain}
+.mach-home-link:focus-visible{outline:3px solid #165dcb;outline-offset:3px}
+@media print{.mach-home-nav,.mach-home-link{display:none!important}}
+
+.mach-screen-bar{padding:8px 24px;margin:0;background:#fff}
+
+.mach-mobile-only{display:none}@media(max-width:720px){.mach-mobile-only{display:block}}
+@media print{.mach-mobile-only{display:none!important}}
