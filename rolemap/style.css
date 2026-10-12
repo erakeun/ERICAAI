@@ -32,5 +32,5 @@
 
 .mach-screen-bar{padding:8px 24px;margin:0;background:#fff}
 
-.mach-mobile-only{display:none}@media(max-width:720px){.mach-mobile-only{display:block}}
+.mach-mobile-only{display:none}@media(max-width:950px){.mach-mobile-only{display:block}.sidebar>.mach-home-nav{display:none}}
 @media print{.mach-mobile-only{display:none!important}}
