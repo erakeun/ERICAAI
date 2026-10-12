@@ -10,7 +10,7 @@ import {createRequire} from 'node:module';
 import path from 'node:path';
 import {tmpdir} from 'node:os';
 import vm from 'node:vm';
-import {pathToFileURL} from 'node:url';
+import {fileURLToPath,pathToFileURL} from 'node:url';
 import {createProject,newSession,newApplicant,autoAssign,confirmSchedule,validateBackup,exportBackup,captureSchedule,trackChanges} from '../core.js';
 
 const {chromium}=process.env.MACH_PLAYWRIGHT_MODULE?await import(pathToFileURL(path.resolve(process.env.MACH_PLAYWRIGHT_MODULE))):await import('playwright');
@@ -135,7 +135,7 @@ await test('editing a confirmed session into invalid slots reopens confirmation 
 await test('nameplate UI defaults to a native new project with names, organization, position and role',async()=>{
   const source=fixture(),page=await launchPage(source);await nav(page,'panels');await action(page,'nameplates');assert.equal(await page.locator('#dialog [name="handoff"]').inputValue(),'project');
   const file=await downloaded(page,()=>submit(page),'native-nameplate-project.json'),data=JSON.parse(await fs.readFile(file,'utf8'));
-  const maker=createRequire(import.meta.url)(new URL('./fixtures/nameplate-changes.cjs',import.meta.url).pathname);
+  const maker=createRequire(import.meta.url)(fileURLToPath(new URL('./fixtures/nameplate-changes.cjs',import.meta.url)));
   assert.equal(maker.validateProject(data),true);assert.equal(data.app,'nameplate-maker');assert.equal(data.mach.eventId,`interview-${source.id}`);assert.equal(data.people.length,2);
   assert.equal(data.people[0].name,source.panelists[0].name);assert.equal(data.people[0].organization,source.panelists[0].organization);assert.equal(data.people[0].position,`${source.panelists[0].position} · ${source.panelists[0].role}`);
   assert.doesNotMatch(JSON.stringify(data),/가상지원자_|지원자비밀연락처|위원비밀연락처/);return page;
@@ -143,7 +143,7 @@ await test('nameplate UI defaults to a native new project with names, organizati
 await test('nameplate UI roster option produces a valid same-event incremental update',async()=>{
   const source=fixture(),page=await launchPage(source);await nav(page,'outputs');await action(page,'nameplates');await page.locator('#dialog [name="handoff"]').selectOption('roster');
   const file=await downloaded(page,()=>submit(page),'nameplate-roster-update.json'),data=JSON.parse(await fs.readFile(file,'utf8'));
-  const contract=createRequire(import.meta.url)(new URL('./fixtures/nameplate-mach-contract.cjs',import.meta.url).pathname);assert.equal(contract.validateTransfer(data),data);
+  const contract=createRequire(import.meta.url)(fileURLToPath(new URL('./fixtures/nameplate-mach-contract.cjs',import.meta.url)));assert.equal(contract.validateTransfer(data),data);
   assert.equal(data.kind,'roster');assert.equal(data.eventId,`interview-${source.id}`);assert.equal(data.participants.length,2);assert.deepEqual(data.participants.map(p=>p.participantId),source.panelists.map(p=>p.id));
   assert.doesNotMatch(JSON.stringify(data),/가상지원자_|지원자비밀연락처|위원비밀연락처/);return page;
 });
