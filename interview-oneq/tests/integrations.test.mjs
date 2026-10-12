@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
+import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 import { BUILDINGS, TOOL_URLS, nameplatePayload, nameplateProjectPayload, noticePayload, signagePayload, mapLink, locationInfo, filenameSafe } from '../integrations.js';
 
@@ -31,13 +32,13 @@ test('명패 일부 선택 및 ID/빈 이름/분량 오류를 검증한다', () 
 });
 test('실제 명패 수신 계약으로 JSON 왕복 검증 (배포 사본에서도 실행)', () => {
   const contract = new URL('./fixtures/nameplate-mach-contract.cjs',import.meta.url);
-  const Mach = createRequire(import.meta.url)(contract.pathname);
+  const Mach = createRequire(import.meta.url)(fileURLToPath(contract));
   const packet=JSON.parse(JSON.stringify(nameplatePayload(project)));
   assert.equal(Mach.validateTransfer(packet),packet);
   assert.throws(()=>Mach.validateTransfer({...packet,participants:packet.participants.map(p=>({...p,contact:'forbidden'}))}));
 });
 test('새 명패 작업은 실제 maker validator를 통과하고 이후 같은 행사 변경분을 반영한다', () => {
-  const maker = createRequire(import.meta.url)(new URL('./fixtures/nameplate-changes.cjs',import.meta.url).pathname);
+  const maker = createRequire(import.meta.url)(fileURLToPath(new URL('./fixtures/nameplate-changes.cjs',import.meta.url)));
   const packet=JSON.parse(JSON.stringify(nameplateProjectPayload(project)));
   assert.equal(maker.validateProject(packet),true);
   assert.equal(packet.mach.eventId,'interview-p-integration');
