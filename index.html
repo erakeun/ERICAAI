@@ -275,6 +275,15 @@
       .guide-copy small{display:none}
     }
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+    .now-invite{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:28px;border:1px solid #cbd9eb;border-radius:18px;background:#fff;margin-bottom:38px}
+    .now-invite .now-kicker{color:#145cbd;font-size:12px;font-weight:750;margin:0 0 8px}
+    .now-invite h2{font-size:clamp(22px,3vw,30px);line-height:1.35;margin:0 0 6px;color:#0b1f3a}
+    .now-invite small{font-size:12px;color:#5c6e86}
+    .now-invite p{font-size:15px;line-height:1.7;color:#465b75;margin:12px 0 0}
+    .now-start{flex-shrink:0;display:inline-flex;align-items:center;gap:20px;background:#145cbd;color:white;border-radius:10px;padding:14px 18px;font-size:16px;font-weight:700;min-height:48px}
+    .now-start:hover{background:#0b448f}.now-start:focus-visible{outline:3px solid #bd5d18;outline-offset:4px}
+    @media(max-width:640px){.now-invite{flex-direction:column;align-items:stretch;padding:22px;margin-bottom:28px}.now-start{justify-content:space-between}}
   </style>
 <style id="mach-logo-navigation-style">
 .brand{min-height:44px}
@@ -314,6 +323,16 @@
           <div class="portfolio-summary" id="portfolioSummary" aria-label="프로젝트 현황"></div>
         </div>
       </div>
+    </section>
+
+    <section class="wrap now-invite" aria-labelledby="now-title">
+      <div>
+        <p class="now-kicker">아이디어가 있다면, 다음은 NOW</p>
+        <h2 id="now-title">MACH의 속도에 스며든다 NOW</h2>
+        <small>출처: 레인보우 〈MACH〉 가사</small>
+        <p>당신의 아이디어를 AI가 이해하는 개발 요청으로.<br>쉬운 질문에 답하고, 첫 개발 요청서를 직접 다듬어 복사해 보세요.</p>
+      </div>
+      <a class="now-start" href="./now/">NOW, 시작해 볼까? <span aria-hidden="true">→</span></a>
     </section>
 
     <section class="wrap" id="projects" aria-labelledby="projects-title">
