@@ -287,6 +287,11 @@
     @media(max-width:900px){.now-logo-flow{flex-basis:110px}.now-invite{flex-wrap:wrap;gap:16px}.now-start{width:100%;justify-content:flex-end}}
     @media(max-width:640px){.now-invite{padding:20px;gap:12px}.now-logo-flow{flex:0 0 100px}.now-copy{flex-basis:100%}.now-start{justify-content:space-between}.now-copy strong{font-size:22px}}
     @media(prefers-reduced-motion:reduce){.now-invite,.now-logo-flow::after{transition:none}.now-logo-flow::after{background-position:50% 50%}}
+
+    .hero-logo-flow{position:relative;line-height:0}.hero-logo-flow img{display:block;width:100%;height:auto}
+    .hero-logo-flow::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 20%,#84cfff 40%,#b3a0ff 52%,transparent 70%);background-size:300% 100%;background-position:100% 50%;mask:url('./assets/mach-three-speed-lines.png') center/contain no-repeat;-webkit-mask:url('./assets/mach-three-speed-lines.png') center/contain no-repeat;opacity:.65;transition:background-position 1.3s ease}
+    .hero-logo-flow:hover::after,.hero-logo-flow:focus::after{background-position:0 50%}.hero-logo-flow:focus-visible{outline:3px solid #bd5d18;outline-offset:4px}
+    @media(prefers-reduced-motion:reduce){.hero-logo-flow::after{display:none;transition:none}}
   </style>
 <style id="mach-logo-navigation-style">
 .brand{min-height:44px}
@@ -317,7 +322,7 @@
       <div class="wrap hero-layout">
         <div class="hero-identity">
           <div class="eyebrow"><span class="dot" aria-hidden="true"></span>AI-ASSISTED WORK PROJECTS · made by Hyung Keun Yoo</div>
-          <h1 class="hero-title" id="hero-title"><span class="hero-project">PROJECT</span><img class="hero-wordmark" src="./assets/mach-three-speed-lines.png" width="2172" height="724" alt="MACH"></h1>
+          <h1 class="hero-title" id="hero-title"><span class="hero-project">PROJECT</span><span class="hero-wordmark hero-logo-flow" tabindex="0" role="img" aria-label="MACH"><img src="./assets/mach-three-speed-lines.png" width="2172" height="724" alt=""></span></h1>
           <p class="hero-subtitle">Making Administration Change at Hanyang</p>
         </div>
         <div class="hero-context">
