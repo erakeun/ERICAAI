@@ -280,13 +280,18 @@
     .now-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:6px}.now-kicker{color:#145cbd;font-size:12px;font-weight:750}
     .now-copy strong{font-size:clamp(20px,2.5vw,28px);line-height:1.4;color:#0b1f3a}.now-copy small{font-size:12px;color:#5c6e86}.now-copy>span:last-child{font-size:15px;line-height:1.6;color:#465b75}
     .now-logo-flow{position:relative;display:block;flex:0 0 150px;line-height:0}.now-logo-flow img{display:block;width:100%;height:auto}
-    .now-logo-flow::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 20%,#84cfff 40%,#b3a0ff 52%,transparent 70%);background-size:300% 100%;background-position:100% 50%;mask:url('./assets/mach-three-speed-lines.png') center/contain no-repeat;-webkit-mask:url('./assets/mach-three-speed-lines.png') center/contain no-repeat;opacity:.65;transition:background-position 1.3s ease,opacity .4s}
+    .now-logo-flow::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 27%,#84cfff 35%,#b3a0ff 38%,transparent 42%,#84cfff 46%,transparent 48%);background-size:300% 100%;background-position:100% 50%;mask:url('./assets/mach-three-speed-lines.png') center/contain no-repeat;-webkit-mask:url('./assets/mach-three-speed-lines.png') center/contain no-repeat;opacity:.65;transition:background-position .38s ease-out,opacity .38s}
     .now-start{display:flex;flex-shrink:0;align-items:center;gap:14px;color:#145cbd;font-size:16px;font-weight:750;min-height:48px}
     .now-invite:hover,.now-invite:focus-visible{border-color:#719bcf;box-shadow:0 8px 28px #145cbd14}.now-invite:hover .now-logo-flow::after,.now-invite:focus-visible .now-logo-flow::after{background-position:0 50%;opacity:.9}
     .now-invite:focus-visible{outline:3px solid #bd5d18;outline-offset:4px}
     @media(max-width:900px){.now-logo-flow{flex-basis:110px}.now-invite{flex-wrap:wrap;gap:16px}.now-start{width:100%;justify-content:flex-end}}
     @media(max-width:640px){.now-invite{padding:20px;gap:12px}.now-logo-flow{flex:0 0 100px}.now-copy{flex-basis:100%}.now-start{justify-content:space-between}.now-copy strong{font-size:22px}}
     @media(prefers-reduced-motion:reduce){.now-invite,.now-logo-flow::after{transition:none}.now-logo-flow::after{background-position:50% 50%}}
+
+    .hero-logo-flow{position:relative;line-height:0}.hero-logo-flow img{display:block;width:100%;height:auto}
+    .hero-logo-flow::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 27%,#84cfff 35%,#b3a0ff 38%,transparent 42%,#84cfff 46%,transparent 48%);background-size:300% 100%;background-position:100% 50%;mask:url('./assets/mach-three-speed-lines.png') center/contain no-repeat;-webkit-mask:url('./assets/mach-three-speed-lines.png') center/contain no-repeat;opacity:.65;transition:background-position .38s ease-out}
+    .hero-logo-flow:hover::after,.hero-logo-flow:focus::after{background-position:0 50%}.hero-logo-flow:focus-visible{outline:3px solid #bd5d18;outline-offset:4px}
+    @media(prefers-reduced-motion:reduce){.hero-logo-flow::after{display:none;transition:none}}
   </style>
 <style id="mach-logo-navigation-style">
 .brand{min-height:44px}
@@ -317,7 +322,7 @@
       <div class="wrap hero-layout">
         <div class="hero-identity">
           <div class="eyebrow"><span class="dot" aria-hidden="true"></span>AI-ASSISTED WORK PROJECTS · made by Hyung Keun Yoo</div>
-          <h1 class="hero-title" id="hero-title"><span class="hero-project">PROJECT</span><img class="hero-wordmark" src="./assets/mach-three-speed-lines.png" width="2172" height="724" alt="MACH"></h1>
+          <h1 class="hero-title" id="hero-title"><span class="hero-project">PROJECT</span><span class="hero-wordmark hero-logo-flow" tabindex="0" role="img" aria-label="MACH"><img src="./assets/mach-three-speed-lines.png" width="2172" height="724" alt=""></span></h1>
           <p class="hero-subtitle">Making Administration Change at Hanyang</p>
         </div>
         <div class="hero-context">
