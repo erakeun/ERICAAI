@@ -334,11 +334,11 @@
           </div>
           <label class="sort-field" for="projectSort"><span class="sort-label">정렬</span>
             <select class="discovery-btn" id="projectSort" aria-controls="projectsGrid">
-              <option value="oldest">오래된순</option>
               <option value="newest">최신순</option>
+              <option value="oldest">예전순</option>
             </select>
           </label>
-          <button class="discovery-btn" id="latestProject" type="button" title="검색·필터를 초기화하고 가장 최근 프로젝트로 이동합니다">최신 프로젝트 ↓</button>
+          <button class="discovery-btn" id="latestProject" type="button" title="현재 검색·필터를 유지하고 최신순으로 정렬합니다">최신순 보기 ↑</button>
         </div>
         <p class="project-help" id="searchHelp">이름·설명·태그에서 검색합니다. 여러 단어를 띄어 쓰면 모두 포함된 프로젝트를 찾습니다.</p>
         <div class="filter-row">
@@ -1033,12 +1033,16 @@
       selectedCategory = button.dataset.filter;
       filterProjects();
     });
-    projectSort.addEventListener('change', function(){
+    function applyProjectSort(){
       const items = projectSort.value === 'newest' ? [...projectItems].reverse() : projectItems;
       document.getElementById('projectsGrid').append(...items);
       document.getElementById('sortSummary').textContent = projectSort.value === 'newest'
         ? '최신순 · NEW → OLD' : '제작순서 · OLD → NEW';
       filterProjects();
+    }
+    projectSort.addEventListener('change', function(){
+      applyProjectSort();
+      document.getElementById('projectsGrid').scrollIntoView({block:'start',behavior:'auto'});
     });
     searchInput.addEventListener('input', filterProjects);
     function clearSearchQuery(){
@@ -1058,20 +1062,19 @@
       searchInput.value = '';
       guideOnly.checked = false;
       selectedCategory = 'all';
-      filterProjects();
+      projectSort.value = 'newest';
+      applyProjectSort();
     }
     document.getElementById('resetDiscovery').addEventListener('click', function(){
       resetDiscovery();
       searchInput.focus();
     });
     document.getElementById('latestProject').addEventListener('click', function(){
-      resetDiscovery();
-      const card = document.querySelector('#projectsGrid .latest')?.closest('.card');
-      if(!card) return;
-      card.focus({preventScroll:true});
-      card.scrollIntoView({block:'center', behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'});
+      projectSort.value = 'newest';
+      applyProjectSort();
+      document.getElementById('projectsGrid').scrollIntoView({block:'start',behavior:'auto'});
     });
-    filterProjects();
+    applyProjectSort();
 
     document.addEventListener('keydown', function(event){
       const target = event.target;
