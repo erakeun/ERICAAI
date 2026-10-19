@@ -2,11 +2,10 @@
    The original MACH PNG and its intrinsic 2172:724 ratio stay unchanged. */
 .mach-lockup{width:min(340px,100%);margin-top:14px;container-type:inline-size}
 .mach-lockup .hero-title{display:flex;flex-direction:column;align-items:center;gap:0;margin:0;font-size:inherit;letter-spacing:normal}
-.mach-lockup .hero-project{display:block;width:100%;height:auto;aspect-ratio:340/42;writing-mode:horizontal-tb;transform:none;align-self:center;overflow:visible;fill:#172d49}
-.mach-lockup .hero-project text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Arial",sans-serif;font-size:34px;font-weight:900;font-style:normal;letter-spacing:0}
-.mach-lockup .hero-wordmark{width:100%;max-width:none;height:auto;margin-block:-5% -8%}
+.mach-lockup .hero-project{display:block;width:100%;height:auto;aspect-ratio:340/24;writing-mode:horizontal-tb;transform:none;align-self:center;overflow:hidden;fill:#172d49}
+.mach-lockup .hero-wordmark{width:100%;max-width:none;height:auto;margin-block:-8% -9.4%}
 /* Negative margins consume only the transparent top/bottom canvas padding;
    neither the image pixels nor the logo drawing are cropped or stretched. */
-.mach-lockup .hero-subtitle{margin:0;text-align:center;font-size:13px;font-size:3.85cqi;font-weight:550;line-height:1.3;letter-spacing:0;overflow-wrap:anywhere;color:#60718a}
+.mach-lockup .hero-subtitle{margin:0;line-height:0;width:100%}.mach-lockup .hero-subtitle img{display:block;width:100%;height:auto}
 @media(max-width:680px){.mach-lockup{width:min(295px,100%);margin-top:12px}}
 @media print{.mach-lockup .hero-project{display:none}}
