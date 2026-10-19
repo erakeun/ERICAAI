@@ -281,6 +281,8 @@
 .brand:focus-visible{outline:3px solid #165dcb;outline-offset:3px;border-radius:6px}
 @media print{.brand-logo,.hero-wordmark{display:none!important}}
 </style>
+  <link rel="stylesheet" href="./usage-guides.css">
+  <script defer src="./usage-guides.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#projects">프로젝트로 바로가기</a>
@@ -930,10 +932,16 @@
         '<span>설계방법</span><span class="guide-state">준비중</span></div>';
     }
 
+    function projectUsageHtml(project){
+      const targets=['01','02','04','05','12','15','19','20','21','22','23','25','26','27','28'];
+      if(!targets.includes(project.id)) return '';
+      return '<button type="button" class="usage-link" data-usage-id="'+escapeHtml(project.id)+'" aria-label="'+escapeHtml(project.name)+' 사용방법 보기"><span><b>사용방법</b><small>준비 · 단계별 화면 · 결과 확인</small></span><span>읽어보기 →</span></button>';
+    }
+
     function renderProjects(){
       const grid = document.getElementById('projectsGrid');
       grid.innerHTML = PROJECTS
-        .map(project => '<div class="project-item" id="project-' + escapeHtml(project.id) + '" data-category="' + escapeHtml(project.category) + '">' + projectCardHtml(project) + projectGuideHtml(project) + '</div>')
+        .map(project => '<div class="project-item" id="project-' + escapeHtml(project.id) + '" data-category="' + escapeHtml(project.category) + '">' + projectCardHtml(project) + projectUsageHtml(project) + projectGuideHtml(project) + '</div>')
         .join('');
 
       document.getElementById('projectCount').textContent = PROJECTS.length + ' CREATIONS';
@@ -1162,5 +1170,7 @@
       setTimeout(()=>requestStatus.classList.remove('show'), 2800);
     });
   </script>
+<dialog id="usageDialog" class="usage-dialog" aria-labelledby="usageTitle"><div class="usage-top"><span>처음 사용하는 분을 위한 안내</span><button class="usage-close" type="button" data-usage-close="usageDialog" aria-label="사용방법 닫기">×</button></div><div id="usageBody" class="usage-body"></div></dialog>
+<dialog id="usageImageDialog" class="usage-dialog usage-lightbox" aria-label="사용 화면 확대"><div class="usage-top"><span>화면 확대 · 좌우로 움직여 자세히 보세요</span><button class="usage-close" type="button" data-usage-close="usageImageDialog" aria-label="확대 화면 닫기">×</button></div><div class="usage-full-scroll"><img id="usageFullImage" alt=""></div><p><a id="usageFullLink" target="_blank" rel="noopener noreferrer">원본 크기로 새 탭에서 보기 ↗</a></p></dialog>
 </body>
 </html>
