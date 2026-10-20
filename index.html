@@ -111,6 +111,12 @@
     #latestProject:hover{background:#e1edfe;border-color:#83a9dc}
     .project-help{margin:0;color:#5c6e86;font-size:12px;line-height:1.6}
     #searchHelp{margin-top:9px}
+    .work-tags{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px}
+    .work-tags[hidden]{display:none}
+    .work-tag{min-height:44px;padding:8px 13px;border:1px solid #bccbdf;border-radius:22px;background:#fff;color:#294969;font:inherit;font-size:13px;cursor:pointer}
+    .work-tag[aria-pressed="true"]{background:#145cbd;color:#fff;border-color:#145cbd}
+    .work-tag:focus-visible{outline:3px solid #145cbd;outline-offset:3px}
+    .work-tags-label{font-size:13px;font-weight:700;color:#294969}
     .filter-row{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-top:12px;border-top:1px solid #e5eaf2}
     .project-filters{display:flex;gap:22px;min-width:0;scrollbar-width:thin;scrollbar-color:#c7d2e2 transparent}
     .filter-btn{position:relative;flex:0 0 auto;min-height:48px;padding:0;border:0;background:transparent;color:#60738d;font-size:13px;font-weight:650;cursor:pointer;white-space:nowrap;transition:color .15s}
@@ -361,6 +367,8 @@
           <button class="discovery-btn" id="latestProject" type="button" title="현재 검색·필터를 유지하고 최신순으로 정렬합니다">최신순 보기 ↑</button>
         </div>
         <p class="project-help" id="searchHelp">이름·설명·태그에서 검색합니다. 여러 단어를 띄어 쓰면 모두 포함된 프로젝트를 찾습니다.</p>
+        <div class="work-tags" id="workTags" role="group" aria-label="업무 태그 검색" aria-describedby="workTagsHelp"><span class="work-tags-label">업무 태그</span></div>
+        <p class="project-help" id="workTagsHelp">여러 태그를 고르면 모두 해당하는 프로젝트만 표시합니다. 다시 누르면 해제됩니다. 검색어·분류와 함께 사용할 수 있으며, 카드의 기존 기술·특징 태그와는 별도입니다.</p>
         <div class="filter-row">
           <div class="project-filters" id="projectFilters" role="group" aria-label="프로젝트 카테고리 필터">
             <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">전체</button>
@@ -389,6 +397,7 @@
         <button class="discovery-btn" id="resetDiscovery" type="button">검색·필터 초기화</button>
       </div>
       <p class="empty-results" id="emptyResults" hidden>조건에 맞는 프로젝트가 없습니다. 검색어를 바꾸거나 위의 검색·필터 초기화 버튼을 눌러 전체 목록을 확인하세요.</p>
+      <div class="work-tags" id="filterRecovery" role="group" aria-label="조건 하나만 해제해 다시 찾기" hidden></div>
       <div class="grid" id="projectsGrid"></div>
       <p class="project-help project-note">사이트 연결은 운영 페이지로 이동하며, 일부 서비스는 로그인이 필요합니다. 설계자료가 있는 프로젝트는 설치·적용 방법도 살펴볼 수 있습니다.</p>
     </section>
@@ -887,6 +896,40 @@
       }
     ];
 
+    // 업무 태그는 아래 프로젝트 설명에 명시된 기능만 수동 연결합니다.
+    const WORK_TAGS = {
+      '행사':['02','04','20','21','22','23','25','27'],
+      '명단':['02','21','22','23','25','26','28'],
+      '인쇄':['02','21','22','23','26','27','28'],
+      '좌석':['21','22','23','25'],
+      '신청':['06','07','08','09','10','17','24'],
+      '예약':['08','09'],
+      '일정':['08','09','10','11','17','18','26','27'],
+      '재고':['13','14'],
+      '검색':['03','12','23'],
+      '업무분장':['28']
+    };
+    function projectMatches(project, text, terms, category, needsGuide, selectedTags){
+      return (category === 'all' || project.category === category)
+        && (!needsGuide || Boolean(project.guideUrl))
+        && terms.every(term => text.includes(term))
+        && [...selectedTags].every(tag => WORK_TAGS[tag].includes(project.id));
+    }
+
+    // Only offer changes that actually recover results while keeping every other condition.
+    function discoveryRecovery(entries, current){
+      const choices=[];
+      const add=(kind,label,next,tag)=>{
+        const count=entries.filter(({project,text})=>projectMatches(project,text,next.terms,next.category,next.needsGuide,new Set(next.tags))).length;
+        if(count)choices.push({kind,label,count,tag});
+      };
+      if(current.terms.length)add('query','검색어만 지우기',{...current,terms:[]});
+      if(current.category!=='all')add('category','분류만 전체로',{...current,category:'all'});
+      if(current.needsGuide)add('guide','설계자료 조건만 해제',{...current,needsGuide:false});
+      for(const tag of current.tags)add('tag',tag+' 태그만 해제',{...current,tags:current.tags.filter(value=>value!==tag)},tag);
+      return choices.sort((a,b)=>a.count-b.count).slice(0,3);
+    }
+
     // Verified screenshots only. Sources are populated after each public page is captured.
     const PROJECT_PREVIEWS = {
       '01': {src:'./assets/previews/project-01.jpg'},
@@ -1009,10 +1052,22 @@
     const normalizeSearch = value => value.normalize('NFKC').toLocaleLowerCase('ko').replace(/\s+/g, ' ').trim();
     const searchableProjects = projectItems.map(item => ({
       item,
-      text: normalizeSearch(Array.from(item.querySelectorAll('h2, .desc, .tag')).map(node => node.textContent).join(' ')),
+      text: normalizeSearch(Array.from(item.querySelectorAll('h2, .desc, .tag')).map(node => node.textContent).join(' ') + ' ' + Object.keys(WORK_TAGS).filter(tag => WORK_TAGS[tag].includes(item.id.replace('project-', ''))).join(' ')),
       hasGuide: Boolean(item.querySelector('a.guide-link[href]'))
     }));
     let selectedCategory = 'all';
+    const selectedWorkTags = new Set();
+    const workTagButtons = Object.keys(WORK_TAGS).map(tag => {
+      const button = document.createElement('button');
+      button.type = 'button'; button.className = 'work-tag'; button.textContent = tag;
+      button.setAttribute('aria-pressed', 'false'); button.setAttribute('aria-controls', 'projectsGrid');
+      button.addEventListener('click', () => {
+        if(selectedWorkTags.has(tag)) selectedWorkTags.delete(tag); else selectedWorkTags.add(tag);
+        filterProjects();
+      });
+      document.getElementById('workTags').appendChild(button);
+      return [tag, button];
+    });
 
     filterButtons.forEach(button => {
       const count = projectItems.filter(item => button.dataset.filter === 'all' || item.dataset.category === button.dataset.filter).length;
@@ -1042,13 +1097,13 @@
       const terms = normalizeSearch(searchInput.value).split(' ').filter(Boolean);
       let visibleCount = 0;
       searchableProjects.forEach(({item, text, hasGuide}) => {
-        const match = (selectedCategory === 'all' || item.dataset.category === selectedCategory)
-          && (!guideOnly.checked || hasGuide)
-          && terms.every(term => text.includes(term));
+        const project = PROJECTS.find(project => 'project-' + project.id === item.id);
+        const match = projectMatches(project, text, terms, selectedCategory, guideOnly.checked, selectedWorkTags);
         item.hidden = !match;
         if(match) visibleCount++;
       });
       filterButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === selectedCategory)));
+      workTagButtons.forEach(([tag, button]) => button.setAttribute('aria-pressed', String(selectedWorkTags.has(tag))));
       const results = document.getElementById('projectResults');
       const count = document.createElement('strong');
       count.className = 'results-count';
@@ -1067,6 +1122,7 @@
         addCondition('분류: ' + selectedButton.dataset.label);
       }
       if(terms.length) addCondition('검색: “' + searchInput.value.trim() + '”', true);
+      selectedWorkTags.forEach(tag => addCondition('업무: ' + tag));
       if(guideOnly.checked) addCondition('설계자료 있음');
       const sort = document.createElement('span');
       sort.className = 'results-sort';
@@ -1075,6 +1131,25 @@
       results.replaceChildren(count, document.createTextNode(' '), context);
       clearSearchButton.hidden = searchInput.value.length === 0;
       document.getElementById('emptyResults').hidden = visibleCount !== 0;
+      const recovery=document.getElementById('filterRecovery');
+      recovery.replaceChildren();recovery.hidden=true;
+      if(visibleCount===0){
+        const entries=searchableProjects.map(({item,text})=>({project:PROJECTS.find(p=>'project-'+p.id===item.id),text}));
+        const options=discoveryRecovery(entries,{terms,category:selectedCategory,needsGuide:guideOnly.checked,tags:[...selectedWorkTags]});
+        if(options.length){
+          const hint=document.createElement('span');hint.className='work-tags-label';hint.textContent='다른 조건은 유지하고';recovery.appendChild(hint);recovery.hidden=false;
+          options.forEach(option=>{
+            const button=document.createElement('button');button.type='button';button.className='work-tag';button.textContent=option.label+' · '+option.count+'개';button.setAttribute('aria-controls','projectsGrid');
+            button.addEventListener('click',()=>{
+              if(option.kind==='query')searchInput.value='';
+              if(option.kind==='category')selectedCategory='all';
+              if(option.kind==='guide')guideOnly.checked=false;
+              if(option.kind==='tag')selectedWorkTags.delete(option.tag);
+              filterProjects();results.tabIndex=-1;results.focus({preventScroll:true});
+            });recovery.appendChild(button);
+          });
+        }
+      }
     }
 
     document.getElementById('projectFilters').addEventListener('click', function(event){
@@ -1112,12 +1187,13 @@
       searchInput.value = '';
       guideOnly.checked = false;
       selectedCategory = 'all';
+      selectedWorkTags.clear();
       projectSort.value = 'newest';
       applyProjectSort();
     }
     document.getElementById('resetDiscovery').addEventListener('click', function(){
       resetDiscovery();
-      searchInput.focus();
+      searchInput.focus({preventScroll:true});
     });
     document.getElementById('latestProject').addEventListener('click', function(){
       projectSort.value = 'newest';

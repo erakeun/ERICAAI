@@ -1,0 +1,16 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const source=fs.readFileSync('index.html','utf8'),c=vm.createContext({});
+vm.runInContext(source.slice(source.indexOf('    const PROJECTS ='),source.indexOf('    // Verified screenshots only.'))+';globalThis.api={PROJECTS,WORK_TAGS,projectMatches,discoveryRecovery}',c);
+const {PROJECTS,WORK_TAGS,projectMatches,discoveryRecovery}=c.api;
+const entries=PROJECTS.map(project=>({project,text:[project.name,project.description,...project.tags,...Object.keys(WORK_TAGS).filter(t=>WORK_TAGS[t].includes(project.id))].join(' ').normalize('NFKC').toLocaleLowerCase('ko')}));
+let n=0;function test(name,fn){fn();console.log('PASS '+name);n++}
+const current=(extra={})=>({terms:[],category:'all',needsGuide:false,tags:[],...extra});
+test('incompatible tags recover with one tag removed and exact real count',()=>{const options=discoveryRecovery(entries,current({tags:['좌석','재고']}));assert.deepEqual(JSON.parse(JSON.stringify(options.map(o=>[o.tag,o.count]))),[['좌석',2],['재고',4]]);});
+test('query-only relief keeps category tag and guide conditions',()=>{const options=discoveryRecovery(entries,current({terms:['없는것'],category:'maker',tags:['인쇄'],needsGuide:true}));assert.equal(options.length,1);assert.equal(options[0].kind,'query');assert.equal(options[0].count,1);});
+test('category relief keeps exact search and tags',()=>{const options=discoveryRecovery(entries,current({terms:['서울'],category:'maker',tags:['좌석']}));assert.equal(options.length,1);assert.equal(options[0].kind,'category');assert.equal(options[0].count,1);});
+test('guide-only relief preserves query',()=>{const options=discoveryRecovery(entries,current({terms:['서울'],needsGuide:true,tags:['좌석']}));assert.equal(options.length,1);assert.equal(options[0].kind,'guide');assert.equal(options[0].count,1);});
+test('no single change works: no misleading recommendation',()=>assert.equal(discoveryRecovery(entries,current({terms:['없는것'],tags:['좌석','재고']})).length,0));
+test('recovery never mutates current settings or data',()=>{const state=current({terms:['서울'],category:'maker',tags:['좌석'],sort:'oldest'}),before=JSON.stringify(state);discoveryRecovery(entries,state);assert.equal(JSON.stringify(state),before);assert.equal(PROJECTS.length,28);});
+test('recommendation cap and actual counts are consistent',()=>{for(const tags of [['명단','인쇄','행사'],['신청','예약'],['일정','좌석']]){const st=current({tags});for(const option of discoveryRecovery(entries,st)){const next={...st,tags:st.tags.filter(t=>t!==option.tag)};assert.equal(option.count,entries.filter(({project,text})=>projectMatches(project,text,next.terms,next.category,next.needsGuide,new Set(next.tags))).length);}assert(discoveryRecovery(entries,st).length<=3)}});
+test('recovery click preserves sort, focuses result without scrolling, uses native buttons',()=>{const block=source.slice(source.indexOf('      const recovery='),source.indexOf("    document.getElementById('projectFilters').addEventListener"));assert(block.includes("button.type='button'"));assert(block.includes('focus({preventScroll:true})'));assert(!block.includes('projectSort.value='));assert(!block.includes('scrollIntoView'));assert(block.includes('selectedWorkTags.delete(option.tag)'));});
+console.log(n+' search recovery logic/source checks passed; actual browser/keyboard unverified.');
