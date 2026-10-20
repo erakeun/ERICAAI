@@ -1,7 +1,9 @@
 /* Selected A lockup: original MACH PNG embedded unchanged; aligned oblique text. */
-.mach-lockup{width:min(340px,100%);margin-top:14px}
-.mach-lockup .hero-title{display:block;margin:0;font-size:inherit;line-height:0;letter-spacing:normal}
-.mach-lockup .hero-wordmark{display:block;position:relative;width:100%;max-width:none;height:auto;margin:0;aspect-ratio:340/94}
-.mach-lockup .hero-wordmark img{display:block;width:100%;height:auto}
+.hero-identity{display:grid;grid-template-columns:minmax(0,1fr);row-gap:14px;align-content:start;min-width:0}
+.hero-identity>.eyebrow{margin:0;line-height:1.6;flex-wrap:wrap;overflow-wrap:anywhere}
+.mach-lockup{width:min(340px,100%);margin:0;min-width:0}
+.mach-lockup .hero-title{display:block;margin:0;font-size:inherit;line-height:normal;letter-spacing:normal}
+.mach-lockup .hero-wordmark{display:block;position:relative;width:100%;max-width:none;height:auto;margin:0;line-height:normal;aspect-ratio:340/94}
+.mach-lockup .hero-wordmark img{display:block;position:static;width:100%;height:auto;aspect-ratio:340/94;vertical-align:top}
 .mach-lockup .hero-logo-flow::after{mask-image:url('./assets/mach-selected-A-mask.svg');-webkit-mask-image:url('./assets/mach-selected-A-mask.svg');mask-size:100% 100%;-webkit-mask-size:100% 100%}
-@media(max-width:680px){.mach-lockup{width:min(295px,100%);margin-top:12px}}
+@media(max-width:680px){.hero-identity{row-gap:12px}.mach-lockup{width:min(295px,100%)}}
