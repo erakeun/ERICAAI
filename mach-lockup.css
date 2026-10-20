@@ -1,11 +1,7 @@
-/* Reusable three-part lockup. Creator credit belongs outside this component.
-   The original MACH PNG and its intrinsic 2172:724 ratio stay unchanged. */
-.mach-lockup{width:min(340px,100%);margin-top:14px;container-type:inline-size}
-.mach-lockup .hero-title{display:flex;flex-direction:column;align-items:center;gap:0;margin:0;font-size:inherit;letter-spacing:normal}
-.mach-lockup .hero-project{display:block;width:100%;height:auto;aspect-ratio:340/24;writing-mode:horizontal-tb;transform:none;align-self:center;overflow:hidden;fill:#172d49}
-.mach-lockup .hero-wordmark{width:100%;max-width:none;height:auto;margin-block:-8% -9.4%}
-/* Negative margins consume only the transparent top/bottom canvas padding;
-   neither the image pixels nor the logo drawing are cropped or stretched. */
-.mach-lockup .hero-subtitle{margin:0;line-height:0;width:100%}.mach-lockup .hero-subtitle img{display:block;width:100%;height:auto}
+/* Selected A lockup: original MACH PNG embedded unchanged; aligned oblique text. */
+.mach-lockup{width:min(340px,100%);margin-top:14px}
+.mach-lockup .hero-title{display:block;margin:0;font-size:inherit;line-height:0;letter-spacing:normal}
+.mach-lockup .hero-wordmark{display:block;position:relative;width:100%;max-width:none;height:auto;margin:0;aspect-ratio:340/94}
+.mach-lockup .hero-wordmark img{display:block;width:100%;height:auto}
+.mach-lockup .hero-logo-flow::after{mask-image:url('./assets/mach-selected-A-mask.svg');-webkit-mask-image:url('./assets/mach-selected-A-mask.svg');mask-size:100% 100%;-webkit-mask-size:100% 100%}
 @media(max-width:680px){.mach-lockup{width:min(295px,100%);margin-top:12px}}
-@media print{.mach-lockup .hero-project{display:none}}
