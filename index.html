@@ -908,6 +908,10 @@
       }
     ];
 
+    // MACH 화면에서만 숨깁니다. 원본 프로젝트 정보와 실행 주소는 복구를 위해 보존합니다.
+    const HIDDEN_PROJECT_IDS = new Set(['18']);
+    const VISIBLE_PROJECTS = PROJECTS.filter(project => !HIDDEN_PROJECT_IDS.has(project.id));
+
     // 업무 태그는 아래 프로젝트 설명에 명시된 기능만 수동 연결합니다.
     const WORK_TAGS = {
       '행사':['02','04','20','21','22','23','25','27'],
@@ -922,7 +926,8 @@
       '업무분장':['28']
     };
     function projectMatches(project, text, terms, category, needsGuide, selectedTags){
-      return (category === 'all' || project.category === category)
+      return !HIDDEN_PROJECT_IDS.has(project.id)
+        && (category === 'all' || project.category === category)
         && (!needsGuide || Boolean(project.guideUrl))
         && terms.every(term => text.includes(term))
         && [...selectedTags].every(tag => WORK_TAGS[tag].includes(project.id));
@@ -992,11 +997,12 @@
     }
 
     function projectCardHtml(project){
+      if(HIDDEN_PROJECT_IDS.has(project.id)) return '';
       const tag = project.internal ? 'div' : 'a';
       const attributes = project.internal
         ? ' role="article" aria-label="' + escapeHtml(project.name) + '"'
         : ' href="' + escapeHtml(project.url) + '" target="_blank" rel="noopener"';
-      const latest = project === PROJECTS[PROJECTS.length - 1] ? '<span class="latest">LATEST</span>' : '';
+      const latest = project === VISIBLE_PROJECTS[VISIBLE_PROJECTS.length - 1] ? '<span class="latest">LATEST</span>' : '';
       const tags = project.tags
         .map(tagName => '<span class="tag">' + escapeHtml(tagName) + '</span>')
         .join('');
@@ -1037,15 +1043,15 @@
 
     function renderProjects(){
       const grid = document.getElementById('projectsGrid');
-      grid.innerHTML = PROJECTS
+      grid.innerHTML = VISIBLE_PROJECTS
         .map(project => '<div class="project-item" id="project-' + escapeHtml(project.id) + '" data-category="' + escapeHtml(project.category) + '">' + projectCardHtml(project) + projectUsageHtml(project) + projectGuideHtml(project) + '</div>')
         .join('');
 
-      document.getElementById('projectCount').textContent = PROJECTS.length + ' CREATIONS';
+      document.getElementById('projectCount').textContent = VISIBLE_PROJECTS.length + ' CREATIONS';
 
       const referenceSelect = document.getElementById('rqReference');
       while(referenceSelect.options.length > 1) referenceSelect.remove(1);
-      PROJECTS.forEach(project => {
+      VISIBLE_PROJECTS.forEach(project => {
         const option = document.createElement('option');
         option.textContent = project.name;
         referenceSelect.appendChild(option);
