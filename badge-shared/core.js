@@ -10,7 +10,8 @@
   var MAX_TEXT_LENGTH = 2 * 1024 * 1024;
   var FIELD_LIMITS = Object.freeze({ name: 120, affiliation: 240, title: 240, event: 240 });
   var FIELDS = ['name', 'affiliation', 'title', 'event'];
-  var TEMPLATES = ['blue', 'official', 'hanyang', 'hibb', 'staff'];
+  var TEMPLATES = ['blue', 'official', 'hanyang', 'hibb', 'staff', 'ribbon', 'frame', 'side'];
+  var LOGO_MODES = ['none', 'hanyang', 'erica', 'both'];
   var own = function (object, key) { return Object.prototype.hasOwnProperty.call(object, key); };
   var plain = function (value) {
     if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
@@ -300,6 +301,9 @@
     if (!placement.valid) result.errors = result.errors.concat(placement.errors);
     var template = own(value, 'template') ? value.template : 'blue';
     if (TEMPLATES.indexOf(template) === -1) result.errors.push('지원하지 않는 템플릿입니다.');
+    // Version 1 projects saved before logo selection used the Hanyang wordmark.
+    var logoMode = own(value, 'logoMode') ? value.logoMode : 'hanyang';
+    if (LOGO_MODES.indexOf(logoMode) === -1) result.errors.push('logoMode: none, hanyang, erica, both 중 하나여야 합니다.');
     var event = own(value, 'event') ? value.event : '';
     if (typeof event !== 'string' || event.length > FIELD_LIMITS.event || /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(event)) result.errors.push('행사명은 제어 문자가 없는 240자 이내의 문자열이어야 합니다.');
     var records = [];
@@ -317,7 +321,7 @@
     else if (records.length && !ids.has(selectedId)) { selectedId = records[0].id; result.warnings.push('선택한 명단을 첫 번째 항목으로 변경했습니다.'); }
     else if (!records.length) selectedId = null;
     if (result.errors.length) return result;
-    result.project = { version: 1, kind: value.kind, template: template, event: event.trim(), records: records, selectedId: selectedId, settings: settings };
+    result.project = { version: 1, kind: value.kind, template: template, logoMode: logoMode, event: event.trim(), records: records, selectedId: selectedId, settings: settings };
     result.valid = true;
     return result;
   }
