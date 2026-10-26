@@ -1,0 +1,3 @@
+.badge-feedback-link{text-decoration:none;min-height:39px;font-size:12px}
+@media(max-width:790px){.header-actions{flex-wrap:wrap}.header-actions .badge-feedback-link{flex:1 1 100%;min-height:36px}}
+@media print{.badge-feedback-link{display:none!important}}

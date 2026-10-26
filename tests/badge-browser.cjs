@@ -51,7 +51,10 @@ async function pdfCheck(page,file,expectedPages){await page.emulateMedia({media:
   await page.locator('#swapOrientation').click();await settled(page);check(kind+' orientation swaps',Number(await page.locator('#width').inputValue())===height&&Number(await page.locator('#height').inputValue())===width);await page.locator('#swapOrientation').click();
   await page.locator('#helpButton').click();check(kind+' beginner help opens',await page.locator('#helpDialog').isVisible());await page.locator('#closeHelp').click();
   const downloadPromise=page.waitForEvent('download');await page.locator('#saveProject').click();const download=await downloadPromise;await download.saveAs(path.join(out,kind+'-project.json'));const saved=JSON.parse(fs.readFileSync(path.join(out,kind+'-project.json'),'utf8'));check(kind+' explicit JSON save',saved.records.length===count);
-  await fill(page,'event','수정 확인');await page.locator('#projectFile').setInputFiles(path.join(out,kind+'-project.json'));await settled(page);check(kind+' JSON restore',await page.locator('#event').inputValue()===saved.event);
+  await fill(page,'event','수정 확인');await page.locator('#projectFile').setInputFiles(path.join(out,kind+'-project.json'));
+  // The upload event does not await the application's asynchronous file read.
+  await page.waitForFunction(project=>{const current=badgeApp.getState();return document.getElementById('projectFile').value===''&&current.event===project.event&&JSON.stringify(current.records)===JSON.stringify(project.records)&&Object.entries(project.settings).every(([key,value])=>current.settings[key]===value)},saved);
+  await settled(page);check(kind+' JSON restore',await page.locator('#event').inputValue()===saved.event);
   check(kind+' no automatic local persistence',await page.evaluate(()=>localStorage.length===0&&sessionStorage.length===0));
   check(kind+' no external requests',requests.every(u=>u.startsWith(new URL(base).origin)||u.startsWith('data:')));
   await page.setViewportSize({width:390,height:844});await settled(page);await page.screenshot({path:path.join(out,kind+'-mobile.png'),fullPage:true});check(kind+' mobile no page overflow',await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));

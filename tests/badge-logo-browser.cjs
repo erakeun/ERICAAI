@@ -22,6 +22,16 @@ async function settle(page) {
     await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
   });
 }
+async function waitForProjectRestore(page, expected) {
+  // Upload dispatch and animation frames do not await the async file.text() handler.
+  await page.waitForFunction(project => {
+    const current = badgeApp.getState();
+    return document.getElementById('projectFile').value === '' &&
+      current.logoMode === project.logoMode && current.template === project.template &&
+      current.event === project.event && current.records.length === project.records.length &&
+      Object.entries(project.settings).every(([key, value]) => current.settings[key] === value);
+  }, expected);
+}
 function project(kind, template, logoMode, width, height, records) {
   return { version: 1, kind, template, logoMode, event: '한양 함께하는 날', selectedId: 'qa-1',
     settings: { width, height, pageMargin: 8, gap: 3, cardPadding: 4, cropMarks: true, fontScale: 100 },
@@ -88,11 +98,14 @@ async function geometry(page, selector) {
     check(kind+' ERICA control state',await page.evaluate(()=>badgeApp.getState().logoMode==='erica'));
     const downloading=page.waitForEvent('download'); await page.locator('#saveProject').click(); const downloaded=await downloading;
     const savedPath=path.join(out,kind+'-logo-project.json'); await downloaded.saveAs(savedPath);
-    check(kind+' logo saved',JSON.parse(fs.readFileSync(savedPath,'utf8')).logoMode==='erica');
-    await page.locator('#logoMode').selectOption('both'); await page.locator('#projectFile').setInputFiles(savedPath); await settle(page);
+    const savedProject=JSON.parse(fs.readFileSync(savedPath,'utf8'));
+    check(kind+' logo saved',savedProject.logoMode==='erica');
+    await page.locator('#logoMode').selectOption('both'); await page.locator('#projectFile').setInputFiles(savedPath);
+    await waitForProjectRestore(page,savedProject); await settle(page);
     check(kind+' logo restored',await page.evaluate(()=>badgeApp.getState().logoMode==='erica'));
     const legacy=project(kind,'blue','both',95,65); delete legacy.logoMode;
-    await page.locator('#projectFile').setInputFiles({name:'legacy-v1.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(legacy))}); await settle(page);
+    await page.locator('#projectFile').setInputFiles({name:'legacy-v1.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(legacy))});
+    await waitForProjectRestore(page,{...legacy,logoMode:'hanyang'}); await settle(page);
     check(kind+' legacy one-logo compatibility',await page.evaluate(()=>badgeApp.getState().logoMode==='hanyang')&&await page.locator('#previewSlot .badge-logo').count()===1);
     // All designs and logo combinations with long names must either fit or explicitly block.
     for(const template of templates) for(const logoMode of modes){

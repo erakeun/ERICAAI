@@ -8,10 +8,23 @@
 
   var MAX_RECORDS = 1000;
   var MAX_TEXT_LENGTH = 2 * 1024 * 1024;
-  var FIELD_LIMITS = Object.freeze({ name: 120, affiliation: 240, title: 240, event: 240 });
-  var FIELDS = ['name', 'affiliation', 'title', 'event'];
-  var TEMPLATES = ['blue', 'official', 'hanyang', 'hibb', 'staff', 'ribbon', 'frame', 'side'];
-  var LOGO_MODES = ['none', 'hanyang', 'erica', 'both'];
+  var PROJECT_VERSION = 2;
+  var FIELD_LIMITS = Object.freeze({ name: 120, affiliation: 240, title: 240, event: 240, date: 240 });
+  var FIELDS = Object.freeze(['name', 'affiliation', 'title', 'event', 'date']);
+  var TEMPLATES = Object.freeze(['blue', 'official', 'hanyang', 'hibb', 'staff', 'ribbon', 'frame', 'side']);
+  var LOGO_MODES = Object.freeze(['none', 'hanyang', 'erica', 'both']);
+  var TEXT_ELEMENT_IDS = FIELDS;
+  var IMAGE_ELEMENT_IDS = Object.freeze(['logoHanyang', 'logoErica']);
+  var ELEMENT_IDS = Object.freeze(TEXT_ELEMENT_IDS.concat(IMAGE_ELEMENT_IDS));
+  var FONT_IDS = Object.freeze(['pretendard', 'suit', 'noto-sans', 'noto-serif', 'system']);
+  var DESIGN_RANGES = Object.freeze({
+    xMm: Object.freeze([-210, 420]), yMm: Object.freeze([-297, 594]),
+    widthMm: Object.freeze([.5, 420]), heightMm: Object.freeze([.5, 594]),
+    fontSizePt: Object.freeze([4, 144]), lineHeight: Object.freeze([.9, 3]),
+    letterSpacingEm: Object.freeze([-.1, 1])
+  });
+  var TEXT_OVERRIDE_KEYS = Object.freeze(['visible', 'xMm', 'yMm', 'widthMm', 'heightMm', 'fontId', 'fontSizePt', 'color', 'align', 'lineHeight', 'letterSpacingEm', 'fitMode']);
+  var IMAGE_OVERRIDE_KEYS = Object.freeze(['xMm', 'yMm', 'widthMm']);
   var own = function (object, key) { return Object.prototype.hasOwnProperty.call(object, key); };
   var plain = function (value) {
     if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
@@ -85,7 +98,7 @@
 
   function validateRecord(value) {
     var errors = [];
-    var record = { id: '', name: '', affiliation: '', title: '', event: '' };
+    var record = { id: '', name: '', affiliation: '', title: '', event: '', date: '' };
     if (!plain(value)) return { valid: false, errors: ['명단 항목은 객체여야 합니다.'], record: null };
     if (['__proto__', 'prototype', 'constructor'].some(function (key) { return own(value, key); })) {
       return { valid: false, errors: ['명단에 허용되지 않는 속성이 있습니다.'], record: null };
@@ -192,7 +205,7 @@
       report('warning', 'empty-roster', null, '입력된 명단이 없습니다.');
       return result;
     }
-    var aliases = { '이름': 'name', 'name': 'name', '소속': 'affiliation', 'affiliation': 'affiliation', '직책': 'title', 'title': 'title', '행사명': 'event', 'event': 'event' };
+    var aliases = { '이름': 'name', 'name': 'name', '소속': 'affiliation', 'affiliation': 'affiliation', '직책': 'title', 'title': 'title', '행사명': 'event', 'event': 'event', '날짜': 'date', 'date': 'date' };
     var header = parsed.rows[0].cells.map(function (cell) {
       var key = cell.trim().toLowerCase();
       return own(aliases, key) ? aliases[key] : null;
@@ -214,7 +227,7 @@
       return result;
     }
     data.forEach(function (row, index) {
-      var record = { id: 'import-' + (index + 1), name: '', affiliation: '', title: '', event: '' };
+      var record = { id: 'import-' + (index + 1), name: '', affiliation: '', title: '', event: '', date: '' };
       mapping.forEach(function (field, column) { if (field) record[field] = row.cells[column] === undefined ? '' : row.cells[column]; });
       if (row.cells.length > mapping.length && row.cells.slice(mapping.length).some(function (cell) { return cell.trim() !== ''; })) {
         report('warning', 'extra-columns', row.line, row.line + '행: 추가 열은 가져오지 않습니다.');
@@ -237,7 +250,7 @@
   function toCSV(records) {
     if (!Array.isArray(records)) throw new TypeError('명단 배열이 필요합니다.');
     if (records.length > MAX_RECORDS) throw new RangeError('명단은 최대 ' + MAX_RECORDS + '명까지 내보낼 수 있습니다.');
-    return ['이름,소속,직책,행사명'].concat(records.map(function (record) {
+    return ['이름,소속,직책,행사명,날짜'].concat(records.map(function (record) {
       if (!plain(record)) throw new TypeError('명단 항목은 객체여야 합니다.');
       return FIELDS.map(function (field) { return csvCell(own(record, field) ? record[field] : ''); }).join(',');
     })).join('\r\n');
@@ -250,13 +263,15 @@
     while (stack.length) {
       var next = stack.pop();
       var current = next.value;
+      if (next.depth > 8 || ++count > 12000) return '프로젝트 데이터 구조가 너무 큽니다.';
       if (current === null || typeof current === 'string' || typeof current === 'boolean') continue;
       if (typeof current === 'number') { if (!Number.isFinite(current)) return '유한하지 않은 숫자는 사용할 수 없습니다.'; continue; }
       if (typeof current !== 'object') return 'JSON으로 저장할 수 없는 값이 있습니다.';
       if ((!Array.isArray(current) && !plain(current)) || seen.has(current)) return '일반 JSON 객체와 배열만 사용할 수 있습니다.';
-      if (next.depth > 8 || ++count > 12000) return '프로젝트 데이터 구조가 너무 큽니다.';
       seen.add(current);
-      var keys = Object.keys(current);
+      if (Object.getOwnPropertySymbols(current).length) return 'JSON 속성 이름은 문자열이어야 합니다.';
+      var keys = Object.getOwnPropertyNames(current);
+      if (keys.length > 12000 - count) return '프로젝트 데이터 구조가 너무 큽니다.';
       for (var index = 0; index < keys.length; index += 1) {
         var key = keys[index];
         if (key === '__proto__' || key === 'constructor' || key === 'prototype') return '허용되지 않는 객체 속성이 있습니다.';
@@ -268,6 +283,59 @@
     return null;
   }
 
+  function normalizeDesign(value) {
+    var result = { valid: false, design: null, errors: [] };
+    function closedObject(object, allowed, label) {
+      if (!plain(object)) { result.errors.push(label + ': 일반 객체가 필요합니다.'); return false; }
+      var keys = Object.getOwnPropertyNames(object);
+      if (keys.length > allowed.length || keys.some(function (key) { return allowed.indexOf(key) === -1; })) {
+        result.errors.push(label + ': 허용되지 않는 속성이 있습니다.');
+        return false;
+      }
+      return true;
+    }
+    var unsafe = inspectJSON(value);
+    if (unsafe) { result.errors.push(unsafe); return result; }
+    if (!closedObject(value, ['version', 'byTemplate'], 'design')) return result;
+    if (!own(value, 'version') || value.version !== 1) result.errors.push('지원하는 design 버전은 1입니다.');
+    if (!own(value, 'byTemplate') || !closedObject(value.byTemplate, TEMPLATES, 'design.byTemplate')) {
+      if (!own(value, 'byTemplate')) result.errors.push('design.byTemplate 객체가 필요합니다.');
+      return result;
+    }
+    var design = { version: 1, byTemplate: {} };
+    Object.getOwnPropertyNames(value.byTemplate).forEach(function (templateId) {
+      var elements = value.byTemplate[templateId];
+      var label = 'design.byTemplate.' + templateId;
+      if (!closedObject(elements, ELEMENT_IDS, label)) return;
+      var output = {};
+      Object.getOwnPropertyNames(elements).forEach(function (elementId) {
+        var overrides = elements[elementId];
+        var elementLabel = label + '.' + elementId;
+        var allowed = IMAGE_ELEMENT_IDS.indexOf(elementId) !== -1 ? IMAGE_OVERRIDE_KEYS : TEXT_OVERRIDE_KEYS;
+        if (!closedObject(overrides, allowed, elementLabel)) return;
+        var normalized = {};
+        Object.getOwnPropertyNames(overrides).forEach(function (key) {
+          var entry = overrides[key];
+          var valid = false;
+          if (own(DESIGN_RANGES, key)) valid = finite(entry) && entry >= DESIGN_RANGES[key][0] && entry <= DESIGN_RANGES[key][1];
+          else if (key === 'visible') valid = typeof entry === 'boolean';
+          else if (key === 'fontId') valid = FONT_IDS.indexOf(entry) !== -1;
+          else if (key === 'color') valid = typeof entry === 'string' && /^#[0-9a-f]{6}$/i.test(entry);
+          else if (key === 'align') valid = ['left', 'center', 'right'].indexOf(entry) !== -1;
+          else if (key === 'fitMode') valid = ['auto', 'manual'].indexOf(entry) !== -1;
+          if (!valid) result.errors.push(elementLabel + '.' + key + ': 허용되지 않는 값입니다.');
+          else normalized[key] = entry;
+        });
+        output[elementId] = normalized;
+      });
+      design.byTemplate[templateId] = output;
+    });
+    if (result.errors.length) return result;
+    result.design = design;
+    result.valid = true;
+    return result;
+  }
+
   function normalizeProject(value) {
     var result = { valid: false, project: null, errors: [], warnings: [] };
     if (typeof value === 'string') {
@@ -277,7 +345,7 @@
     if (!plain(value)) { result.errors.push('프로젝트는 JSON 객체여야 합니다.'); return result; }
     var unsafe = inspectJSON(value);
     if (unsafe) { result.errors.push(unsafe); return result; }
-    if (value.version !== 1) result.errors.push('지원하는 프로젝트 버전은 1입니다.');
+    if (value.version !== 1 && value.version !== PROJECT_VERSION) result.errors.push('지원하는 프로젝트 버전은 1 또는 2입니다.');
     if (value.kind !== 'lanyard' && value.kind !== 'clip') result.errors.push('프로젝트 종류는 lanyard 또는 clip이어야 합니다.');
     if (!plain(value.settings)) result.errors.push('프로젝트 settings 객체가 필요합니다.');
     if (!Array.isArray(value.records)) result.errors.push('프로젝트 records 배열이 필요합니다.');
@@ -306,6 +374,10 @@
     if (LOGO_MODES.indexOf(logoMode) === -1) result.errors.push('logoMode: none, hanyang, erica, both 중 하나여야 합니다.');
     var event = own(value, 'event') ? value.event : '';
     if (typeof event !== 'string' || event.length > FIELD_LIMITS.event || /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(event)) result.errors.push('행사명은 제어 문자가 없는 240자 이내의 문자열이어야 합니다.');
+    var date = own(value, 'date') ? value.date : '';
+    if (typeof date !== 'string' || date.length > FIELD_LIMITS.date || /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(date)) result.errors.push('날짜는 제어 문자가 없는 240자 이내의 문자열이어야 합니다.');
+    var checkedDesign = normalizeDesign(own(value, 'design') ? value.design : { version: 1, byTemplate: {} });
+    if (!checkedDesign.valid) result.errors = result.errors.concat(checkedDesign.errors);
     var records = [];
     var ids = new Set();
     value.records.forEach(function (record, index) {
@@ -321,7 +393,7 @@
     else if (records.length && !ids.has(selectedId)) { selectedId = records[0].id; result.warnings.push('선택한 명단을 첫 번째 항목으로 변경했습니다.'); }
     else if (!records.length) selectedId = null;
     if (result.errors.length) return result;
-    result.project = { version: 1, kind: value.kind, template: template, logoMode: logoMode, event: event.trim(), records: records, selectedId: selectedId, settings: settings };
+    result.project = { version: PROJECT_VERSION, kind: value.kind, template: template, logoMode: logoMode, event: event.trim(), date: date.trim(), records: records, selectedId: selectedId, settings: settings, design: checkedDesign.design };
     result.valid = true;
     return result;
   }
@@ -334,7 +406,10 @@
   }
 
   return Object.freeze({
-    MAX_RECORDS: MAX_RECORDS, FIELD_LIMITS: FIELD_LIMITS, presets: presets, PRESETS: presets,
+    PROJECT_VERSION: PROJECT_VERSION, MAX_RECORDS: MAX_RECORDS, FIELD_LIMITS: FIELD_LIMITS,
+    TEMPLATE_IDS: TEMPLATES, LOGO_MODES: LOGO_MODES, TEXT_ELEMENT_IDS: TEXT_ELEMENT_IDS,
+    IMAGE_ELEMENT_IDS: IMAGE_ELEMENT_IDS, ELEMENT_IDS: ELEMENT_IDS, FONT_IDS: FONT_IDS, DESIGN_RANGES: DESIGN_RANGES,
+    presets: presets, PRESETS: presets, normalizeDesign: normalizeDesign,
     defaultSettings: defaultSettings, layout: layout, parseRoster: parseRoster,
     validateRecord: validateRecord, toCSV: toCSV, normalizeProject: normalizeProject, paginate: paginate
   });

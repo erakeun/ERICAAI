@@ -7,13 +7,18 @@
 .badge{position:relative;width:var(--badge-width);height:var(--badge-height);padding:var(--card-padding);overflow:hidden;background:#fff;color:var(--blue);font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",Arial,sans-serif;display:flex;flex-direction:column;align-items:stretch;isolation:isolate}
 .badge-header{position:relative;flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:var(--content-gap);min-width:0;min-height:0;z-index:2}
 .badge-logo-band{display:flex;align-items:center;justify-content:center;gap:2mm;width:100%;height:var(--logo-height);min-height:var(--logo-height);flex:0 0 var(--logo-height)}
-.badge-logo{display:block;width:auto;height:100%;max-width:100%;object-fit:contain;flex:0 1 auto;min-width:0}
+.badge-logo{display:block;width:auto;height:auto;max-height:100%;max-width:100%;object-fit:contain;flex:0 1 auto;min-width:0}
 .badge-logo-band[data-logo-mode=both] .badge-logo{max-width:calc((100% - 2mm)/2)}
 .badge-event{font-size:var(--event-size);font-weight:700;text-align:center;line-height:1.4;width:100%;min-width:0;white-space:pre-wrap;overflow-wrap:anywhere;max-height:2.8em;overflow:hidden}
 .badge-person{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--content-gap);min-width:0;min-height:0;padding:var(--content-gap) 0}
 .badge-affiliation{font-size:var(--sub-size);font-weight:500;color:#57718a;line-height:1.4;text-align:center;width:100%;max-height:2.8em;overflow:hidden;overflow-wrap:anywhere;white-space:pre-wrap}
 .badge-name{font-size:var(--name-size);font-weight:800;letter-spacing:.04em;line-height:1.4;text-align:center;width:100%;max-height:2.8em;overflow:hidden;overflow-wrap:anywhere;white-space:pre-wrap}
 .badge-title{font-size:var(--title-size);line-height:1.4;font-weight:600;text-align:center;max-height:2.8em;overflow:hidden;overflow-wrap:anywhere;white-space:pre-wrap;max-width:100%}
+.badge-date{font-size:var(--sub-size);line-height:1.4;font-weight:500;text-align:center;max-height:2.8em;overflow:hidden;overflow-wrap:anywhere;white-space:pre-wrap;max-width:100%;flex-shrink:0}
+.badge-layout-slot{display:block;flex:0 0 auto;visibility:hidden;pointer-events:none}
+.badge .badge-positioned{position:absolute!important;margin:0!important;max-width:none!important;max-height:none!important;min-width:0!important;min-height:0!important;flex:none!important;box-sizing:border-box;z-index:3}
+.badge .badge-positioned.badge-logo{object-fit:contain}
+.badge-measure-root{position:absolute;left:-100000px;top:0;visibility:hidden;pointer-events:none}
 .badge-footer{position:relative;z-index:1;flex:0 0 .6mm;width:18%;align-self:center;background:#c9d7e3}
 .badge[data-template=blue] .badge-header{color:#fff;background:var(--blue);padding:var(--content-gap) var(--card-padding);margin:calc(-1 * var(--card-padding)) calc(-1 * var(--card-padding)) 0}
 .badge[data-template=blue]::after{content:"";position:absolute;bottom:0;left:0;right:0;height:1.2mm;background:var(--blue)}
