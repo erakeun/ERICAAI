@@ -1,0 +1,46 @@
+.precision-panel{padding:0;scroll-margin-top:100px;overflow:hidden}
+.precision-panel>summary{display:flex;align-items:center;gap:9px;list-style:none;padding:19px 22px;font-size:14px;font-weight:750;color:#234764;cursor:pointer}
+.precision-panel>summary::-webkit-details-marker{display:none}
+.precision-panel>summary::after{content:"+";font-size:20px;font-weight:400;margin-left:auto;line-height:1}
+.precision-panel[open]>summary::after{content:"−"}
+.precision-summary-note{font-size:10px;font-weight:400;color:var(--muted);margin-left:auto}
+.precision-panel>summary:focus-visible{outline-offset:-4px}
+.precision-content{border-top:1px solid #e8edf3;padding:18px 22px 21px}
+.precision-intro{margin-bottom:14px}
+.precision-template{font-size:10px;color:#6b8196;line-height:1.7;margin-bottom:12px}
+.precision-content .field{margin-bottom:13px}
+.precision-content .two-col{gap:10px}
+.precision-content .unit-input input{padding-right:35px;font-variant-numeric:tabular-nums}
+.precision-content .check-row{margin:0 0 13px}
+.precision-section{padding-top:15px;margin-top:13px;border-top:1px solid #e8edf3}
+.precision-section-title{font-size:11px;font-weight:750;color:#344054;margin-bottom:12px}
+.precision-origin{margin-bottom:12px}
+.precision-size-note{display:block;font-size:10px;color:#607b92;line-height:1.7;margin-top:-6px;margin-bottom:10px}
+.precision-font-help{margin:-3px 0 13px}
+.precision-color-pair{display:grid;grid-template-columns:39px minmax(0,1fr);gap:7px}
+.precision-color-pair input[type=color]{padding:4px;width:39px;height:39px;cursor:pointer}
+.precision-color-pair input[type=text]{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.03em;font-size:11px}
+.precision-typography{margin:12px 0 0;border-top:1px solid #edf1f5;padding-top:10px}
+.precision-typography>summary{font-size:11px;font-weight:650;color:#4a657d}
+.precision-typography>.two-col{margin-top:13px}
+.precision-typography .hint{margin-top:-5px}
+.precision-status{background:#f2f6fa;border:1px solid #e0e8f0;border-radius:7px;padding:9px 10px;font-size:10px;line-height:1.7;color:#536b80;margin-bottom:13px}
+.precision-logo-help{margin-bottom:13px}
+.precision-logo-help .btn{font-size:10px;min-height:29px;margin-top:4px}
+.precision-error{border-radius:7px;border:1px solid #efc9c5;padding:9px 10px;margin-top:12px;font-size:10px;line-height:1.7;background:#fff3f1;color:#a62f24}
+.precision-content input[aria-invalid=true]{border-color:#c94b40;background:#fff8f7;box-shadow:0 0 0 2px #c94b4012}
+.precision-reset{border-top:1px solid #e8edf3;margin-top:16px;padding-top:14px;display:flex;flex-wrap:wrap;gap:7px}
+.precision-reset .btn{font-size:10px;white-space:normal;min-height:36px;flex:1 1 125px;padding:8px}
+.precision-reset-help{margin-top:9px}
+.preview-edit-help{font-size:10px;line-height:1.7;color:#74899d;margin:10px 1px 0}
+.precision-preview-status{font-size:10px;font-weight:650;line-height:1.5;color:#436783;background:#edf5fc;border:1px solid #d9e7f3;border-radius:6px;padding:6px 9px;margin:10px 0 0}
+.preview-sticky-region{display:contents}
+@media(min-width:791px){.workspace:has(#precisionPanel[open])>.results-column{display:flex;flex-direction:column;align-self:stretch}.workspace:has(#precisionPanel[open]) .preview-sticky-region{display:block;flex:1 0 auto;min-height:0}.workspace:has(#precisionPanel[open]) .preview-panel{position:sticky;top:96px}}
+#previewSlot [data-element]{cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none}
+#previewSlot [data-element]:focus-visible{outline:2px solid #2b7cca!important;outline-offset:2px}
+#previewSlot [data-element].is-design-selected{outline:1.5px dashed #2b7cca!important;outline-offset:2px}
+#previewSlot [data-element].is-design-dragging{cursor:grabbing;outline-style:solid!important}
+.badge-stage.is-design-dragging,.badge-stage.is-design-dragging *{cursor:grabbing!important}
+@media(max-width:790px){.controls>#precisionPanel{order:3}.controls>#printSettingsPanel{order:4}.workspace>.results-column>.roster-panel{order:5}.controls>.privacy-note{order:6}.header-actions{flex-wrap:wrap}.header-actions>.btn{flex:1 1 72px}.precision-panel{scroll-margin-top:16px}}
+@media(max-width:600px){.precision-panel>summary{padding:16px}.precision-content{padding:16px}.precision-summary-note{font-size:9px}.precision-reset .btn{flex-basis:110px}.precision-content .two-col{gap:8px}}
+@media print{.precision-panel,.preview-edit-help,.precision-preview-status,#precisionAnnouncement{display:none!important}#previewSlot [data-element]{outline:none!important;cursor:default!important}}
