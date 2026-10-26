@@ -8,8 +8,12 @@
   <title>집게형 명찰 제작기 · MACH</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../badge-shared/style.css">
+  <link rel="stylesheet" href="../badge-shared/editor.css">
+  <link rel="stylesheet" href="../badge-shared/feedback.css">
   <script src="../badge-shared/core.js" defer></script>
   <script src="../badge-shared/app.js" defer></script>
+  <script src="../badge-shared/editor.js" defer></script>
+  <script src="../badge-shared/feedback.js" defer></script>
 </head>
 <body data-kind="clip">
   <a class="skip-link" href="#editor">명찰 편집으로 바로가기</a>
@@ -29,12 +33,57 @@
           <p class="hint">디자인과 인쇄 설정은 모든 명찰에 함께 적용돼요.</p></section>
         <section class="panel"><div class="section-heading"><h2><span class="step">02</span> 명찰 내용</h2><span id="editingLabel" class="small-label"></span></div>
           <div class="field"><label for="event">공통 행사명</label><input id="event" type="text" maxlength="240" placeholder="예: 한양 함께하는 날"><span class="hint">명단의 개별 행사명이 비어 있으면 이 이름을 사용해요.</span></div>
+          <div class="field"><label for="date">공통 날짜 <span class="required">선택</span></label><input id="date" type="text" maxlength="240" placeholder="예: 2026. 10. 26."><span class="hint">비워두면 표시하지 않아요. 개별 날짜가 있으면 그 날짜를 사용해요.</span></div>
           <div class="person-editor"><div class="field"><label for="name">이름 <span class="required">필수</span></label><input id="name" type="text" maxlength="120" placeholder="이름 입력" autocomplete="off"></div>
           <div class="two-col"><div class="field"><label for="affiliation">소속·기관</label><input id="affiliation" type="text" maxlength="240" placeholder="예: 미래협력팀"></div><div class="field"><label for="title">직책·역할</label><input id="title" type="text" maxlength="240" placeholder="예: 참가자"></div></div>
-          <details class="compact-details"><summary>이 사람의 행사명 따로 설정</summary><div class="field"><label for="recordEvent">개별 행사명</label><input id="recordEvent" type="text" maxlength="240" placeholder="비워두면 공통 행사명 사용"></div></details></div>
-          <div class="range-heading"><label for="fontScale">글자 크기</label><output id="fontScaleValue" for="fontScale">100%</output></div><input id="fontScale" type="range" min="50" max="160" step="1" value="100"><p class="hint">긴 문구는 공간에 맞게 축소됩니다. 너무 작은 글자는 경고로 알려드려요.</p>
+          <details class="compact-details"><summary>이 사람의 행사명·날짜 따로 설정</summary><div class="field"><label for="recordEvent">개별 행사명</label><input id="recordEvent" type="text" maxlength="240" placeholder="비워두면 공통 행사명 사용"></div><div class="field"><label for="recordDate">개별 날짜</label><input id="recordDate" type="text" maxlength="240" placeholder="비워두면 공통 날짜 사용"></div></details></div>
+          <div class="range-heading"><label for="fontScale">전체 글자 크기</label><output id="fontScaleValue" for="fontScale">100%</output></div><input id="fontScale" type="range" min="50" max="160" step="1" value="100"><p class="hint">자동 크기 요소에 적용돼요. 세부 조정에서 수동으로 지정한 pt 크기는 유지합니다.</p>
         </section>
-        <section class="panel"><div class="section-heading"><h2><span class="step">03</span> 삽입지·인쇄 설정</h2><span class="unit-badge">단위 mm</span></div>
+        <details class="panel precision-panel" id="precisionPanel">
+          <summary><span>세부 디자인 조정</span><span class="precision-summary-note">요소별 위치·글꼴</span></summary>
+          <div class="precision-content">
+            <p class="hint precision-intro">명찰 미리보기의 글자·로고를 누르거나 아래에서 선택하세요. 숨긴 요소도 목록에서 다시 선택할 수 있어요.</p>
+            <p id="precisionTemplateName" class="precision-template"></p>
+            <div class="field"><label for="elementSelect">조정할 요소</label><select id="elementSelect"><option value="name">이름</option><option value="affiliation">소속·기관</option><option value="title">직책·역할</option><option value="event">행사명</option><option value="date">날짜</option><option value="logoHanyang">한양대학교 로고</option><option value="logoErica">ERICA 로고</option></select></div>
+            <p id="elementStatus" class="precision-status" hidden></p>
+            <label id="elementVisibilityRow" class="check-row"><input id="elementVisible" type="checkbox" checked><span>명찰에 표시</span></label>
+            <div id="elementLogoHelp" class="precision-logo-help" hidden><p class="hint">로고 표시 여부는 ‘명찰에 넣을 로고’에서 선택해요. 크기를 바꾸어도 원본 비율을 유지합니다.</p><button id="showLogoChoice" class="btn text-button" type="button">로고 선택으로 이동 ↑</button></div>
+            <div class="precision-section">
+              <h3 class="precision-section-title">위치와 크기</h3>
+              <p class="hint precision-origin">삽입지 왼쪽 위가 0, 0입니다. 요소 상자의 왼쪽 위를 mm로 지정해요. 드래그 후에도 숫자로 미세 조정할 수 있어요.</p>
+              <div class="two-col">
+                <div class="field"><label for="elementX">가로 위치 X</label><div class="unit-input"><input id="elementX" type="number" min="-210" max="420" step="0.1" aria-describedby="precisionError"><span>mm</span></div></div>
+                <div class="field"><label for="elementY">세로 위치 Y</label><div class="unit-input"><input id="elementY" type="number" min="-297" max="594" step="0.1" aria-describedby="precisionError"><span>mm</span></div></div>
+              </div>
+              <div class="two-col">
+                <div class="field"><label for="elementWidth">상자 너비</label><div class="unit-input"><input id="elementWidth" type="number" min="0.5" max="420" step="0.1" aria-describedby="precisionError"><span>mm</span></div></div>
+                <div class="field" id="elementHeightField"><label for="elementHeight">상자 높이</label><div class="unit-input"><input id="elementHeight" type="number" min="0.5" max="594" step="0.1" aria-describedby="precisionError"><span>mm</span></div></div>
+              </div>
+              <p id="elementLogoHeight" class="hint precision-size-note" hidden></p>
+            </div>
+            <div id="elementTextOptions" class="precision-section">
+              <h3 class="precision-section-title">글자 모양</h3>
+              <div class="field"><label for="elementFont">글꼴</label><select id="elementFont" aria-describedby="elementFontHelp"><option value="pretendard">Pretendard</option><option value="suit">SUIT</option><option value="noto-sans">Noto Sans KR</option><option value="noto-serif">Noto Serif KR</option><option value="system">시스템 기본 글꼴</option></select></div>
+              <p id="elementFontHelp" class="hint precision-font-help">기기에 설치된 글꼴을 사용합니다. 선택한 글꼴이 없으면 기본 고딕·명조체로 표시돼요. 외부에서 글꼴을 내려받지 않으므로 인쇄할 기기에서도 확인하세요.</p>
+              <div class="two-col">
+                <div class="field"><label id="elementSizeLabel" for="elementFontSize">최대 글자 크기</label><div class="unit-input"><input id="elementFontSize" type="number" min="4" max="144" step="0.1" aria-describedby="elementFitHelp elementAppliedSize precisionError"><span>pt</span></div></div>
+                <div class="field"><label for="elementAlign">글자 정렬</label><select id="elementAlign"><option value="left">왼쪽</option><option value="center">가운데</option><option value="right">오른쪽</option></select></div>
+              </div>
+              <output id="elementAppliedSize" class="precision-size-note" for="elementFontSize elementAutoFit"></output>
+              <label class="check-row"><input id="elementAutoFit" type="checkbox" checked aria-describedby="elementFitHelp"><span>상자에 맞춰 자동 축소</span></label>
+              <p id="elementFitHelp" class="hint">자동: 입력한 pt를 최대 크기로 삼아 각 명찰의 글을 상자에 맞게 줄입니다.</p>
+              <div class="field precision-section"><label for="elementColorHex">글자색</label><div class="precision-color-pair"><input id="elementColor" type="color" value="#0e4a84" aria-label="글자색 선택"><input id="elementColorHex" type="text" maxlength="7" value="#0E4A84" spellcheck="false" autocomplete="off" aria-describedby="precisionError"></div></div>
+              <details class="precision-typography"><summary>줄 간격·자간 조정</summary><div class="two-col">
+                <div class="field"><label for="elementLineHeight">줄 간격</label><div class="unit-input"><input id="elementLineHeight" type="number" min="0.9" max="3" step="0.05" aria-describedby="precisionError"><span>배</span></div></div>
+                <div class="field"><label for="elementTracking">자간</label><div class="unit-input"><input id="elementTracking" type="number" min="-0.1" max="1" step="0.01" aria-describedby="precisionError"><span>em</span></div></div>
+              </div><p class="hint">줄 간격은 글자 크기의 배수, 자간은 글자 사이의 간격입니다. 자간 0은 기본 간격이에요.</p></details>
+            </div>
+            <p id="precisionError" class="precision-error" role="status" hidden></p>
+            <div class="precision-reset"><button id="resetElement" type="button" class="btn">선택 요소 초기화</button><button id="resetDesign" type="button" class="btn">현재 디자인 초기화</button></div>
+            <p class="hint precision-reset-help">선택 요소 또는 현재 템플릿의 세부 조정만 기본값으로 되돌립니다. 명단·입력 내용·로고 선택·삽입지 mm·인쇄 설정과 다른 템플릿의 조정은 유지돼요.</p>
+          </div>
+        </details>
+        <section class="panel" id="printSettingsPanel"><div class="section-heading"><h2><span class="step">03</span> 삽입지·인쇄 설정</h2><span class="unit-badge">단위 mm</span></div>
           <div class="field"><label for="sizePreset">제조사 확인 규격</label><select id="sizePreset"></select><div id="presetDescription" class="source-note"></div></div>
           <div class="size-controls"><div class="field"><label for="width">삽입지 가로</label><div class="unit-input"><input id="width" type="number" min="20" max="210" step="0.1"><span>mm</span></div></div><span class="size-times" aria-hidden="true">×</span><div class="field"><label for="height">삽입지 세로</label><div class="unit-input"><input id="height" type="number" min="20" max="297" step="0.1"><span>mm</span></div></div><button id="swapOrientation" class="btn swap-button" title="가로와 세로 바꾸기" aria-label="가로와 세로 바꾸기">⇄</button></div>
           <p class="insertion-note">케이스 바깥 크기가 아닌 <strong>종이가 들어가는 안쪽 크기</strong>를 입력하세요. 숫자는 자유롭게 수정할 수 있어요.</p>
@@ -44,28 +93,33 @@
         <section class="privacy-note"><span class="privacy-icon" aria-hidden="true">⌂</span><div><strong>입력한 명단은 이 브라우저에서만 처리해요.</strong><p>서버 전송·자동 저장 없이 작업합니다. 창을 닫기 전 <b>작업 저장</b>으로 JSON 파일을 보관하세요.</p></div></section>
       </aside>
       <div class="results-column">
+        <div class="preview-sticky-region">
         <section class="panel preview-panel" id="previewSection" aria-labelledby="previewHeading"><div class="section-heading"><div><p class="eyebrow">LIVE PREVIEW</p><h2 id="previewHeading">이렇게 완성돼요</h2></div><div class="segmented" role="group" aria-label="미리보기 종류"><button id="singleView" aria-pressed="true">명찰</button><button id="sheetView" aria-pressed="false">A4 배치</button></div></div>
           <div class="preview-info"><span id="previewPerson"></span><span id="previewSize"></span></div>
           <div id="badgeStage" class="badge-stage"><div class="preview-slot" id="previewSlot"></div><div class="stage-caption">화면에서는 보기 좋게 확대·축소됩니다.</div></div>
           <div id="sheetStage" class="sheet-stage" hidden><div id="sheetSlot" class="sheet-slot"></div><p class="stage-caption" id="sheetCaption"></p></div>
+          <p id="previewEditHelp" class="preview-edit-help">명찰 보기에서 글자·로고를 눌러 선택하고 끌어 움직이세요. Tab으로 선택 후 방향키는 0.1 mm, Shift+방향키는 1 mm 이동합니다.</p>
+          <p id="precisionPreviewStatus" class="precision-preview-status" hidden></p>
           <div class="print-summary"><div><span class="summary-caption">A4 한 장에</span><strong id="capacitySummary">—</strong></div><div><span class="summary-caption">전체 명단</span><strong id="pagesSummary">—</strong></div><div><span class="summary-caption">출력 크기</span><strong>실제 크기 100%</strong></div></div>
           <div id="warnings" class="warnings" aria-live="polite"></div>
           <div class="print-actions"><button id="printSelected" class="btn">선택 인쇄·PDF</button><button id="printAll" class="btn primary">전체 인쇄·PDF <span aria-hidden="true">↗</span></button></div>
           <p class="print-tip"><strong>A4 · 세로 · 배율 100% · 여백 없음</strong><br>머리글/바닥글을 끄고, 배경 그래픽을 켜주세요. PDF는 인쇄창의 대상에서 ‘PDF로 저장’을 선택해요.</p>
         </section>
+        </div>
         <section class="panel roster-panel" aria-labelledby="rosterHeading"><div class="section-heading"><div><p class="eyebrow">YOUR GUEST LIST</p><h2 id="rosterHeading">명단 <span id="rosterCount" class="count-badge">0명</span></h2></div><button id="addRecord" class="btn">+ 사람 추가</button></div><p class="hint">표에서 바로 수정하세요. 미리보기 버튼으로 한 사람을 보고, 체크한 사람만 골라 인쇄할 수 있어요.</p>
           <div class="roster-toolbar"><label class="check-row"><input id="selectAll" type="checkbox"><span>전체 선택</span></label><span id="selectionCount" class="hint"></span><button id="exportCSV" class="btn small">CSV 내보내기</button><button id="deleteSelected" class="btn small danger">선택 삭제</button></div>
-          <div class="table-scroll"><table class="roster-table"><caption class="sr-only">명찰 명단 편집</caption><thead><tr><th>선택</th><th>미리보기</th><th>이름</th><th>소속·기관</th><th>직책·역할</th><th>개별 행사명</th><th>삭제</th></tr></thead><tbody id="rosterBody"></tbody></table><div id="emptyRoster" class="empty-state" hidden>명단이 비어 있어요. ‘사람 추가’ 또는 명단 가져오기로 시작하세요.</div></div>
-          <details class="import-details" id="importDetails"><summary>엑셀·CSV·TSV에서 명단 가져오기 <span aria-hidden="true">＋</span></summary><div class="import-content"><p class="hint">첫 줄 제목은 <strong>이름, 소속, 직책, 행사명</strong>을 사용하세요. 제목이 없으면 이 순서로 읽어요. 엑셀 셀을 복사해 그대로 붙여넣어도 됩니다. 행사명은 생략할 수 있어요.</p><label for="bulkInput" class="field-label">명단 붙여넣기</label><textarea id="bulkInput" rows="5" spellcheck="false" placeholder="이름&#9;소속&#9;직책&#9;행사명&#10;윤해봄&#9;미래협력팀&#9;참가자&#9;&#10;강도윤&#9;캠퍼스기획팀&#9;운영진&#9;"></textarea><div class="bulk-actions"><button id="appendImport" class="btn primary">명단 뒤에 추가</button><button id="replaceImport" class="btn">이 명단으로 교체</button><button id="chooseRosterFile" class="btn">CSV·TSV 파일 선택</button><button id="sampleCSV" class="btn text-button">예시 CSV 내려받기</button></div><p class="hint">UTF-8, UTF-8 BOM, 한국어 Windows(CP949) 파일을 읽습니다. 최대 1,000명. 예시 이름은 모두 가상 인물입니다.</p><div id="importMessage" class="import-message" role="status"></div></div></details>
+          <div class="table-scroll"><table class="roster-table"><caption class="sr-only">명찰 명단 편집</caption><thead><tr><th>선택</th><th>미리보기</th><th>이름</th><th>소속·기관</th><th>직책·역할</th><th>개별 행사명</th><th>개별 날짜</th><th>삭제</th></tr></thead><tbody id="rosterBody"></tbody></table><div id="emptyRoster" class="empty-state" hidden>명단이 비어 있어요. ‘사람 추가’ 또는 명단 가져오기로 시작하세요.</div></div>
+          <details class="import-details" id="importDetails"><summary>엑셀·CSV·TSV에서 명단 가져오기 <span aria-hidden="true">＋</span></summary><div class="import-content"><p class="hint">첫 줄 제목은 <strong>이름, 소속, 직책, 행사명, 날짜</strong>을 사용하세요. 제목이 없으면 이 순서로 읽어요. 엑셀 셀을 복사해 그대로 붙여넣어도 됩니다. 행사명과 날짜는 생략할 수 있어요.</p><label for="bulkInput" class="field-label">명단 붙여넣기</label><textarea id="bulkInput" rows="5" spellcheck="false" placeholder="이름&#9;소속&#9;직책&#9;행사명&#9;날짜&#10;윤해봄&#9;미래협력팀&#9;참가자&#9;&#10;강도윤&#9;캠퍼스기획팀&#9;운영진&#9;"></textarea><div class="bulk-actions"><button id="appendImport" class="btn primary">명단 뒤에 추가</button><button id="replaceImport" class="btn">이 명단으로 교체</button><button id="chooseRosterFile" class="btn">CSV·TSV 파일 선택</button><button id="sampleCSV" class="btn text-button">예시 CSV 내려받기</button></div><p class="hint">UTF-8, UTF-8 BOM, 한국어 Windows(CP949) 파일을 읽습니다. 최대 1,000명. 예시 이름은 모두 가상 인물입니다.</p><div id="importMessage" class="import-message" role="status"></div></div></details>
         </section>
       </div>
     </div>
     <footer class="page-footer"><span>MACH · 한양의 일을 더 간편하게</span><span>명찰은 단면 삽입지로 출력됩니다. 먼저 한 장을 시험해 보세요.</span></footer>
   </main>
-  <dialog id="helpDialog" class="help-dialog" aria-labelledby="helpTitle"><div class="dialog-heading"><div><p class="eyebrow">처음이어도 괜찮아요</p><h2 id="helpTitle">명찰 만들기, 처음부터 인쇄까지</h2></div><button id="closeHelp" class="btn" aria-label="사용법 닫기">닫기 ×</button></div><ol class="help-steps"><li><h3>케이스 안에 들어갈 종이를 재세요.</h3><p>사용 중인 케이스의 <b>삽입지 가로 × 세로</b>를 mm로 확인하세요. 케이스 바깥 크기와 다를 수 있습니다. 제조사 확인 규격을 고르거나 직접 입력하고, ⇄ 버튼으로 방향을 바꿉니다.</p></li><li><h3>행사에 맞는 디자인을 고르세요.</h3><p>기존 다섯 디자인과 블루 시그널, 네이비 프레임, 네이비 사이드까지 여덟 디자인 중에서 선택합니다. 로고는 없음, 한양대학교, ERICA, 두 로고 함께 중에서 고를 수 있습니다. 공통 행사명과 이름·소속·직책을 입력하면 오른쪽 미리보기에 바로 반영됩니다. 빈 소속·직책은 인쇄하지 않습니다.</p></li><li><h3>한 명씩 추가하거나 엑셀 명단을 가져오세요.</h3><p>‘사람 추가’로 만든 행을 수정하거나 ‘명단 가져오기’를 펼칩니다. 엑셀은 이름 / 소속 / 직책 / 행사명 순서로 셀을 복사해 붙여넣으세요. CSV·TSV 파일도 가능합니다. ‘추가’는 뒤에 이어 붙이고 ‘교체’는 기존 명단을 바꿉니다.</p></li><li><h3>미리보기와 A4 배치를 확인하세요.</h3><p>명단의 ‘보기’를 누르면 그 사람을 크게 확인할 수 있습니다. ‘A4 배치’에서 한 장에 몇 개 들어가는지 봅니다. 긴 이름, 작은 글자, 인쇄 영역 초과 경고가 있으면 크기·여백·문구를 조정하세요. 재단 표시를 쓰면 A4 여백과 명찰 간격을 각각 3 mm 이상 권장합니다.</p></li><li><h3>먼저 100 mm 자를 시험 인쇄하세요.</h3><p><b>A4 / 세로 / 배율 100%(실제 크기) / 여백 없음</b>을 설정하고 머리글·바닥글은 끕니다. ‘페이지에 맞춤’은 사용하지 마세요. 인쇄한 자의 0부터 100까지가 실제 10 cm인지 확인합니다. 프린터의 인쇄 불가 영역을 고려해 A4 여백을 조정하세요.</p></li><li><h3>선택 또는 전체를 인쇄·PDF로 저장하세요.</h3><p>체크한 사람만 출력하려면 ‘선택 인쇄·PDF’를, 모두 출력하려면 ‘전체 인쇄·PDF’를 누릅니다. 컬러 디자인은 <b>배경 그래픽</b>을 켜세요. 파일이 필요하면 인쇄창에서 ‘PDF로 저장’을 선택합니다. 양면·접는 명찰이 아닌 단면 삽입지입니다.</p></li><li><h3>다음에 이어 하려면 작업 파일을 저장하세요.</h3><p>상단 ‘작업 저장’은 디자인·로고 선택·규격·명단을 JSON으로 내려받습니다. 로고 선택이 없는 예전 작업 파일은 한양대학교 로고로 열립니다. ‘불러오기’로 이어서 편집할 수 있어요. 명단은 자동 저장하지 않으며 페이지를 새로고침하거나 닫으면 사라집니다. JSON·CSV 파일에는 입력한 이름이 들어 있으니 필요한 곳에 보관하세요.</p></li></ol><div class="help-footer">모든 명단 처리와 출력 준비는 현재 브라우저 안에서 이루어집니다.</div></dialog>
+  <dialog id="helpDialog" class="help-dialog" aria-labelledby="helpTitle"><div class="dialog-heading"><div><p class="eyebrow">처음이어도 괜찮아요</p><h2 id="helpTitle">명찰 만들기, 처음부터 인쇄까지</h2></div><button id="closeHelp" class="btn" aria-label="사용법 닫기">닫기 ×</button></div><ol class="help-steps"><li><h3>케이스 안에 들어갈 종이를 재세요.</h3><p>사용 중인 케이스의 <b>삽입지 가로 × 세로</b>를 mm로 확인하세요. 케이스 바깥 크기와 다를 수 있습니다. 제조사 확인 규격을 고르거나 직접 입력하고, ⇄ 버튼으로 방향을 바꿉니다.</p></li><li><h3>행사에 맞는 디자인을 고르세요.</h3><p>기존 다섯 디자인과 블루 시그널, 네이비 프레임, 네이비 사이드까지 여덟 디자인 중에서 선택합니다. 로고는 없음, 한양대학교, ERICA, 두 로고 함께 중에서 고를 수 있습니다. 공통 행사명과 이름·소속·직책을 입력하면 오른쪽 미리보기에 바로 반영됩니다. 빈 소속·직책은 인쇄하지 않습니다.</p></li><li><h3>한 명씩 추가하거나 엑셀 명단을 가져오세요.</h3><p>‘사람 추가’로 만든 행을 수정하거나 ‘명단 가져오기’를 펼칩니다. 엑셀은 이름 / 소속 / 직책 / 행사명 / 날짜 순서로 셀을 복사해 붙여넣으세요. CSV·TSV 파일도 가능합니다. ‘추가’는 뒤에 이어 붙이고 ‘교체’는 기존 명단을 바꿉니다.</p></li><li><h3>미리보기와 A4 배치를 확인하세요.</h3><p>명단의 ‘보기’를 누르면 그 사람을 크게 확인할 수 있습니다. ‘A4 배치’에서 한 장에 몇 개 들어가는지 봅니다. 긴 이름, 작은 글자, 인쇄 영역 초과 경고가 있으면 크기·여백·문구를 조정하세요. 재단 표시를 쓰면 A4 여백과 명찰 간격을 각각 3 mm 이상 권장합니다.</p></li><li><h3>먼저 100 mm 자를 시험 인쇄하세요.</h3><p><b>A4 / 세로 / 배율 100%(실제 크기) / 여백 없음</b>을 설정하고 머리글·바닥글은 끕니다. ‘페이지에 맞춤’은 사용하지 마세요. 인쇄한 자의 0부터 100까지가 실제 10 cm인지 확인합니다. 프린터의 인쇄 불가 영역을 고려해 A4 여백을 조정하세요.</p></li><li><h3>선택 또는 전체를 인쇄·PDF로 저장하세요.</h3><p>체크한 사람만 출력하려면 ‘선택 인쇄·PDF’를, 모두 출력하려면 ‘전체 인쇄·PDF’를 누릅니다. 컬러 디자인은 <b>배경 그래픽</b>을 켜세요. 파일이 필요하면 인쇄창에서 ‘PDF로 저장’을 선택합니다. 양면·접는 명찰이 아닌 단면 삽입지입니다.</p></li><li><h3>다음에 이어 하려면 작업 파일을 저장하세요.</h3><p>상단 ‘작업 저장’은 디자인·로고 선택·규격·명단을 JSON으로 내려받습니다. 로고 선택이 없는 예전 작업 파일은 한양대학교 로고로 열립니다. ‘불러오기’로 이어서 편집할 수 있어요. 명단은 자동 저장하지 않으며 페이지를 새로고침하거나 닫으면 사라집니다. JSON·CSV 파일에는 입력한 이름이 들어 있으니 필요한 곳에 보관하세요.</p></li><li><h3>필요한 요소만 세부 조정하세요.</h3><p>‘세부 디자인 조정’을 펼치거나 명찰 미리보기의 글자·로고를 누르면 요소를 선택합니다. 숨긴 요소는 목록에서 선택하세요. X·Y와 상자 크기는 실제 mm, 글자 크기는 pt로 지정합니다. 드래그는 누른 위치를 유지하며 움직이고, 방향키는 0.1 mm, Shift+방향키는 1 mm씩 이동합니다. 자동 축소는 입력 pt와 전체 글자 크기를 최대값으로 삼고, 수동은 지정한 pt를 유지합니다. 줄 간격·자간은 추가 항목을 펼쳐 바꿉니다. 글꼴은 기기에 설치된 글꼴을 쓰며 없으면 기본 글꼴로 대체됩니다.</p><p>‘선택 요소 초기화’는 그 요소만, ‘현재 디자인 초기화’는 현재 템플릿의 세부 조정만 되돌립니다. 명단·입력 내용·로고 선택·삽입지와 인쇄 설정, 다른 템플릿은 유지됩니다. 날짜는 공통 또는 개별로 입력할 수 있고 비우면 표시되지 않습니다. 세부 조정은 작업 JSON에 함께 저장됩니다.</p></li></ol><div class="help-footer">모든 명단 처리와 출력 준비는 현재 브라우저 안에서 이루어집니다.</div></dialog>
   <input type="file" id="projectFile" accept=".json,application/json" hidden>
   <input type="file" id="rosterFile" accept=".csv,.tsv,.txt,text/csv,text/tab-separated-values" hidden>
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <div id="precisionAnnouncement" class="sr-only" role="status" aria-live="polite"></div>
   <div id="printRoot" aria-hidden="true"></div>
   <noscript><div class="noscript">명찰을 편집하려면 브라우저에서 JavaScript를 켜주세요.</div></noscript>
 </body>
