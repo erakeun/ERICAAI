@@ -7,7 +7,7 @@ const test = require('node:test');
 const core = require('../badge-shared/core.js');
 
 function project(overrides = {}) {
-  return { version: 1, kind: 'lanyard', template: 'blue', event: 'MACH 행사', selectedId: 'p1', settings: core.defaultSettings('lanyard'), records: [{ id: 'p1', name: '홍길동', affiliation: '한양대학교', title: '참가자', event: '' }], ...overrides };
+  return { version: 1, kind: 'lanyard', template: 'blue', logoMode: 'both', event: 'MACH 행사', selectedId: 'p1', settings: core.defaultSettings('lanyard'), records: [{ id: 'p1', name: '홍길동', affiliation: '한양대학교', title: '참가자', event: '' }], ...overrides };
 }
 
 test('UMD loads in a plain browser realm without Node globals', () => {
@@ -172,6 +172,82 @@ test('project validates, normalizes and round-trips without mutating source', ()
   const empty = core.normalizeProject(project({ records: [] }));
   assert.equal(empty.valid, true);
   assert.equal(empty.project.selectedId, null);
+});
+
+test('legacy version 1 projects retain the Hanyang logo without mutating the saved data', () => {
+  for (const kind of ['lanyard', 'clip']) {
+    for (const template of ['blue', 'official', 'hanyang', 'hibb', 'staff']) {
+      const legacy = project({ kind, template, settings: core.defaultSettings(kind) });
+      delete legacy.logoMode;
+      for (const input of [legacy, JSON.stringify(legacy)]) {
+        const result = core.normalizeProject(input);
+        assert.equal(result.valid, true, `${kind}/${template}`);
+        assert.deepEqual(result.project, { ...legacy, logoMode: 'hanyang' });
+        assert.deepEqual(core.normalizeProject(JSON.stringify(result.project)).project, result.project);
+      }
+      assert.equal(Object.hasOwn(legacy, 'logoMode'), false);
+    }
+  }
+  const minimal = core.normalizeProject({ version: 1, kind: 'clip', settings: {}, records: [] });
+  assert.equal(minimal.valid, true);
+  assert.equal(minimal.project.logoMode, 'hanyang');
+});
+
+test('all logo modes and templates round-trip for both badge kinds with exact millimeter settings', () => {
+  for (const kind of ['lanyard', 'clip']) {
+    for (const template of ['blue', 'official', 'hanyang', 'hibb', 'staff', 'ribbon', 'frame', 'side']) {
+      for (const logoMode of ['none', 'hanyang', 'erica', 'both']) {
+        const source = project({
+          kind, template, logoMode,
+          settings: { ...core.defaultSettings(kind), width: 88.5, height: 53.25, gap: 2.5, cardPadding: 3.75 }
+        });
+        const saved = JSON.stringify(source);
+        const result = core.normalizeProject(saved);
+        assert.equal(result.valid, true, `${kind}/${template}/${logoMode}: ${result.errors.join(', ')}`);
+        assert.deepEqual(result.project, source);
+        assert.deepEqual(core.normalizeProject(JSON.stringify(result.project)).project, source);
+        assert.equal(JSON.stringify(source), saved);
+      }
+    }
+  }
+});
+
+test('logo modes and template IDs require exact strings and reject arbitrary asset URLs', () => {
+  const invalidValues = [
+    undefined, null, false, true, 0, 1, '', ' ', 'Both', 'both ', 'hanyang,erica',
+    [], ['both'], {}, { src: 'https://example.com/logo.svg' }, new String('both'),
+    'https://example.com/logo.svg', '//example.com/logo.svg', '../assets/logo.svg',
+    'data:image/svg+xml,<svg onload=alert(1)>', 'javascript:alert(1)',
+    '<img src=x onerror=alert(1)>', 'both\u0000'
+  ];
+  for (const field of ['logoMode', 'template']) {
+    for (const value of invalidValues) {
+      const result = core.normalizeProject(project({ [field]: value }));
+      assert.equal(result.valid, false, `${field}: ${String(value)}`);
+      assert.equal(result.project, null);
+      assert.ok(result.errors.length);
+    }
+    const accessor = project();
+    Object.defineProperty(accessor, field, { enumerable: true, get() { throw new Error('must not run'); } });
+    assert.equal(core.normalizeProject(accessor).valid, false);
+  }
+});
+
+test('normalized projects preserve inert user text and discard unsupported asset configuration', () => {
+  const url = 'https://example.com/untrusted.svg';
+  const xss = '<img src=x onerror=alert(1)>';
+  const result = core.normalizeProject(project({
+    logoMode: 'none', template: 'ribbon', event: xss,
+    logoUrl: url, logoAssets: { hanyang: url, erica: url },
+    settings: { ...core.defaultSettings('lanyard'), logoUrl: url },
+    records: [{ id: 'p1', name: xss, affiliation: '', title: '', event: '', logoUrl: url }]
+  }));
+  assert.equal(result.valid, true);
+  assert.equal(result.project.event, xss);
+  assert.equal(result.project.records[0].name, xss);
+  assert.equal(result.project.logoMode, 'none');
+  assert.equal(JSON.stringify(result.project).includes(url), false);
+  assert.deepEqual(core.normalizeProject(JSON.stringify(result.project)).project, result.project);
 });
 
 test('project rejects incompatible schema and unsafe setting values', () => {

@@ -19,7 +19,7 @@ async function pdfCheck(page,file,expectedPages){await page.emulateMedia({media:
   const page=await browser.newPage({viewport:{width:1440,height:1050}}),errors=[],requests=[];
   page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>requests.push(r.url()));page.on('dialog',d=>d.accept());
   const response=await page.goto(base+kind+'-badge/',{waitUntil:'networkidle'});check(kind+' HTTP 200',response.status()===200);await page.waitForFunction(()=>window.badgeApp&&window.BadgeCore);await settled(page);
-  check(kind+' five templates',await page.locator('#templateList [data-template]').count()===5);
+  check(kind+' eight templates',await page.locator('#templateList [data-template]').count()===8);
   await page.screenshot({path:path.join(out,kind+'-desktop.png')});
   await fill(page,'name','가온테스트');await settled(page);check(kind+' live preview',await page.locator('#previewSection').innerText().then(t=>t.includes('가온테스트')));
   await fill(page,'name','<img src=x onerror=alert(1)>');await settled(page);check(kind+' HTML is inert',await page.evaluate(()=>!document.querySelector('img[src="x"]')&&!document.querySelector('[onerror]')));
@@ -35,7 +35,7 @@ async function pdfCheck(page,file,expectedPages){await page.emulateMedia({media:
   await fill(page,'bulkInput','');await page.locator('#replaceImport').click();check(kind+' empty import preserves roster',(await page.evaluate(()=>badgeApp.getState().records.length))===count);
   await fill(page,'bulkInput','이름,소속\n"닫히지 않은,셀');await page.locator('#replaceImport').click();check(kind+' malformed import preserves roster',(await page.evaluate(()=>badgeApp.getState().records.length))===count);
   const layout=await page.evaluate(()=>BadgeCore.layout(badgeApp.getState().settings));check(kind+' A4 capacity',layout.capacity===(kind==='lanyard'?4:8));
-  for(const template of ['blue','official','hanyang','hibb','staff']){
+  for(const template of ['blue','official','hanyang','hibb','staff','ribbon','frame','side']){
    await page.locator(`#templateList [data-template="${template}"]`).click();await settled(page);const print=await page.evaluate(()=>badgeApp.preparePrint('all'));check(kind+' '+template+' all pages',print.pages===3||print.pages.length===3);
    await page.emulateMedia({media:'print'});await settled(page);
    const geometry=await page.evaluate(()=>Array.from(document.querySelectorAll('#printRoot .badge')).map(el=>{const r=el.getBoundingClientRect(),p=el.closest('.print-page').getBoundingClientRect();return {w:r.width,h:r.height,inside:r.left>=p.left-1&&r.right<=p.right+1&&r.top>=p.top-1&&r.bottom<=p.bottom+1,text:el.innerText}}));

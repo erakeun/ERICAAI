@@ -9,14 +9,18 @@
     { id: 'official', name: '공식 심플', description: '격식을 담은 여백' },
     { id: 'hanyang', name: '하냥이', description: '반가운 첫인사' },
     { id: 'hibb', name: 'HiBB', description: '가볍고 친근하게' },
-    { id: 'staff', name: '행사·스태프', description: '현장에서 한눈에' }
+    { id: 'staff', name: '행사·스태프', description: '현장에서 한눈에' },
+    { id: 'ribbon', name: '블루 시그널', description: '행사명을 담은 하단 띠' },
+    { id: 'frame', name: '네이비 프레임', description: '테두리와 사선 포인트' },
+    { id: 'side', name: '네이비 사이드', description: '측면 패널과 골드 선' }
   ];
+  const logoModes = ['none', 'hanyang', 'erica', 'both'];
   const fields = ['name', 'affiliation', 'title', 'event'];
   const labels = { name: '이름', affiliation: '소속·기관', title: '직책·역할', event: '개별 행사명' };
   let nextId = 0;
   const uid = () => 'badge-' + Date.now().toString(36) + '-' + (++nextId);
   let state = {
-    version: 1, kind, template: 'blue', event: '한양 함께하는 날', selectedId: 'sample-1',
+    version: 1, kind, template: 'blue', logoMode: 'both', event: '한양 함께하는 날', selectedId: 'sample-1',
     settings: Object.assign(Core.defaultSettings(kind), { pageMargin: 8, gap: 3 }),
     records: [
       { id: 'sample-1', name: '윤해봄', affiliation: '미래협력팀', title: '참가자', event: '' },
@@ -42,6 +46,22 @@
     image.alt = alt || '';
     image.draggable = false;
     return image;
+  }
+  function makeLogoBand(template, miniature) {
+    const mode = logoModes.includes(state.logoMode) ? state.logoMode : 'hanyang';
+    if (mode === 'none') return null;
+    const white = template === 'blue' || template === 'staff';
+    const band = el('div', miniature ? 'mini-logo-band' : 'badge-logo-band');
+    band.dataset.logoMode = mode;
+    for (const logo of mode === 'both' ? ['hanyang', 'erica'] : [mode]) {
+      const file = (logo === 'hanyang' ? 'hyu' : 'hyu-erica') + (white ? '-white' : '') + '.png';
+      const img = imageNode(file, miniature ? 'mini-logo' : 'badge-logo', logo === 'hanyang' ? '한양대학교' : '한양대학교 ERICA');
+      img.dataset.logo = logo;
+      img.width = white ? (logo === 'hanyang' ? 2710 : 2269) : 2048;
+      img.height = logo === 'hanyang' ? (white ? 591 : 446) : (white ? 354 : 319);
+      band.append(img);
+    }
+    return band;
   }
   const currentRecord = () => state.records.find(record => record.id === state.selectedId) || state.records[0] || null;
   const mm = value => Number(value).toLocaleString('ko-KR', { maximumFractionDigits: 2 });
@@ -93,6 +113,8 @@
     setPhysicalProperties(cell, s);
     const card = el('article', 'badge' + (s.height > s.width ? ' is-portrait' : ''));
     card.dataset.template = templates.some(template => template.id === state.template) ? state.template : 'blue';
+    card.dataset.logoMode = logoModes.includes(state.logoMode) ? state.logoMode : 'hanyang';
+    card.classList.toggle('is-compact', s.width < 70 || s.height < 45);
     card.dataset.recordId = record.id;
     card.setAttribute('aria-label', record.name ? record.name + ' 명찰' : '빈 명찰');
     const scale = s.fontScale / 100;
@@ -102,18 +124,25 @@
     card.style.setProperty('--sub-size', Math.max(6.5, 10 * base) * scale + 'pt');
     card.style.setProperty('--title-size', Math.max(7, 11.5 * base) * scale + 'pt');
     card.style.setProperty('--event-size', Math.max(6.5, 9.5 * base) * scale + 'pt');
+    card.style.setProperty('--logo-height', Math.min(5.5, Math.max(1.5, (s.height - s.cardPadding * 2) * .12), (s.width - s.cardPadding * 2) / (card.dataset.logoMode === 'both' ? 12 : 6)) + 'mm');
+    card.style.setProperty('--content-gap', Math.min(1.8, Math.max(.5, s.height * .025)) + 'mm');
     const header = el('div', 'badge-header');
-    header.append(imageNode(card.dataset.template === 'blue' || card.dataset.template === 'staff' ? 'hyu-white.png' : 'hyu.png', 'badge-logo', '한양대학교'));
+    const logoBand = makeLogoBand(card.dataset.template);
+    if (logoBand) header.append(logoBand);
     const event = record.event || state.event;
-    if (event) header.append(el('div', 'badge-event', event));
+    const eventNode = event ? el('div', 'badge-event', event) : null;
+    if (eventNode && card.dataset.template !== 'ribbon') header.append(eventNode);
     const person = el('div', 'badge-person');
     if (record.affiliation) person.append(el('div', 'badge-affiliation', record.affiliation));
     person.append(el('div', 'badge-name', record.name || '이름 입력'));
     if (record.title) person.append(el('div', 'badge-title', record.title));
-    const footer = el('div', 'badge-footer', 'HANYANG UNIVERSITY');
-    footer.style.fontSize = Math.min(5, Math.max(1, (s.width - s.cardPadding * 2) / 9)) + 'pt';
-    if (s.width < 50) footer.style.letterSpacing = '.02em';
+    const footer = el('div', 'badge-footer');
+    footer.setAttribute('aria-hidden', 'true');
     card.append(header, person, footer);
+    if (eventNode && card.dataset.template === 'ribbon') {
+      eventNode.classList.add('badge-event-ribbon');
+      card.append(eventNode);
+    }
     if (card.dataset.template === 'hanyang' || card.dataset.template === 'hibb') card.append(imageNode(card.dataset.template === 'hanyang' ? 'hanyangi.png' : 'hibb.png', 'badge-character', card.dataset.template === 'hanyang' ? '하냥이' : 'HiBB'));
     cell.append(card);
     if (s.cropMarks) {
@@ -133,7 +162,8 @@
         size = Math.max(min, size - .65);
         text.style.fontSize = size + 'px';
       }
-      if (size < initial * .73 || size < 10) issues.push('문구가 길어 글자를 작게 조정했습니다. 실제 크기로 읽을 수 있는지 확인하세요.');
+      if (size < initial * .73) issues.push('문구가 길어 글자를 작게 조정했습니다. 실제 크기로 읽을 수 있는지 확인하세요.');
+      else if (size < 10) issues.push('작은 글자가 있습니다. 실제 크기로 읽을 수 있는지 확인하세요.');
       if (text.scrollWidth > text.clientWidth + 1 || text.scrollHeight > text.clientHeight + 1) issues.push('일부 문구가 명찰 영역을 넘습니다. 문구를 줄이거나 글자 크기·안쪽 여백을 줄여주세요.');
     }
     const person = card.querySelector('.badge-person');
@@ -155,6 +185,14 @@
     }
     if (safety > 1) issues.push('세로 공간에 맞게 글자를 축소했습니다. 안쪽 여백 또는 문구 길이를 조정할 수 있어요.');
     if (personOverflows()) issues.push('내용이 명찰 높이를 넘습니다. 높이를 늘리거나 문구·글자 크기를 줄이세요.');
+    const bounds = card.getBoundingClientRect();
+    const logos = [...card.querySelectorAll('.badge-logo')];
+    const content = [...card.querySelectorAll('.badge-event,.badge-affiliation,.badge-name,.badge-title')];
+    const outside = rect => rect.left < bounds.left - 1 || rect.right > bounds.right + 1 || rect.top < bounds.top - 1 || rect.bottom > bounds.bottom + 1;
+    const overlaps = (a, b) => a.left < b.right - 1 && a.right > b.left + 1 && a.top < b.bottom - 1 && a.bottom > b.top + 1;
+    if ([...logos, ...content].some(node => outside(node.getBoundingClientRect()))) issues.push('로고 또는 문구가 명찰 영역을 넘습니다. 크기를 늘리거나 안쪽 여백을 줄이세요.');
+    if (logos.some((logo, index) => [...logos.slice(index + 1), ...content].some(node => overlaps(logo.getBoundingClientRect(), node.getBoundingClientRect())))) issues.push('로고가 다른 로고 또는 문구 영역을 넘습니다. 크기를 늘리거나 로고 선택·안쪽 여백을 조정하세요.');
+    if (content.some((node, index) => content.slice(index + 1).some(other => overlaps(node.getBoundingClientRect(), other.getBoundingClientRect())))) issues.push('문구가 서로의 영역을 넘습니다. 크기를 늘리거나 문구·글자 크기를 줄이세요.');
     card.dataset.overflow = issues.some(issue => /넘/.test(issue)) ? 'true' : 'false';
     card.dataset.fitWarning = issues.join(' ');
     return [...new Set(issues)];
@@ -177,7 +215,10 @@
       button.setAttribute('aria-pressed', String(template.id === state.template));
       const thumb = el('span', 'template-thumb ' + template.id);
       thumb.setAttribute('aria-hidden', 'true');
-      thumb.append(imageNode('hyu.png', 'mini-logo'), el('small', '', 'HANYANG TOGETHER'), el('b', '', '윤해봄'));
+      thumb.dataset.logoMode = state.logoMode;
+      const band = makeLogoBand(template.id, true);
+      if (band) thumb.append(band);
+      thumb.append(el('small', '', '함께하는 날'), el('b', '', '윤해봄'));
       if (template.id === 'hanyang' || template.id === 'hibb') thumb.append(imageNode(template.id === 'hanyang' ? 'hanyangi.png' : 'hibb.png', 'mini-char'));
       button.append(thumb, el('strong', '', template.name), el('span', 'template-description', template.description));
       button.addEventListener('click', () => { state.template = template.id; renderTemplates(); renderVisual(); });
@@ -205,6 +246,7 @@
       input.disabled = !record;
     }
     $('event').value = state.event;
+    $('logoMode').value = state.logoMode;
     $('editingLabel').textContent = record ? '미리보기의 사람 편집 중' : '명단을 추가하세요';
     for (const key of ['width', 'height', 'pageMargin', 'gap', 'cardPadding', 'fontScale']) $(key).value = Number.isFinite(state.settings[key]) ? state.settings[key] : '';
     $('cropMarks').checked = state.settings.cropMarks;
@@ -436,6 +478,11 @@
       else { $('presetDescription').textContent = '아래 가로·세로에 원하는 삽입지 크기를 입력하세요.'; $('width').focus(); }
     });
     $('event').addEventListener('input', () => { state.event = $('event').value; renderVisual(); });
+    $('logoMode').addEventListener('change', () => {
+      if (!logoModes.includes($('logoMode').value)) return;
+      state.logoMode = $('logoMode').value;
+      renderTemplates(); renderVisual();
+    });
     for (const field of fields) {
       const input = $(field === 'event' ? 'recordEvent' : field);
       input.addEventListener('input', () => {
