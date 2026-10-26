@@ -514,8 +514,17 @@
     </div>
   </main>
 
+  <style>
+/* Private feedback opens a separate form without sharing workspace data. */
+.mach-feedback-link{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:44px;box-sizing:border-box;padding:8px 12px;border:1px solid currentColor;border-radius:8px;background:#fff;color:#245fbc;font:600 13px/1.5 sans-serif;text-decoration:none;white-space:nowrap}
+.mach-feedback-link span{font-size:11px}
+.mach-feedback-link:hover{background:#edf3fb}
+.mach-feedback-link:focus-visible{outline:3px solid #f28b21;outline-offset:3px}
+@media print{.mach-feedback-link{display:none!important}}
+</style>
   <footer>
     <div class="wrap foot">
+      <a class="mach-feedback-link" data-mach-feedback="main" href="https://script.google.com/macros/s/AKfycby2ShSY4ruQr9Ku-QlljB05Ygk3ygDRtX-hXWO0hfUmEULl-jK9Z7mqh_k2m9GSV70v/exec?tool=main" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" data-html2canvas-ignore="true">의견 보내기 <span>(새 창)</span></a>
       <span>© <span id="year">2026</span> <strong>ERICA AI PROJECTS</strong></span>
       <span>AI를 활용한 업무 개선 프로젝트 모음. · <strong>v1.6.7</strong></span>
     </div>
