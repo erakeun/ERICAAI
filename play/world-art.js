@@ -13,19 +13,20 @@ if(type==='erica'){r(-170,-105,340,105,stone);r(-180,-115,360,25,'#d7e0df');r(-6
 if(type==='library'){r(-160,-140,95,140,'#d4dfe1');r(-65,-130,225,130,stone);r(-78,-153,247,58,'#c8b999');r(-68,-138,228,23,glass);for(let k=-140;k<-70;k+=23)for(let j=-117;j<-5;j+=28)r(k,j,13,17,glass);for(let k=-45;k<160;k+=33)r(k,-95,7,95,'#90aab6');r(-20,-24,52,24,glass);}
 if(type==='agora'){poly([[-85,0],[-67,-164],[-49,-170],[-34,0]],shade);poly([[-74,-165],[45,-196],[72,-136],[-50,-108]],'#a5afb5');poly([[-62,-160],[36,-184],[52,-145],[-47,-121]],'#93abb8');poly([[70,0],[102,-103],[127,-116],[113,0]],'#c1cdd3');for(let k=0;k<8;k++)poly([[80,k*-12],[116,-7-k*12],[114,-10-k*12],[80,-3-k*12]],'#a4b9c7');}
 ctx.restore();}
-// Actual vector renders of the user's white baby pigeon. A missing original
-// displays an NPC marker; it is never replaced with an invented bee or ghost.
+// Unmodified approved pixel poses 01/02 from mascot-approved-pixel-v5.
+// Draw at 102px (20.3% smaller than 128px), with nearest-neighbor sampling and
+// integer destination bounds. Source pixels stay unchanged; feet meet shrubs.
 const npcImages=[];
-if(typeof Image==='function')for(const src of ['assets/hibibi-original-source.png','assets/hibibi-wave-source.png']){const image=new Image();image.src=src;npcImages.push(image);}
+if(typeof Image==='function')for(const src of ['assets/haibibi-idle-pixel.png','assets/haibibi-wave-pixel.png']){const image=new Image();image.src=src;npcImages.push(image);}
 function npc(x,y,time){
  ctx.save();ctx.translate(Math.round(x),y);
  r(-37,-13,74,13,'#6f9a75');r(-31,-23,28,13,'#88b98b');r(5,-25,29,16,'#82ad82');
  const chosen=npcImages[Math.floor((Number(time)||0)/7)%2];
- const image=chosen&&chosen.complete&&chosen.naturalWidth?chosen:npcImages.find(i=>i.complete&&i.naturalWidth),scale=.20;
- if(image&&image.complete&&image.naturalWidth){ctx.imageSmoothingEnabled=true;ctx.drawImage(image,-256*scale,-392*scale,512*scale,512*scale);}
+ const image=chosen&&chosen.complete&&chosen.naturalWidth?chosen:npcImages.find(i=>i.complete&&i.naturalWidth);
+ if(image&&image.complete&&image.naturalWidth){ctx.imageSmoothingEnabled=false;ctx.drawImage(image,-51,-82,102,102);}
  else{r(-19,-45,38,29,'#f4fafc');txt('NPC',0,-25,12,'#0e4a84');}
  r(-42,-9,25,9,'#638e69');r(19,-10,24,10,'#638e69');r(-50,-4,100,4,'#7aa17a');
- txt('하이비비',0,-76,16);ctx.restore();
+ txt('하이비비',0,-70,16);ctx.restore();
 }
 const C={blue:'#0e4a84',ink:'#163e63',cream:'#fbf7e9',glass:'#a8d6e8',stone:'#dbe5e7',coral:'#de8c7d',yellow:'#e9bf61',green:'#6d9c8b'};
 function door(locked,selected){

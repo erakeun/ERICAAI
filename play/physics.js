@@ -4,6 +4,7 @@ const GROUND=420,WIDTH=3400,PLAYER_W=28,PLAYER_H=39,SPEED=440,MIN_SPEED=220,MAX_
 const DASH_SPEED=640,DASH_DURATION=.18,DASH_COOLDOWN=.55,ATTACK_COOLDOWN=.35,BUILDING_RECOVERY=8;
 const ATTACK_DURATION=.4,ATTACK_STRIKE_TIME=.14,ATTACK_REACH=72,RECOIL_DURATION=.16,RECOIL_SPEED=360,TIME_EPS=1e-9;
 const RUN_STRIDE_PX=132,RUN_FRAME_COUNT=8;
+const BUILDING_POINTS=150,SCORE_LIMIT=10000;
 const ENEMY_TYPES=Object.freeze({
  slime:Object.freeze({points:100,respawn:12,speed:35}),
  report:Object.freeze({points:100,respawn:14,speed:25}),
@@ -17,6 +18,29 @@ const speedValue=value=>Number.isFinite(Number(value))?clamp(Number(value),MIN_S
 const isAlly=s=>s.ally===true||s.type==='earlyLeave';
 const isIndestructible=q=>Boolean(q&&(q.indestructible===true||q.castle===true||q.id==='castle'));
 const enemySpec=s=>ENEMY_TYPES[s.type]||ENEMY_TYPES.slime;
+const boundedScore=value=>Number.isFinite(Number(value))?clamp(Number(value),0,SCORE_LIMIT):0;
+function awardPoints(state,points){
+ const previous=boundedScore(state.score);state.score=previous;
+ if(state.freeExplore===true||state.ended===true)return 0;
+ const earned=Number.isFinite(points)?Math.max(0,points):0;
+ state.score=Math.min(SCORE_LIMIT,previous+earned);return state.score-previous;
+}
+function resetCombatRound(state){
+ const round=Number.isSafeInteger(state.round)&&state.round>=0?state.round+1:1;
+ Object.assign(state,{score:0,lastPoints:0,lastAttack:-Infinity,attackSerial:0,swing:null,scoredBuildingIds:new Set(),notifiedMilestone:0,ended:false,freeExplore:false,round});
+ return state;
+}
+function awardBuildingPoints(buildings,state){
+ const awarded=state.scoredBuildingIds instanceof Set?state.scoredBuildingIds:(state.scoredBuildingIds=new Set());
+ let points=0;
+ for(const q of buildings){
+  // Private scenery has no public system to discover and never earns points.
+  if(!q||q.locked||isIndestructible(q)||!/^https:\/\//.test(q.url||'')||q.id===undefined||q.id===null)continue;
+  const id=String(q.id);if(!id||awarded.has(id))continue;
+  awarded.add(id);points+=BUILDING_POINTS;
+ }
+ return awardPoints(state,points);
+}
 function createPlayer(x=180,floor=0){return {x:clamp(Number(x)||0,0,WIDTH-PLAYER_W),y:GROUND-PLAYER_H,vx:0,vy:0,grounded:true,facing:1,floor:floorOf({floor}),jumps:0,speed:SPEED,dashRemaining:0,dashCooldown:0,dashDirection:1,attackRemaining:0,attackFacing:1,attackId:null,recoilRemaining:0,recoilDirection:0,locomotionDirection:0,intentionalDirection:0,groundDistance:0,runPhase:0,runFrame:0,wrapped:0,wrapCount:0};}
 // Slider changes use setSpeed; passing SPEED restores the default. The selected
 // speed survives floor travel, while every airborne/dash state is reset.
@@ -108,7 +132,7 @@ function strikeTargets(p,slimes,time,state,contact){
  for(const s of slimes)if(!isAlly(s)&&!isIndestructible(s)&&s.alive!==false&&inStrikeRange(p,s,contact)){
   const spec=enemySpec(s);s.alive=false;s.respawnAt=time+spec.respawn;hits++;points+=spec.points;
  }
- state.lastPoints=points;state.score=(state.score||0)+points;return {hits,points};
+ points=awardPoints(state,points);state.lastPoints=points;return {hits,points};
 }
 // Compatibility helper for older callers/tests. The game uses launch/advance
 // so input does not deal damage before the 140ms claw contact frame.
@@ -156,6 +180,7 @@ function advanceAttack(p,targets,buildings,time,state,geometry={}){
   const contact={actual,bounds:swing.hitBounds,time,reducedMotion:geometry?.reducedMotion===true};
   const strikePlayer={...p,y:p.y+swing.hitOffsetY,facing:swing.facing},hit=strikeTargets(strikePlayer,targets,time,state,contact);
   result.hits=hit.hits;result.points=hit.points;result.destroyed=damageBuildings(strikePlayer,buildings,time,contact);
+  result.points+=awardBuildingPoints(result.destroyed,state);state.lastPoints=result.points;
   const fortress=buildings.find(q=>isIndestructible(q)&&inStrikeRange(strikePlayer,q,contact,true));
   if(fortress){
    result.impact={target:fortress,facing:swing.hitFacing,at:time,x:swing.hitX,y:swing.hitY,offsetY:swing.hitOffsetY,originY:swing.hitOriginY,attackId:swing.id};
@@ -191,7 +216,7 @@ function collectAllies(p,allies,time){
  return collected;
 }
 // Only presentation changes: URLs, lock flags and permissions remain untouched.
-// Buildings award zero points, so repeated manual recovery cannot farm score.
+// Scoring is separate from scenery recovery: a public ID earns once per round.
 function damageBuildings(p,buildings,time,contact){
  if(!Number.isFinite(time))return [];const destroyed=[];
  for(const q of buildings)if(!isIndestructible(q)&&!q.destroyed&&time-(q.lastDamage??-Infinity)>=ATTACK_COOLDOWN&&inStrikeRange(p,q,contact,true)){q.destroyed=true;q.destroyedAt=time;q.lastDamage=time;q.restoreAt=time+BUILDING_RECOVERY;destroyed.push(q);}
@@ -201,10 +226,10 @@ function restoreBuilding(q){if(!q||isIndestructible(q)||!q.destroyed)return fals
 function updateBuildings(buildings,time){if(!Number.isFinite(time))return buildings;for(const q of buildings)if(!isIndestructible(q)&&q.destroyed&&Number.isFinite(q.restoreAt)&&time>=q.restoreAt)restoreBuilding(q);return buildings;}
 function scoreMilestones(state){
  const score=Number(state.score),notified=Number(state.notifiedMilestone);
- const reached=Math.floor(Math.max(0,Number.isFinite(score)?score:0)/1000),previous=Math.max(0,Math.floor(Number.isFinite(notified)?notified:0)),milestones=[];
+ const reached=Math.floor(boundedScore(score)/1000),previous=clamp(Math.floor(Number.isFinite(notified)?notified:0),0,SCORE_LIMIT/1000),milestones=[];
  for(let n=previous+1;n<=reached;n++)milestones.push(n*1000);
  state.notifiedMilestone=Math.max(previous,reached);return milestones;
 }
-const api={GROUND,WIDTH,PLAYER_W,PLAYER_H,SPEED,MIN_SPEED,MAX_SPEED,DASH_SPEED,DASH_DURATION,DASH_COOLDOWN,ATTACK_COOLDOWN,ATTACK_DURATION,ATTACK_STRIKE_TIME,ATTACK_REACH,RECOIL_DURATION,RECOIL_SPEED,RUN_STRIDE_PX,RUN_FRAME_COUNT,BUILDING_RECOVERY,ENEMY_TYPES,clamp,createPlayer,setSpeed,changeFloor,step,jump,nearby,interaction,canOpen,animationFrame,attack,launchAttack,advanceAttack,cancelAttack,isIndestructible,enemyHitBounds,updateSlimes,collectAllies,damageBuildings,restoreBuilding,updateBuildings,scoreMilestones};
+const api={GROUND,WIDTH,PLAYER_W,PLAYER_H,SPEED,MIN_SPEED,MAX_SPEED,DASH_SPEED,DASH_DURATION,DASH_COOLDOWN,ATTACK_COOLDOWN,ATTACK_DURATION,ATTACK_STRIKE_TIME,ATTACK_REACH,RECOIL_DURATION,RECOIL_SPEED,RUN_STRIDE_PX,RUN_FRAME_COUNT,BUILDING_RECOVERY,BUILDING_POINTS,SCORE_LIMIT,ENEMY_TYPES,clamp,createPlayer,setSpeed,changeFloor,step,jump,nearby,interaction,canOpen,animationFrame,attack,launchAttack,advanceAttack,cancelAttack,isIndestructible,enemyHitBounds,updateSlimes,collectAllies,damageBuildings,restoreBuilding,updateBuildings,scoreMilestones,resetCombatRound};
 if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.MachPhysics=api;
 })(typeof window!=='undefined'?window:globalThis);

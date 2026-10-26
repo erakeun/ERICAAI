@@ -23,11 +23,13 @@ class Element {
   setAttribute(key, value) { this.attributes[key]=value; }
   focus(options) { this.focused=true; this.focusOptions=options; }
   scrollIntoView(options) { this.scrollOptions=options; }
+  getBoundingClientRect() { return {top:0,bottom:1100}; }
 }
 function bootParent() {
   const ids=['mach-play','mach-play-toggle','mach-play-mount','mach-play-status','mach-play-close'];
   const nodes=Object.fromEntries(ids.map(id=>[id,new Element(id)]));
   const created=[], window=new Element('window'), origin='https://erakeun.github.io';
+  window.innerHeight=780;
   const document={getElementById:id=>nodes[id],createElement:tag=>{const e=new Element(tag); created.push(e); return e;}};
   vm.runInNewContext(read('play-embed.js'),{document,window,location:{origin}});
   const open=()=>{nodes['mach-play'].open=true;nodes['mach-play'].emit('toggle');return nodes['mach-play-mount'].children[0];};
@@ -73,6 +75,19 @@ test('footer close restores focus and removes game synchronously',()=>{
   assert.equal(h.nodes['mach-play'].open,false);assert.equal(frame.removed,true);
   assert.equal(h.nodes['mach-play-toggle'].focused,true);
   assert.equal(h.nodes['mach-play-toggle'].focusOptions.preventScroll,true);
+});
+
+test('keyboard game close and menu positioning only accept the current trusted frame',()=>{
+  const h=bootParent(),frame=h.open();frame.emit('load');
+  assert.equal(frame.messages[0][0].type,'mach-play:viewport');
+  assert.equal(frame.messages[0][0].height,748);
+  assert.equal(frame.messages[1][0].type,'mach-play:focus');
+  h.message(frame,{type:'mach-play:close'},{origin:'https://example.org'});
+  assert.equal(h.nodes['mach-play'].open,true);
+  h.message(frame,{type:'mach-play:dialog'});
+  assert.equal(frame.scrollOptions.block,'start');
+  h.message(frame,{type:'mach-play:close'});
+  assert.equal(frame.removed,true);assert.equal(h.nodes['mach-play-toggle'].focused,true);
 });
 
 test('height and escape messages require both matching origin and current frame',()=>{
@@ -141,9 +156,15 @@ test('all portals stay reachable at new default speed without jumping',()=>{
 test('approved sprite PNGs and animation modules remain byte-identical to V4',()=>{
   function list(dir){return fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?list(path.join(dir,e.name)):[path.join(dir,e.name)]);}
   const play=path.join(root,'play');
-  const pngs=list(path.join(play,'assets')).filter(f=>f.endsWith('.png')).map(f=>path.relative(play,f)).sort();
+  const pngs=list(path.join(play,'assets')).filter(f=>f.endsWith('.png')&&!/haibibi-(idle|wave)-pixel\.png$/.test(f)).map(f=>path.relative(play,f)).sort();
   const hash=crypto.createHash('sha256');for(const file of pngs)hash.update(file+'\0').update(fs.readFileSync(path.join(play,file)));
   assert.equal(pngs.length,24);assert.equal(hash.digest('hex'),'c53c103be74f27fdc878b74a1bef11a18dbc9b449344fd8d442c0704c7c43723');
   const modules={'actors.js':'f058aa67ea29e38055df58874aa330b7673f8edd3cf6f3c9c4c2df93f40ef06e','attack-assets.js':'b58bef22bf4a0fce83a6166de7b1ac1b1c021a33143dc5cd609128ba32639697','attack-animation.js':'7e1a32edc331d9ae6d5e211cf2ecac3e31ca127c4c8564a17b8371b2e44f0d85'};
   for(const [file,expected] of Object.entries(modules))assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(play,file))).digest('hex'),expected,file);
+});
+
+test('approved pixel Haibibi assets are unchanged and use crisp rendering',()=>{
+  const hashes={'haibibi-idle-pixel.png':'05a41381c7f1335f0fb6fee32a1dafbbcec5db8288fc60800097c1fea64cf477','haibibi-wave-pixel.png':'841fbfa9bbf724da3b63db281fe7eb8d1533205141cf73be0188ab4f9c1ed190'};
+  for(const [file,expected] of Object.entries(hashes))assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(root,'play/assets',file))).digest('hex'),expected);
+  const art=read('play/world-art.js');assert.match(art,/imageSmoothingEnabled=false/);assert.doesNotMatch(art,/hibibi-original-source|hibibi-wave-source/);
 });
