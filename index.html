@@ -306,7 +306,7 @@
 @media print{.brand-logo,.hero-wordmark{display:none!important}}
 </style>
   <link rel="stylesheet" href="./usage-guides.css">
-  <script defer src="./usage-guides.js?v=17295d0fcdc3"></script>
+  <script defer src="./usage-guides.js?v=badge-makers-20261026"></script>
   <link rel="stylesheet" href="mach-lockup.css?v=selected-a-flow-1">
 </head>
 <body>
@@ -907,6 +907,40 @@
         category:'manage',
         tags:['인수인계','주·월 달력','JSON·DOCX'],
         previewClass:'eventoneq'
+      },
+      {
+        "id": "30",
+        "name": "목걸이형 명찰 제작기",
+        "description": "목걸이 명찰의 삽입지 크기를 직접 정하고, 한양 디자인·명단 일괄 입력·A4 배치로 행사 명찰을 인쇄합니다.",
+        "date": "2026.10.26",
+        "url": "https://erakeun.github.io/ERICAAI/lanyard-badge/",
+        "guideUrl": "",
+        "internal": false,
+        "category": "maker",
+        "tags": [
+          "목걸이 명찰",
+          "행사",
+          "명단",
+          "A4 인쇄"
+        ],
+        "previewClass": "nameplate"
+      },
+      {
+        "id": "31",
+        "name": "집게·옷핀형 명찰 제작기",
+        "description": "집게·옷핀 명찰의 삽입지 규격과 디자인을 선택하고, 여러 명의 이름을 한 번에 편집해 실제 크기로 인쇄합니다.",
+        "date": "2026.10.26",
+        "url": "https://erakeun.github.io/ERICAAI/clip-badge/",
+        "guideUrl": "",
+        "internal": false,
+        "category": "maker",
+        "tags": [
+          "집게 명찰",
+          "옷핀 명찰",
+          "명단",
+          "A4 인쇄"
+        ],
+        "previewClass": "nameplate"
       }
     ];
 
@@ -928,9 +962,9 @@
 
     // 업무 태그는 아래 프로젝트 설명에 명시된 기능만 수동 연결합니다.
     const WORK_TAGS = {
-      '행사':['02','04','20','21','22','23','25','27'],
-      '명단':['02','21','22','23','25','26','28'],
-      '인쇄':['02','21','22','23','26','27','28'],
+      '행사':['02','04','20','21','22','23','25','27','30','31'],
+      '명단':['02','21','22','23','25','26','28','30','31'],
+      '인쇄':['02','21','22','23','26','27','28','30','31'],
       '좌석':['21','22','23','25'],
       '신청':['06','07','08','09','10','17','24'],
       '예약':['08','09'],
@@ -986,7 +1020,9 @@
       '24': {src:'./assets/previews/project-24.jpg'},
       '26': {src:'./assets/previews/project-26.jpg'},
       '27': {src:'./assets/previews/project-27.jpg'},
-      '28': {src:'./assets/previews/project-28.jpg'}
+      '28': {src:'./assets/previews/project-28.jpg'},
+      '30': {src:'./assets/previews/project-30.jpg'},
+      '31': {src:'./assets/previews/project-31.jpg'}
     };
 
     function projectPreviewHtml(project){
@@ -1050,7 +1086,7 @@
     }
 
     function projectUsageHtml(project){
-      const targets=['01','02','04','05','12','15','19','20','21','22','23','25','26','27','28','29'];
+      const targets=['01','02','04','05','12','15','19','20','21','22','23','25','26','27','28','29','30','31'];
       if(!targets.includes(project.id)) return '';
       return '<button type="button" class="usage-link" data-usage-id="'+escapeHtml(project.id)+'" aria-label="'+escapeHtml(project.name)+' 사용방법 보기"><span><b>사용방법</b><small>준비 · 단계별 화면 · 결과 확인</small></span><span>읽어보기 →</span></button>';
     }

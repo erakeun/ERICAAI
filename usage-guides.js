@@ -3,7 +3,7 @@
   const dialog=document.getElementById('usageDialog'),body=document.getElementById('usageBody'),zoom=document.getElementById('usageImageDialog');
   const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   let dataPromise,lastTrigger,historyClosing=false,queuedOpen=null,requestNumber=0;
-  const getData=()=>dataPromise||(dataPromise=fetch('./assets/usage-guides.json?v=1f10c3f79114').then(r=>{if(!r.ok)throw Error('load');return r.json();}).catch(e=>{dataPromise=null;throw e;}));
+  const getData=()=>dataPromise||(dataPromise=fetch('./assets/usage-guides.json?v=badge-makers-20261026').then(r=>{if(!r.ok)throw Error('load');return r.json();}).catch(e=>{dataPromise=null;throw e;}));
   const image=(s)=>s.image&&/^assets\/usage\/[\w.-]+\.jpg$/.test(s.image)?`<figure class="usage-figure"><button type="button" class="usage-picture" data-usage-image="${esc(s.image)}" data-usage-alt="${esc(s.alt)}" aria-label="${esc(s.alt)} 확대 보기"><img src="${esc(s.image)}" alt="${esc(s.alt)}" loading="lazy" decoding="async"></button><figcaption>${esc(s.caption)}<span class="usage-enlarge">화면을 누르면 확대할 수 있습니다.</span></figcaption></figure>`:'';
   async function open(id,trigger,fromHistory=false){
     if(historyClosing){queuedOpen=[id,trigger,fromHistory];return;}
