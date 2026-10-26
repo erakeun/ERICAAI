@@ -308,6 +308,8 @@
   <link rel="stylesheet" href="./usage-guides.css">
   <script defer src="./usage-guides.js?v=badge-makers-20261026"></script>
   <link rel="stylesheet" href="mach-lockup.css?v=selected-a-flow-1">
+  <link rel="stylesheet" href="play-embed.css?v=1">
+  <script defer src="play-embed.js?v=1"></script>
 </head>
 <body>
   <a class="skip-link" href="#projects">프로젝트로 바로가기</a>
@@ -393,6 +395,21 @@
         </span>
         <span class="now-start">NOW, 시작해 볼까? <small id="now-new-tab">새 탭 ↗</small></span>
       </a>
+
+      <details class="play-disclosure" id="mach-play">
+        <summary id="mach-play-toggle" aria-controls="mach-play-panel">
+          <span class="play-disclosure-icon" aria-hidden="true">✦</span>
+          <span class="play-disclosure-copy"><strong>하냥이의 마하탐험</strong><span>하냥이와 캠퍼스를 달리며 MACH 도구를 만나보세요.</span></span>
+          <span class="play-disclosure-action" aria-hidden="true"><span class="play-open-label">펼쳐서 플레이</span><span class="play-close-label">게임 접기</span><b>⌄</b></span>
+        </summary>
+        <div id="mach-play-panel" class="play-panel">
+          <p class="play-help" id="mach-play-help">이 페이지에서 바로 플레이합니다. 게임 화면을 선택한 뒤 방향키·스페이스·X로 조작하세요. Esc는 쉬어가기, Tab은 다음 버튼으로 이동합니다. 게임을 접으면 종료되며 다시 펼칠 때 처음부터 시작합니다.</p>
+          <p class="play-loading" id="mach-play-status" role="status" aria-live="polite"></p>
+          <div id="mach-play-mount"></div>
+          <div class="play-panel-footer"><span>도구 포털만 새 탭에서 열립니다.</span><button type="button" id="mach-play-close">게임 접기 ↑</button></div>
+          <noscript><p class="play-help">게임을 플레이하려면 브라우저에서 JavaScript를 켜 주세요.</p></noscript>
+        </div>
+      </details>
 
       <div class="results-row">
         <p id="projectResults" role="status" aria-live="polite" aria-atomic="true"></p>
