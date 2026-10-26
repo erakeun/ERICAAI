@@ -1,0 +1,168 @@
+{
+  "description": "Read-only vector render from user-provided original AI PDF pages. No raster editing or generated animation.",
+  "renderSize": 512,
+  "assets": [
+    {
+      "id": "hanyang-original",
+      "label": "기본 하냥이",
+      "file": "hanyang-original-source.png",
+      "sourceName": "한양대ERICA 하냥이 동작 개별저장.ai",
+      "sourcePage": 1,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": {
+        "x": 101,
+        "y": 45,
+        "width": 308,
+        "height": 412
+      },
+      "suggestedBaseline": 456,
+      "footBaseline": 448,
+      "anchorX": 256,
+      "transparentPixels": 173500,
+      "paintedPixels": 88644,
+      "pngRoundTripRgbaVerified": true
+    },
+    {
+      "id": "hanyang-varsity",
+      "label": "과잠 하냥이",
+      "file": "hanyang-varsity-source.png",
+      "sourceName": "한양대ERICA 하냥이 동작 개별저장.ai",
+      "sourcePage": 9,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": {
+        "x": 101,
+        "y": 47,
+        "width": 308,
+        "height": 412
+      },
+      "suggestedBaseline": 458,
+      "footBaseline": 450,
+      "anchorX": 256,
+      "transparentPixels": 176162,
+      "paintedPixels": 85982,
+      "pngRoundTripRgbaVerified": true
+    },
+    {
+      "id": "hanyang-graduate",
+      "label": "졸업 하냥이",
+      "file": "hanyang-graduate-source.png",
+      "sourceName": "한양대ERICA 하냥이 동작 개별저장.ai",
+      "sourcePage": 21,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": {
+        "x": 90,
+        "y": 23,
+        "width": 332,
+        "height": 465
+      },
+      "suggestedBaseline": 487,
+      "footBaseline": 479,
+      "anchorX": 256,
+      "transparentPixels": 164082,
+      "paintedPixels": 98062,
+      "pngRoundTripRgbaVerified": true
+    },
+    {
+      "id": "hanyang-explorer",
+      "label": "탐험 하냥이",
+      "file": "hanyang-explorer-source.png",
+      "sourceName": "한양대ERICA 하냥이 동작 개별저장.ai",
+      "sourcePage": 33,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": {
+        "x": 106,
+        "y": 55,
+        "width": 308,
+        "height": 412
+      },
+      "suggestedBaseline": 466,
+      "footBaseline": 458,
+      "anchorX": 256,
+      "transparentPixels": 173480,
+      "paintedPixels": 88664,
+      "pngRoundTripRgbaVerified": true
+    },
+    {
+      "id": "hanyang-safety",
+      "label": "안전 하냥이",
+      "file": "hanyang-safety-source.png",
+      "sourceName": "한양대ERICA 하냥이 동작 개별저장.ai",
+      "sourcePage": 34,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": {
+        "x": 67,
+        "y": 39,
+        "width": 386,
+        "height": 445
+      },
+      "suggestedBaseline": 483,
+      "footBaseline": 480,
+      "anchorX": 294,
+      "transparentPixels": 148491,
+      "paintedPixels": 113653,
+      "pngRoundTripRgbaVerified": true
+    },
+    {
+      "id": "hibibi-original",
+      "label": "하이비비 기본",
+      "file": "hibibi-original-source.png",
+      "sourceName": "하이비비_포즈작업1.0.ai",
+      "sourcePage": 1,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": {
+        "x": 140,
+        "y": 100,
+        "width": 232,
+        "height": 312
+      },
+      "suggestedBaseline": 411,
+      "footBaseline": 392,
+      "anchorX": 256,
+      "transparentPixels": 210326,
+      "paintedPixels": 51818,
+      "pngRoundTripRgbaVerified": true
+    },
+    {
+      "id": "hibibi-wave",
+      "label": "하이비비 인사",
+      "file": "hibibi-wave-source.png",
+      "sourceName": "하이비비_포즈작업1.0.ai",
+      "sourcePage": 2,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": {
+        "x": 123,
+        "y": 100,
+        "width": 266,
+        "height": 312
+      },
+      "suggestedBaseline": 411,
+      "footBaseline": 392,
+      "anchorX": 256,
+      "transparentPixels": 208727,
+      "paintedPixels": 53417,
+      "pngRoundTripRgbaVerified": true
+    }
+  ],
+  "sources": [
+    {
+      "name": "한양대ERICA 하냥이 동작 개별저장.ai",
+      "size": 2451717,
+      "sha256": "7ed01ad2b64c543b378c8ee7fc9e5a719a8be9483869cdec8c3e30351e89387d",
+      "pages": 41
+    },
+    {
+      "name": "하이비비_포즈작업1.0.ai",
+      "size": 1342290,
+      "sha256": "9e62ee465306661417937d2f3c58aee0b8e1e820a95a5c272f24602a20a33cba",
+      "pages": 24
+    }
+  ],
+  "displayGuidance": "Use footBaseline and anchorX to anchor at the shared world feet position. Preserve image aspect ratio. The safety pose includes an original safety sign; do not enlarge collision boxes for pose accessories. Alpha bounds include the original pale shadow."
+}
