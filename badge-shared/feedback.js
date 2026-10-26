@@ -1,8 +1,8 @@
 (function () {
   'use strict';
   // IDs are the two existing MACH catalog cards. Do not substitute another tool.
-  // Enable only after the live backend confirms both entries in its allowlist.
-  const verifiedForBadgeTools = false;
+  // Production GET verified both exact badge titles on 2026-10-26; no submission.
+  const verifiedForBadgeTools = true;
   const endpoint = 'https://script.google.com/macros/s/AKfycby2ShSY4ruQr9Ku-QlljB05Ygk3ygDRtX-hXWO0hfUmEULl-jK9Z7mqh_k2m9GSV70v/exec';
   const toolId = document.body.dataset.kind === 'clip' ? '31' : '30';
   const actions = document.querySelector('.header-actions');
