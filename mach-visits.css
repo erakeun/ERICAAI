@@ -1,0 +1,4 @@
+#mach-visit-preference{box-sizing:border-box;position:relative;z-index:1;max-width:900px;margin:20px auto;padding:12px 16px;color:#555;background:#fff;border:1px solid #ddd;border-radius:8px;font:13px/1.5 system-ui,sans-serif;clear:both}
+#mach-visit-preference summary{cursor:pointer}#mach-visit-preference button{font:inherit;padding:6px 10px;margin:4px;border:1px solid #aaa;border-radius:4px;color:#333;background:#fff;cursor:pointer}#mach-visit-preference button:focus-visible{outline:3px solid #2463bc}#mach-visit-preference p{margin:8px 0}
+@media print{#mach-visit-preference{display:none!important}}
+#mach-visit-preference{position:fixed;right:12px;bottom:12px;z-index:10000;margin:0;max-width:calc(100vw - 24px);max-height:40vh;overflow:auto;box-shadow:0 2px 8px #0001}#mach-visit-preference[open]{width:560px}
